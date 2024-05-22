@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.logo {
+    flex: 1;
+    display: flex;
+
+}
+
+.login {
+    flex: 1; /* Ocupa la mitad derecha */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff; /* Color de fondo opcional para mejor visualización */
+}
+
+.title {
+    font-size: 3rem;;
+    font-weight: bold;
+    margin-bottom: 60px; /* Espaciado inferior */
+    color: darkgreen;
+}
+
+.login-form {
+    width: 100%; /* Asegura que el formulario ocupe todo el ancho disponible */
+    max-width: 400px; /* Limita el ancho máximo del formulario */
+}
+
+.input {
+    width: 100%;
+    margin-bottom: 20px; /* Espaciado entre los campos del formulario */
+}
+
+.login-button {
+    width: 60%;
+    margin-top: 20px; /* Espaciado superior */
+    color: white;
+    background-color: #05AD75;
+    border-radius: 15px;
+}
+
+.other-button {
+    width: 60%;
+    margin-top: 10px; /* Espaciado superior */
+}

@@ -11,13 +11,13 @@
 }
 
 .login {
-    flex: 1; /* Ocupa la mitad derecha */
+    flex: 1; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff; /* Color de fondo opcional para mejor visualización */
+    background-color: #ffffff; 
 }
 
 .title {
@@ -32,6 +32,10 @@
     max-width: 400px; /* Limita el ancho máximo del formulario */
 }
 
+.text {
+    color: darkgreen;
+}
+
 .input {
     width: 100%;
     margin-bottom: 20px; /* Espaciado entre los campos del formulario */
@@ -39,6 +43,7 @@
 
 .login-button {
     width: 60%;
+    height: 5%;
     margin-top: 20px; /* Espaciado superior */
     color: white;
     background-color: #05AD75;

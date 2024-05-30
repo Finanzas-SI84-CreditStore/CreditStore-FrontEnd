@@ -13,9 +13,9 @@
                 </form>
 
                 <h4 class="text">Tipo de Tasa</h4>
-                <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="1">Efectiva</mat-radio-button>
-                    <mat-radio-button value="2">Nominal</mat-radio-button>
+                <mat-radio-group class="radio" aria-label="Select an option">
+                    <mat-radio-button class="radio-button" value="1">Efectiva</mat-radio-button>
+                    <mat-radio-button class="radio-button" value="2">Nominal</mat-radio-button>
                 </mat-radio-group>
 
                 <h4 class="text">Capitalización de Tasa</h4>
@@ -44,8 +44,8 @@
             <div class="section2">
 
                 <h4 class="text">Tipo de Crédito</h4>
-                <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="1">Pago a Vencimiento</mat-radio-button>
+                <mat-radio-group class="radio" aria-label="Select an option">
+                    <mat-radio-button class="radio-button" value="1">Pago a Vencimiento</mat-radio-button>
                     <mat-radio-button value="2">Pago Mensual</mat-radio-button>
                 </mat-radio-group>
 
@@ -57,9 +57,9 @@
                 </mat-select>
 
                 <h4 class="text">Plazo de Gracia</h4>
-                <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="1">Sí</mat-radio-button>
-                    <mat-radio-button value="2">No</mat-radio-button>
+                <mat-radio-group class="radio" aria-label="Select an option">
+                    <mat-radio-button class="radio-button" value="1">Sí</mat-radio-button>
+                    <mat-radio-button class="radio-button" value="2">No</mat-radio-button>
                 </mat-radio-group>
 
                 <h4 class="text">Periodo(s) de Gracia</h4>
@@ -72,7 +72,36 @@
             </div>
 
             <div class="section3">
-                <h2 class="title3">Valor de Compra</h2>
+                <h2 class="title-section3">Valor de Compra</h2>
+                <form class="form">
+                    <mat-form-field class="input">
+                        <input matInput>
+                    </mat-form-field>
+                </form>
+
+                <form class="form">
+                    <h4 class="text">Cuota: S/</h4>
+                    <mat-form-field class="input">
+                        <mat-label>Cantidad</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                </form>
+
+                <form class="form">
+                    <h4 class="text">Finalización de la<br>cuenta:</h4>
+                    <mat-form-field class="input">
+                        <mat-label>Fecha</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                </form>
+
+                <form class="form">
+                    <h4 class="text">Periodos de Gracia:</h4>
+                    <mat-form-field class="input">
+                        <mat-label>Periodos</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                </form>
 
             </div>
         </div>

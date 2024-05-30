@@ -6,6 +6,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { LogoScreenComponent } from '../../public/components/logo-screen/logo-screen.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AddPaymentComponent } from '../add-payment/add-payment.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { UserService } from '../clients/services/user.service';
+import { UserReq } from '../clients/models/user-req';
+import { error } from 'console';
+import { HttpClientModule } from '@angular/common/http'
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+
 
 @Component({
   selector: 'app-the-create-account',
@@ -17,10 +28,13 @@ import { LogoScreenComponent } from '../../public/components/logo-screen/logo-sc
     MatIconModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    LogoScreenComponent
+    LogoScreenComponent,
+    MatDialogModule, MatButtonModule,AddPaymentComponent,FormsModule,HttpClientModule
   ],
   templateUrl: './the-create-account.component.html',
-  styleUrls: ['./the-create-account.component.css']
+  styleUrls: ['./the-create-account.component.css'],
+  providers: [ HttpClientModule,UserService]
+
 })
 export class TheCreateAccountComponent {
   registerForm: FormGroup;
@@ -31,12 +45,12 @@ export class TheCreateAccountComponent {
   passwordsMatch = false;
   passwordNeutral = true;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,public dialog: MatDialog, private userService:UserService) {
     this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
+      name: ['', Validators.required],
       lastName: ['', Validators.required],
       dni: ['', Validators.required],
-      birthdate: ['', Validators.required],
+      birthDate: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator()]],
       confirmPassword: ['', Validators.required]
@@ -88,6 +102,17 @@ export class TheCreateAccountComponent {
     if (this.registerForm.valid) {
       // handle the form submission
       console.log("Form data:", this.registerForm.value);
+      this.userService.createUser(this.registerForm.getRawValue() as UserReq).subscribe({
+
+        next:id=>{
+          console.log("Se imprimió correctamente");
+        },
+        error:error=>{
+          console.log("Error:",error);
+        }
+      })
+        
+      
     } else {
       console.error("Form is invalid");
     }
@@ -108,4 +133,24 @@ export class TheCreateAccountComponent {
   get confirmPassword() {
     return this.registerForm.get('confirmPassword');
   }
+
+
+
+  openAddPaymentDialog(): void {
+    const dialogRef = this.dialog.open(AddPaymentComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('El diálogo fue cerrado');
+ 
+    });
+  }
+
+createUser():void{
+
+}
+
+
+
 }

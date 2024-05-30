@@ -144,3 +144,17 @@
   .valid {
     color: green;
   }
+
+
+  .mat-raised-button.mat-primary {
+    background-color: #05AD75;
+    color: #29624F;
+  }
+  
+  .mat-form-field .mat-form-field-label {
+    color: #29624F;
+  }
+  
+  .mat-form-field .mat-input-element {
+    color: #29624F;
+  }

@@ -1,0 +1,159 @@
+.navbar {
+  width: 264px;
+  height: 100vh;
+  background-color: #05AD75;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: width 0.3s ease;
+}
+
+.navbar.expanded {
+  width: 64px;
+}
+
+.logo {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.hamburger {
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: #FFFFFF;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  margin-bottom: 24px;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-links a .icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+.bottom-section {
+  margin-top: auto;
+}
+
+.setting {
+  margin-bottom: 24px;
+}
+
+.setting a {
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.setting a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.setting a .icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 24px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.user-info:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.user-name {
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.navbar.expanded .logo,
+.navbar.expanded .nav-links li span,
+.navbar.expanded .setting span,
+.navbar.expanded .user-name {
+  display: none;
+}
+
+.navbar.expanded .nav-links a,
+.navbar.expanded .setting a,
+.navbar.expanded .user-info {
+  justify-content: center;
+}
+
+.navbar.expanded .nav-links a .icon,
+.navbar.expanded .setting a .icon {
+  margin-right: 0;
+}

@@ -4,6 +4,6 @@ import {AddCustomerComponent} from "./features/clients/components/add-customer/a
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'inicio', component: HomePageComponent },
+  { path: 'inicio', component: AddCustomerComponent },
   // Agrega otras rutas aquí
 ];

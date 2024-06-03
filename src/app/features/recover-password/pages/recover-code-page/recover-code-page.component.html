@@ -1,0 +1,19 @@
+<div class="recover-code-container">
+  <app-logo-screen class="logo"></app-logo-screen>
+
+  <div class="recover-code">
+    <h1 class="title">Recuperar contraseña</h1>
+    <form class="recover-code-form">
+      <h2> Codigo de Recuperación: </h2>
+      <mat-form-field class="input">
+        <mat-label>Codigo</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+    <button mat-raised-button class="recover-button" color="primary" routerLink="/change-password">Intentar</button>
+  </div>
+
+</div>

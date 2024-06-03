@@ -158,3 +158,33 @@
   .mat-form-field .mat-input-element {
     color: #29624F;
   }
+
+  .success-message {
+    color: green;   
+  }
+  
+  .error-message {
+    color: red;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 20%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #FAF1DD;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .success-modal {
+    border: 2px solid green;
+    background-color: #05AD75;
+  }
+  
+  .error-modal {
+    border: 2px solid red;
+    background-color: #E74C3C;  }
+  

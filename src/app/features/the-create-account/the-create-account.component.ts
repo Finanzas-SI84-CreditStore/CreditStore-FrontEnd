@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,11 +12,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../clients/services/user.service';
 import { UserReq } from '../clients/models/user-req';
-import { error } from 'console';
-import { HttpClientModule } from '@angular/common/http'
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-the-create-account',
@@ -29,23 +25,29 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     MatFormFieldModule,
     ReactiveFormsModule,
     LogoScreenComponent,
-    MatDialogModule, MatButtonModule,AddPaymentComponent,FormsModule,HttpClientModule
+    MatDialogModule,
+    MatButtonModule,
+    AddPaymentComponent,
+    FormsModule,
+    HttpClientModule
   ],
   templateUrl: './the-create-account.component.html',
   styleUrls: ['./the-create-account.component.css'],
-  providers: [ HttpClientModule,UserService]
-
+  providers: [HttpClientModule, UserService]
 })
-export class TheCreateAccountComponent {
+export class TheCreateAccountComponent implements OnInit {
   registerForm: FormGroup;
   hide = true;
   passwordUpperCaseValid = false;
   passwordSpecialCharValid = false;
   passwordNumberValid = false;
+  passwordLowerCaseValid = false;
   passwordsMatch = false;
   passwordNeutral = true;
+  showSuccessMessage = false;
+  showErrorMessage = false;
 
-  constructor(private fb: FormBuilder,public dialog: MatDialog, private userService:UserService) {
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private userService: UserService) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -56,13 +58,20 @@ export class TheCreateAccountComponent {
       confirmPassword: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
 
-    this.registerForm.get('password')?.valueChanges.subscribe(() => {
+    this.registerForm.valueChanges.subscribe(() => {
       this.updatePasswordRequirements();
+      this.updatePasswordMatch();
     });
+  }
 
-    this.registerForm.get('confirmPassword')?.valueChanges.subscribe(() => {
-      this.passwordsMatch = this.registerForm.get('password')?.value === this.registerForm.get('confirmPassword')?.value;
-    });
+  ngOnInit(): void {
+    if (this.showSuccessMessage) {
+      setTimeout(() => this.showSuccessMessage = false, 3000);
+    }
+
+    if (this.showErrorMessage) {
+      setTimeout(() => this.showErrorMessage = false, 3000);
+    }
   }
 
   passwordValidator() {
@@ -73,46 +82,46 @@ export class TheCreateAccountComponent {
       const hasUpperCase = /[A-Z]/.test(value);
       const hasNumber = /\d/.test(value);
       const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+      const hasLowerCase = /[a-z]/.test(value);
 
       this.passwordNeutral = false;
       this.passwordUpperCaseValid = hasUpperCase;
       this.passwordNumberValid = hasNumber;
       this.passwordSpecialCharValid = hasSpecialChar;
+      this.passwordLowerCaseValid = hasLowerCase;
 
-      const valid = hasUpperCase && hasNumber && hasSpecialChar;
+      const valid = hasUpperCase && hasNumber && hasSpecialChar && hasLowerCase;
       return !valid ? { passwordStrength: true } : null;
     };
   }
 
-  passwordMatchValidator(group: AbstractControl): ValidationErrors | null {
+  passwordMatchValidator = (group: AbstractControl): ValidationErrors | null => {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     const passwordsMatch = password === confirmPassword;
+    return passwordsMatch ? null : { passwordsDoNotMatch: true };
+  }
 
-    if (passwordsMatch) {
-      this.passwordsMatch = true;
-      return null;
-    } else {
-      this.passwordsMatch = false;
-      return { passwordsDoNotMatch: true };
-    }
+  updatePasswordMatch(): void {
+    const password = this.registerForm.get('password')?.value;
+    const confirmPassword = this.registerForm.get('confirmPassword')?.value;
+    this.passwordsMatch = password === confirmPassword;
   }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      // handle the form submission
-      console.log("Form data:", this.registerForm.value);
       this.userService.createUser(this.registerForm.getRawValue() as UserReq).subscribe({
-
-        next:id=>{
-          console.log("Se imprimió correctamente");
+        next: id => {
+          this.showSuccessMessage = true;
+          this.showErrorMessage = false;
+          this.registerForm.reset();
         },
-        error:error=>{
-          console.log("Error:",error);
+        error: error => {
+          console.log("Error:", error);
+          this.showErrorMessage = true;
+          this.showSuccessMessage = false;
         }
-      })
-        
-      
+      });
     } else {
       console.error("Form is invalid");
     }
@@ -123,18 +132,7 @@ export class TheCreateAccountComponent {
     if (passwordControl) {
       passwordControl.updateValueAndValidity({ onlySelf: true });
     }
-    this.passwordsMatch = this.registerForm.get('password')?.value === this.registerForm.get('confirmPassword')?.value;
   }
-
-  get password() {
-    return this.registerForm.get('password');
-  }
-
-  get confirmPassword() {
-    return this.registerForm.get('confirmPassword');
-  }
-
-
 
   openAddPaymentDialog(): void {
     const dialogRef = this.dialog.open(AddPaymentComponent, {
@@ -143,14 +141,6 @@ export class TheCreateAccountComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('El diálogo fue cerrado');
- 
     });
   }
-
-createUser():void{
-
-}
-
-
-
 }

@@ -1,17 +1,34 @@
 import { Component } from '@angular/core';
+import { PasswordRecoveryService } from '../../services/password-recovery.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import {LogoScreenComponent} from "../../../../public/components/logo-screen/logo-screen.component";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatButtonModule} from "@angular/material/button";
-import {MatInputModule} from "@angular/material/input";
 import {RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-recover-password-page',
   standalone: true,
-  imports: [LogoScreenComponent, MatFormFieldModule, MatButtonModule, MatInputModule, RouterModule],
+  imports: [CommonModule, FormsModule, MatInputModule, MatButtonModule, LogoScreenComponent, RouterModule],
   templateUrl: './recover-password-page.component.html',
-  styleUrl: './recover-password-page.component.css'
+  styleUrls: ['./recover-password-page.component.css']
 })
 export class RecoverPasswordPageComponent {
+  email: string = '';
 
+  constructor(private passwordRecoveryService: PasswordRecoveryService) { }
+
+  verifyEmail() {
+    this.passwordRecoveryService.verifyEmail(this.email).subscribe(
+      response => {
+        console.log('Correo electrónico verificado');
+        // Realiza cualquier acción adicional después de verificar el correo electrónico
+      },
+      error => {
+        console.error('Error al verificar el correo electrónico', error);
+        // Maneja el error de acuerdo a tus necesidades
+      }
+    );
+  }
 }

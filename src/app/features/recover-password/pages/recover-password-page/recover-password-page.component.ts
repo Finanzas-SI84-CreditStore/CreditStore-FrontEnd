@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import {LogoScreenComponent} from "../../../../public/components/logo-screen/logo-screen.component";
-import {RouterModule} from "@angular/router";
+import { LogoScreenComponent } from "../../../../public/components/logo-screen/logo-screen.component";
+import { RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-recover-password-page',

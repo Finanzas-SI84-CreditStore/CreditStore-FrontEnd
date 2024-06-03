@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import {LogoScreenComponent} from "../../../../public/components/logo-screen/logo-screen.component";
-import {MatIcon} from "@angular/material/icon";
-import {RouterModule} from "@angular/router";
+import { LogoScreenComponent } from "../../../../public/components/logo-screen/logo-screen.component";
+import { MatIcon } from "@angular/material/icon";
+import { RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-create-new-password-page',
@@ -25,7 +25,8 @@ export class CreateNewPasswordPageComponent {
   changePassword() {
     if (this.newPassword === this.confirmPassword) {
       const changePasswordReq = {
-        password: this.newPassword
+        password: this.newPassword,
+        newPassword: this.newPassword
       };
       this.passwordRecoveryService.changePassword(this.email, changePasswordReq).subscribe(
         response => {

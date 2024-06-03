@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PasswordRecoveryService {
-  private apiUrl = 'http://localhost:8080/api'; // Reemplaza con la URL de tu backend
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) { }
 

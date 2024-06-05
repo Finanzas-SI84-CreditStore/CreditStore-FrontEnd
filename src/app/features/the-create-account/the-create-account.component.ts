@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../clients/services/user.service';
 import { UserReq } from '../clients/models/user-req';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-the-create-account',
@@ -47,7 +48,7 @@ export class TheCreateAccountComponent implements OnInit {
   showSuccessMessage = false;
   showErrorMessage = false;
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog, private userService: UserService) {
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private userService: UserService,private router: Router) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -142,5 +143,9 @@ export class TheCreateAccountComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('El diálogo fue cerrado');
     });
+  }
+
+  navigateToInicio() {
+    this.router.navigate(['inicio']);
   }
 }

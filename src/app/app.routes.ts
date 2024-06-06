@@ -8,6 +8,7 @@ import { RecoverCodePageComponent } from './features/recover-password/pages/reco
 import { AddPaymentComponent } from './features/add-payment/add-payment.component';
 import { TheCreateAccountComponent } from './features/the-create-account/the-create-account.component';
 import { AddAccountPageComponent } from './features/account/pages/add-account-page/add-account-page.component';
+import { ClientPageComponent } from './features/clients/pages/client-page/client-page.component';
 
 
 export const routes: Routes = [
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'inicio', component: TheLoginPageComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'add-client', component: AddCustomerComponent },
+  {path: 'clients', component: ClientPageComponent},
   { path: 'recover-code', component: RecoverCodePageComponent },
   { path: 'change-password', component: CreateNewPasswordPageComponent },
   { path: 'recover-password', component: RecoverPasswordPageComponent },

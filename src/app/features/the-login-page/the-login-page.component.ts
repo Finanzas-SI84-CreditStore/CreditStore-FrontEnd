@@ -28,4 +28,8 @@ export class TheLoginPageComponent {
   navigateToCreateAccount() {
     this.router.navigate(['/createAccount']);
   }
+
+  navigateToChangePassword() {
+    this.router.navigate(['/recover-password']);
+  }
 }

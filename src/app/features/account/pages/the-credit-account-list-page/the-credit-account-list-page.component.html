@@ -1,0 +1,48 @@
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="content">
+      <div class="accounts-container">
+        <div class="accounts-header">
+          <h2>Mis Cuentas</h2>
+          <button class="export-button" (click)="exportAccounts()">Exportar</button>
+        </div>
+        <div class="accounts-table">
+          <table>
+            <thead>
+            <tr>
+              <th>ID de Transacción</th>
+              <th>Cliente</th>
+              <th>Fecha de Registro</th>
+              <th>Estado</th>
+              <th>Deuda</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let account of accounts | slice: (currentPage - 1) * itemsPerPage : currentPage * itemsPerPage">
+              <td>{{ account.id }}</td>
+              <td>{{ account.clientFirstName }} {{ account.clientLastName }}</td>
+              <td>{{ account.registerDate | date: 'dd MMM, yyyy' }}</td>
+              <td>{{ account.state }}</td>
+              <td>S/ {{ account.debt }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="paginator">
+          <span>Items per page:</span>
+          <select (change)="onItemsPerPageChange($event)">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
+          <div class="paginator-buttons">
+            <button (click)="currentPage = 1" [disabled]="currentPage === 1">&lt;&lt;</button>
+            <button (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">&lt;</button>
+            <span>{{ currentPage }} - {{ itemsPerPage }} of {{ totalItems }}</span>
+            <button (click)="currentPage = currentPage + 1" [disabled]="currentPage * itemsPerPage >= totalItems">&gt;</button>
+            <button (click)="currentPage = Math.ceil(totalItems / itemsPerPage)" [disabled]="currentPage * itemsPerPage >= totalItems">&gt;&gt;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

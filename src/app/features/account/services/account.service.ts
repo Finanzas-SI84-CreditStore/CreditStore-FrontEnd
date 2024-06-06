@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AccountRequest } from '../models/account-request.model';
 import { AccountResponse } from '../models/account-response.model';
+import { Account } from '../models/account.model';
+import { AccountQuery } from '../models/account-query';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +16,8 @@ export class AccountService {
 
   createAccount(accountRequest: AccountRequest): Observable<AccountResponse> {
     return this.http.post<AccountResponse>(this.apiUrl, accountRequest);
+  }
+  getAllAccountsByUser(userId: string): Observable<AccountQuery[]> {
+    return this.http.get<AccountQuery[]>(`${this.apiUrl}/users/${userId}/accounts`);
   }
 }

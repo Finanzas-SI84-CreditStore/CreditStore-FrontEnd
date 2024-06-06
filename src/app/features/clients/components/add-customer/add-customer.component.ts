@@ -2,15 +2,17 @@ import { Component } from '@angular/core';
 import { ClientService } from '../../services/client.service';
 import { Client } from '../../models/client.model';
 import {FormsModule} from "@angular/forms";
+import { NavbarComponent } from "../../../../public/components/navbar/navbar.component";
 
 @Component({
-  selector: 'app-add-customer',
-  templateUrl: './add-customer.component.html',
-  standalone: true,
-  imports: [
-    FormsModule
-  ],
-  styleUrls: ['./add-customer.component.css']
+    selector: 'app-add-customer',
+    templateUrl: './add-customer.component.html',
+    standalone: true,
+    styleUrls: ['./add-customer.component.css'],
+    imports: [
+        FormsModule,
+        NavbarComponent
+    ]
 })
 export class AddCustomerComponent {
   client: Client = {

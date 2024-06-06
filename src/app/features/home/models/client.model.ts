@@ -7,3 +7,6 @@ export interface Client {
   maxCredit: number;
   progress: number;
 }
+
+export class ClientModel {
+}

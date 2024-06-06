@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomePageComponent } from './features/home/components/home-page/home-page.component';
 import { NavbarComponent } from './public/components/navbar/navbar.component';

@@ -1,4 +1,5 @@
-export interface Client {
+export interface ClientQuery {
+  id: string;
   name: string;
   lastName: string;
   dni: string;
@@ -6,7 +7,6 @@ export interface Client {
   address: string;
   paymentDay: number;
   creditLine: number;
-}
-
-export class ClientModel {
+  debt: number;
+  availableBalance: number;
 }

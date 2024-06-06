@@ -1,0 +1,98 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="content">
+    <h1 class="title">Agregar Cuenta</h1>
+    <div class="sections">
+      <div class="section1">
+        <form class="form" (ngSubmit)="onSubmit()">
+          <h4 class="text">Valor de Compra <mat-icon matTooltip="Introduzca el precio total de la compra realizada" class="help">help_outline</mat-icon></h4>
+          <mat-form-field class="input">
+            <mat-label>Valor de Compra</mat-label>
+            <input matInput [(ngModel)]="accountRequest.purchaseValue" name="purchaseValue">
+          </mat-form-field>
+
+          <h4 class="text">Tipo de Tasa</h4>
+          <mat-radio-group class="radio" aria-label="Select an option" [(ngModel)]="accountRequest.interestType" name="interestType">
+            <mat-radio-button class="radio-button" value="effective">Efectiva</mat-radio-button>
+            <mat-radio-button class="radio-button" value="nominal">Nominal</mat-radio-button>
+          </mat-radio-group>
+
+          <h4 class="text">Capitalización de Tasa <mat-icon matTooltip="En caso de ser taza nominal, elija la frecuencia de capitalización" class="help">help_outline</mat-icon></h4>
+          <mat-select class="selector" [(ngModel)]="accountRequest.capitalizationPeriod" name="capitalizationPeriod">
+            <mat-option *ngFor="let capitalizationRate of capitalizationRates" [value]="capitalizationRate.value">
+              {{capitalizationRate.viewValue}}
+            </mat-option>
+          </mat-select>
+
+          <h4 class="text">Tiempo de Tasa <mat-icon matTooltip="Escoja si el tiempo de la taza será calculado en días, meses o años" class="help">help_outline</mat-icon></h4>
+          <mat-select class="selector" [(ngModel)]="accountRequest.interestPeriod" name="interestPeriod">
+            <mat-option *ngFor="let capitalizationTime of capitalizationTimes" [value]="capitalizationTime.value">
+              {{capitalizationTime.viewValue}}
+            </mat-option>
+          </mat-select>
+
+          <h4 class="text">Valor de Tasa <mat-icon matTooltip="Escriba el porcentaje de la tasa" class="help">help_outline</mat-icon></h4>
+          <mat-form-field class="input">
+            <mat-label>Valor de Tasa</mat-label>
+            <input matInput [(ngModel)]="accountRequest.interestRate" name="interestRate">
+            <span matSuffix>% &nbsp;</span>
+          </mat-form-field>
+
+        </form>
+      </div>
+      <div class="section2">
+        <h4 class="text">Tipo de Crédito</h4>
+        <mat-radio-group class="radio" aria-label="Select an option" [(ngModel)]="accountRequest.creditType" name="creditType">
+          <mat-radio-button class="radio-button" value="atExpiration">Pago a Vencimiento</mat-radio-button>
+          <mat-radio-button value="monthly">Pago Mensual</mat-radio-button>
+        </mat-radio-group>
+
+        <h4 class="text">N° de Cuotas <mat-icon  matTooltip="Escoja la cantidad de cuotas de la compra" class="help">help_outline</mat-icon></h4>
+        <mat-select class="selector" [(ngModel)]="accountRequest.installmentCount" name="installmentCount">
+          <mat-option *ngFor="let shareNumber of sharesNumber" [value]="shareNumber.value">
+            {{shareNumber.viewValue}}
+          </mat-option>
+        </mat-select>
+
+        <h4 class="text">Plazo de Gracia <mat-icon matTooltip="Escoja si es que debería haber un tiempo de gracia en la taza de la compra" class="help">help_outline</mat-icon></h4>
+        <mat-radio-group class="radio" aria-label="Select an option" [(ngModel)]="accountRequest.gracePeriod" name="gracePeriod">
+          <mat-radio-button class="radio-button" [value]="true">Sí</mat-radio-button>
+          <mat-radio-button class="radio-button" [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+
+        <h4 class="text">Periodo(s) de Gracia</h4>
+        <mat-select class="selector" [(ngModel)]="accountRequest.gracePeriodLength" name="gracePeriodLength">
+          <mat-option *ngFor="let gracePeriod of gracePeriods" [value]="gracePeriod.value">
+            {{gracePeriod.viewValue}}
+          </mat-option>
+        </mat-select>
+      </div>
+
+      <div class="section3">
+        <h2 class="title-section3">Valor de Compra</h2>
+        <mat-form-field class="input">
+          <input matInput [value]="accountRequest.purchaseValue" readonly>
+        </mat-form-field>
+
+        <h4 class="text">Cuota: S/</h4>
+        <mat-form-field class="input">
+          <mat-label>Cantidad</mat-label>
+          <input matInput>
+        </mat-form-field>
+
+        <h4 class="text">Finalización de la<br>cuenta: <mat-icon matTooltip="La fecha en la que el último pago se realice" class="help">help_outline</mat-icon></h4>
+        <mat-form-field class="input">
+          <mat-label>Fecha</mat-label>
+          <input matInput>
+        </mat-form-field>
+
+        <h4 class="text">Periodos de Gracia:</h4>
+        <mat-form-field class="input">
+          <mat-label>Periodos</mat-label>
+          <input matInput [value]="accountRequest.gracePeriodLength" readonly>
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" type="submit" class="add-button">Agregar Cuenta</button>
+  </div>
+</div>

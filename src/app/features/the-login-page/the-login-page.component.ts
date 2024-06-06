@@ -4,6 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,4 +23,16 @@ import { MatIconModule } from '@angular/material/icon';
 export class TheLoginPageComponent {
   hide=true;
 
+  constructor(private router: Router) {}
+
+  navigateToCreateAccount() {
+    this.router.navigate(['/create-account']);
+  }
+
+  navigateToChangePassword() {
+    this.router.navigate(['/recover-password']);
+  }
+  navigateToHome() {
+    this.router.navigate(['/home']);
+  }
 }

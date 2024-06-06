@@ -1,0 +1,48 @@
+.recover-code-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+
+.logo {
+  flex: 1;
+  display: flex;
+
+}
+
+.recover-code {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.title {
+  font-size: 3rem;;
+  font-weight: bold;
+  margin-bottom: 60px;
+  color: darkgreen;
+}
+
+
+.recover-code-form {
+  width: 100%;
+  max-width: 500px;
+}
+
+.input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.recover-button {
+  width: 60%;
+  margin-top: 20px;
+  color: darkgreen;
+  background-color: #05AD75;
+  border-radius: 15px;
+}

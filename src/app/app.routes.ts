@@ -7,6 +7,8 @@ import { CreateNewPasswordPageComponent } from './features/recover-password/page
 import { RecoverCodePageComponent } from './features/recover-password/pages/recover-code-page/recover-code-page.component';
 import { AddPaymentComponent } from './features/add-payment/add-payment.component';
 import { TheCreateAccountComponent } from './features/the-create-account/the-create-account.component';
+import { AddAccountPageComponent } from './features/account/pages/add-account-page/add-account-page.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -19,4 +21,5 @@ export const routes: Routes = [
   { path: 'create-password', component: CreateNewPasswordPageComponent },
   { path: 'add-payment', component: AddPaymentComponent },
   { path: 'create-account', component: TheCreateAccountComponent },
+  { path: 'add-account', component: AddAccountPageComponent },
 ];

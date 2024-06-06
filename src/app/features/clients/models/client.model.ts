@@ -7,3 +7,6 @@ export interface Client {
   paymentDay: number;
   creditLine: number;
 }
+
+export class ClientModel {
+}

@@ -10,6 +10,8 @@ import {MatSelect} from "@angular/material/select";
 import {NgForOf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {HttpClientModule} from '@angular/common/http';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-add-account-page',
@@ -26,7 +28,9 @@ import {HttpClientModule} from '@angular/common/http';
     NgForOf,
     MatRadioButton,
     MatButton,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule,
+    MatIconModule
   ],
   styleUrls: ['./add-account-page.component.css']
 })

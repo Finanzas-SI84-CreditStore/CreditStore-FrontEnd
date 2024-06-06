@@ -32,4 +32,7 @@ export class TheLoginPageComponent {
   navigateToChangePassword() {
     this.router.navigate(['/recover-password']);
   }
+  navigateToHome() {
+    this.router.navigate(['/home']);
+  }
 }

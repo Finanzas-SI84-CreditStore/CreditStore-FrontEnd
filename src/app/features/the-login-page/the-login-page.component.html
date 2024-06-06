@@ -18,7 +18,7 @@
                 </button>
             </mat-form-field>
         </form>
-        <button mat-raised-button class="login-button" color="primary">Iniciar sesión</button>
+        <button mat-raised-button class="login-button" color="primary" (click)="navigateToHome()" >Iniciar sesión</button>
         <button mat-button class="other-button" (click)="navigateToCreateAccount()">No tienes una cuenta?</button>
         <button mat-button class="other-button" (click)="navigateToChangePassword()">Recuperar contraseña</button>   
     </div>

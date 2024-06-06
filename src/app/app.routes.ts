@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'recover-code', component: RecoverCodePageComponent },
   { path: 'change-password', component: CreateNewPasswordPageComponent },
   { path: 'recover-password', component: RecoverPasswordPageComponent },
-  { path: 'create-contrasena', component: CreateNewPasswordPageComponent },
+  { path: 'create-password', component: CreateNewPasswordPageComponent },
   { path: 'add-payment', component: AddPaymentComponent },
   { path: 'create-account', component: TheCreateAccountComponent },
 ];

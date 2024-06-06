@@ -12,27 +12,29 @@ import {MatButton} from "@angular/material/button";
 import {HttpClientModule} from '@angular/common/http';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
+import { NavbarComponent } from "../../../../public/components/navbar/navbar.component";
 
 @Component({
-  selector: 'app-add-account-page',
-  templateUrl: './add-account-page.component.html',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatLabel,
-    MatFormField,
-    MatInput,
-    MatRadioGroup,
-    MatOption,
-    MatSelect,
-    NgForOf,
-    MatRadioButton,
-    MatButton,
-    HttpClientModule,
-    MatTooltipModule,
-    MatIconModule
-  ],
-  styleUrls: ['./add-account-page.component.css']
+    selector: 'app-add-account-page',
+    templateUrl: './add-account-page.component.html',
+    standalone: true,
+    styleUrls: ['./add-account-page.component.css'],
+    imports: [
+        FormsModule,
+        MatLabel,
+        MatFormField,
+        MatInput,
+        MatRadioGroup,
+        MatOption,
+        MatSelect,
+        NgForOf,
+        MatRadioButton,
+        MatButton,
+        HttpClientModule,
+        MatTooltipModule,
+        MatIconModule,
+        NavbarComponent
+    ]
 })
 export class AddAccountPageComponent {
   accountRequest: AccountRequest = {

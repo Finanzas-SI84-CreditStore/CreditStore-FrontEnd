@@ -5,6 +5,7 @@ import { AsyncPipe, CurrencyPipe, DecimalPipe,CommonModule } from '@angular/comm
 import { HomeService } from '../../services/home.service';
 import { Client } from '../../models/client.model';
 import { NavbarComponent } from "../../../../public/components/navbar/navbar.component";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home-page',
@@ -17,8 +18,9 @@ export class HomePageComponent implements OnInit {
   clients: Client[] = [];
   interest: number = 0;
   username: string = '';
+  
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService, private router: Router) { }
 
   ngOnInit(): void {
     this.getClients();
@@ -42,5 +44,12 @@ export class HomePageComponent implements OnInit {
     this.homeService.getUsername().subscribe(
       username => this.username = username
     );
+  }
+
+  navigateToAddAccount() {
+    this.router.navigate(['/add-account']);
+  }
+  navigateToAddClient() {
+    this.router.navigate(['/add-client']);
   }
 }

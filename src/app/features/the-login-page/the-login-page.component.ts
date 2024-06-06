@@ -26,7 +26,7 @@ export class TheLoginPageComponent {
   constructor(private router: Router) {}
 
   navigateToCreateAccount() {
-    this.router.navigate(['/createAccount']);
+    this.router.navigate(['/create-account']);
   }
 
   navigateToChangePassword() {

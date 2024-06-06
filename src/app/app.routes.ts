@@ -11,7 +11,7 @@ import { TheCreateAccountComponent } from './features/the-create-account/the-cre
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: TheLoginPageComponent },
-  { path: 'dashboard', component: HomePageComponent },
+  { path: 'home', component: HomePageComponent },
   { path: 'add-client', component: AddCustomerComponent },
   { path: 'recover-code', component: RecoverCodePageComponent },
   { path: 'change-password', component: CreateNewPasswordPageComponent },

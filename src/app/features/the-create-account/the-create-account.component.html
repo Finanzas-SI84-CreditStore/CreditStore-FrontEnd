@@ -12,17 +12,17 @@
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-row">
           <div class="form-group">
-            <label for="name">Nombres</label>
+            <label for="firstName">Nombres</label>
             <div class="input-container">
               <i class="fas fa-user"></i>
-              <input type="text" id="firstName" formControlName="name" placeholder="John" required>
+              <input type="text" id="firstName" formControlName="name" placeholder="Juan" required>
             </div>
           </div>
           <div class="form-group">
             <label for="lastName">Apellidos</label>
             <div class="input-container">
               <i class="fas fa-user"></i>
-              <input type="text" id="lastName" formControlName="lastName" placeholder="Doe" required>
+              <input type="text" id="lastName" formControlName="lastName" placeholder="Perez" required>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
             <label for="birthDate">Fecha de nacimiento</label>
             <div class="input-container">
               <i class="fas fa-calendar-alt"></i>
-              <input type="date" id="birthdate" formControlName="birthDate" required>
+              <input type="date" id="birthDate" formControlName="birthDate" required>
             </div>
           </div>
         </div>

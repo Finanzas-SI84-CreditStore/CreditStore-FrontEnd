@@ -43,12 +43,12 @@ export class TheCreateAccountComponent implements OnInit {
   passwordSpecialCharValid = false;
   passwordNumberValid = false;
   passwordLowerCaseValid = false;
-  passwordsMatch = false;
+  passwordsMatch?: boolean;
   passwordNeutral = true;
   showSuccessMessage = false;
   showErrorMessage = false;
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog, private userService: UserService,private router: Router) {
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private userService: UserService, private router: Router) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -78,7 +78,7 @@ export class TheCreateAccountComponent implements OnInit {
   passwordValidator() {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
-      if (!value) return null;
+      if (!control.touched) return null;
 
       const hasUpperCase = /[A-Z]/.test(value);
       const hasNumber = /\d/.test(value);
@@ -97,16 +97,17 @@ export class TheCreateAccountComponent implements OnInit {
   }
 
   passwordMatchValidator = (group: AbstractControl): ValidationErrors | null => {
+    if (!group.get('password')?.touched || !group.get('confirmPassword')?.touched) return null;
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     const passwordsMatch = password === confirmPassword;
-    return passwordsMatch ? null : { passwordsDoNotMatch: true };
+    return !passwordsMatch ? { passwordsDoNotMatch: true } : null;
   }
 
   updatePasswordMatch(): void {
     const password = this.registerForm.get('password')?.value;
     const confirmPassword = this.registerForm.get('confirmPassword')?.value;
-    this.passwordsMatch = password === confirmPassword;
+    this.passwordsMatch = password === confirmPassword && this.registerForm.get('confirmPassword')?.touched;
   }
 
   onSubmit(): void {
@@ -116,6 +117,8 @@ export class TheCreateAccountComponent implements OnInit {
           this.showSuccessMessage = true;
           this.showErrorMessage = false;
           this.registerForm.reset();
+
+          this.router.navigate(['inicio']);
         },
         error: error => {
           console.log("Error:", error);

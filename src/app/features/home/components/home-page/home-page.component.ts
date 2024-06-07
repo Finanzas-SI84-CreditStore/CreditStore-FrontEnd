@@ -18,7 +18,7 @@ export class HomePageComponent implements OnInit {
   clients: Client[] = [];
   interest: number = 0;
   username: string = '';
-  
+
 
   constructor(private homeService: HomeService, private router: Router) { }
 

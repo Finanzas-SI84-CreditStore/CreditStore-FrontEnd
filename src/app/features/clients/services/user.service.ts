@@ -12,13 +12,13 @@ const injector = Injector.create({
   ],
 });
 @Injectable({
-  providedIn: 'root' 
-  
-  
+  providedIn: 'root'
+
+
 })
 export class UserService {
 
-  apiUrl: string = environment.baseUrl+'users';
+  apiUrl: string = environment.baseUrl+'/users';
   constructor(public http: HttpClient) {}
 
   createUser(userReq:UserReq): Observable<string> {

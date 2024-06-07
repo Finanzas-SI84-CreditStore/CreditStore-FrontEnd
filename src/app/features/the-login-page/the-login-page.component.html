@@ -1,49 +1,23 @@
-<div class="container">
-<<<<<<< Updated upstream
-    <app-logo-screen class="logo"></app-logo-screen>
-    <div class="login">
-        <h1 class="title">Iniciar sesión</h1>
-        <form class="login-form">
-            <h4 class="text">Correo</h4>
-            <mat-form-field class="input">
-                <mat-label>Correo</mat-label>
-                <input matInput>
-            </mat-form-field>
-
-            <h4 class="text">Contraseña</h4>
-            <mat-form-field class="input">
-                <mat-label>Contraseña</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'">
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-            </mat-form-field>
-        </form>
-        <button mat-raised-button class="login-button" color="primary" (click)="navigateToHome()" >Iniciar sesión</button>
-        <button mat-button class="other-button" (click)="navigateToCreateAccount()">No tienes una cuenta?</button>
-        <button mat-button class="other-button" (click)="navigateToChangePassword()">Recuperar contraseña</button>   
+<div class="row m-0 d-flex justify-content-center min-vh-100">
+  <app-logo-screen class="d-none d-md-flex col-md-6 m-0 p-0"></app-logo-screen>
+  <form class="col-12 col-md-6 gap-4 d-flex flex-column justify-content-center align-items-center px-5">
+    <div class="logo d-md-none">
+      <img class="img" src="../../../../assets/credistore2logo.png" alt="CreditStore Logo">
     </div>
-=======
-  <app-logo-screen class="logo"></app-logo-screen>
-  <div class="login">
-    <h1 class="title">Iniciar sesión</h1>
-    <form class="login-form">
-      <mat-form-field class="input">
-        <mat-label>Correo</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field class="input">
-        <mat-label>Contraseña</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
-    </form>
-    <button mat-raised-button class="login-button" color="primary">Iniciar sesión</button>
-    <button mat-button class="other-button" (click)="navigateToCreateAccount()">No tienes una cuenta?</button>
-    <button mat-button class="other-button">Recuperar contraseña</button>
-  </div>
->>>>>>> Stashed changes
+    <h1 class="h1 fs-1 fw-medium">Iniciar Sesión</h1>
+    <div class="input-group flex-nowrap">
+      <span class="input-group-text" id="addon-wrapping">
+        <i class="bi bi-person"></i>
+      </span>
+      <input type="text" class="form-control" placeholder="Username">
+    </div>
+    <div class="input-group flex-nowrap">
+      <input type="text" class="form-control" placeholder="Contraseña">
+    </div>
+    <div class="d-flex flex-column align-items-center gap-2">
+      <a class="btn btn-primary" (click)="navigateToHome()">Iniciar sesión</a>
+      <a class="btn btn-secondary" (click)="navigateToCreateAccount()">No tienes una cuenta?</a>
+      <a class="btn btn-secondary" (click)="navigateToChangePassword()">Recuperar contraseña</a>
+    </div>
+  </form>
 </div>

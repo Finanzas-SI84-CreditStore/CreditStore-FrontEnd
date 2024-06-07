@@ -17,7 +17,8 @@ import { RouterModule } from "@angular/router";
 })
 export class RecoverCodePageComponent {
   otp: number = 0;
-  email: string = ''; // Obtén el correo electrónico desde el componente anterior
+  email: string = 'jenniespinoza2002@hotmail.com'; // Obtén el correo electrónico desde el componente anterior
+
 
   constructor(private passwordRecoveryService: PasswordRecoveryService) { }
 
@@ -33,4 +34,6 @@ export class RecoverCodePageComponent {
       }
     );
   }
+
+
 }

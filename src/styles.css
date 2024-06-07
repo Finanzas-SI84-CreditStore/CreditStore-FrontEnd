@@ -5,3 +5,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Configuración global de estilos*/
+
+.form-control:focus {
+  border-color: #05ad75 !important;
+  box-shadow: 0 0 0 0.2rem rgba(5, 173, 117, 0.25) !important;
+}
+
+.h1,.h2,.h3,.h4,.h5,.h6 {
+  color: #29624F !important;
+}
+
+.btn-primary {
+  background-color: #05ad75 !important;
+  border-color: #05ad75 !important;
+}
+
+.btn-primary:hover {
+  background-color: #049162 !important;
+  border-color: #29624F !important;
+}
+
+

@@ -1,3 +1,4 @@
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
@@ -28,4 +29,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-color: #29624F !important;
 }
 
+
+.screen {
+  position: fixed;
+  z-index: 10000;
+  background-color: black;
+  opacity: 0.75;
+  width: 100vw;
+  height: 100vh;
+}
+
+.spinner {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.hover-pointer {
+  cursor: pointer;
+}
+
+a {
+  color: #05ad75 !important;
+}
 

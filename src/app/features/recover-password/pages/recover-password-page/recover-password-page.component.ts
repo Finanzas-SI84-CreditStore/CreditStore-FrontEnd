@@ -15,7 +15,7 @@ import { RouterModule } from "@angular/router";
   styleUrls: ['./recover-password-page.component.css']
 })
 export class RecoverPasswordPageComponent {
-  email: string = '';
+  email: string = 'jenniespinoza2002@hotmail.com';
 
   constructor(private passwordRecoveryService: PasswordRecoveryService) { }
 

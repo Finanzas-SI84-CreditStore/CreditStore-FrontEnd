@@ -1,35 +1,37 @@
-<app-navbar></app-navbar>
-<div class="home-container">
-  <div class="search-bar">
-    <input type="text" placeholder="Buscar cliente">
-  </div>
+<div class="row">
+  <app-navbar></app-navbar>
+  <div class="home-container">
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar cliente">
+    </div>
 
-  <div class="greeting-box">
-    <h2>Hi {{username}}!</h2>
-    <p>Los intereses del mes son S/{{interest | number:'1.2-2'}}</p>
-  </div>
+    <div class="greeting-box">
+      <h2>Hi {{username}}!</h2>
+      <p>Los intereses del mes son S/{{interest | number:'1.2-2'}}</p>
+    </div>
 
-  <div class="client-list">
-    <div class="client-card" *ngFor="let client of clients">
-      <div class="client-info">
-        <span class="client-icon">😊</span>
-        <div>
-          <h3>{{client.name}}</h3>
-          <p>{{client.paymentDate}}</p>
+    <div class="client-list">
+      <div class="client-card" *ngFor="let client of clients">
+        <div class="client-info">
+          <span class="client-icon">😊</span>
+          <div>
+            <h3>{{client.name}}</h3>
+            <p>{{client.paymentDate}}</p>
+          </div>
+        </div>
+        <div class="client-amount">
+          <p>S/{{client.amount | number:'1.2-2'}} <span class="client-progress">{{client.progress}}%</span></p>
+          <p>Crédito máximo: S/{{client.maxCredit | number:'1.2-2'}}</p>
+        </div>
+        <div class="progress-bar">
+          <div class="progress" [style.width.%]="client.progress"></div>
         </div>
       </div>
-      <div class="client-amount">
-        <p>S/{{client.amount | number:'1.2-2'}} <span class="client-progress">{{client.progress}}%</span></p>
-        <p>Crédito máximo: S/{{client.maxCredit | number:'1.2-2'}}</p>
-      </div>
-      <div class="progress-bar">
-        <div class="progress" [style.width.%]="client.progress"></div>
-      </div>
     </div>
-  </div>
 
-  <div class="action-buttons">
-    <button class="add-client-btn" (click)="navigateToAddClient()">Agregar Nuevo Cliente</button>
-    <button class="add-account-btn" (click)="navigateToAddAccount()">Agregar Nueva Cuenta</button>
+    <div class="action-buttons">
+      <button class="add-client-btn" (click)="openFormClientAccount()">Agregar Nuevo Cliente</button>
+      <button class="add-account-btn" (click)="navigateToAddAccount()">Agregar Nueva Cuenta</button>
+    </div>
   </div>
 </div>

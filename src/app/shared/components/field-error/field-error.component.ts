@@ -10,7 +10,7 @@ import { AbstractControl, FormGroupDirective } from '@angular/forms';
   templateUrl: './field-error.component.html',
   styleUrl: './field-error.component.css'
 })
-export class fieldErrorComponent implements OnInit {
+export class FieldErrorComponent implements OnInit {
   private _formGroupDirective = inject(FormGroupDirective, { optional: true, skipSelf: true });
   @Input({ required: true }) controlName!: string;
   @Input() message?: string;

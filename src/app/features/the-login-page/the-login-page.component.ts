@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { LogoScreenComponent } from '../../public/components/logo-screen/logo-screen.component';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../clients/services/user.service';
 import { UserReq } from '../clients/models/user-req';
 import { finalize } from 'rxjs';
-import { fieldErrorComponent } from '../../shared/components/field-error/field-error.component';
+import { FieldErrorComponent } from '../../shared/components/field-error/field-error.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-the-login-page',
   standalone: true,
   imports: [
-    LogoScreenComponent, CommonModule, ReactiveFormsModule, fieldErrorComponent
+    LogoScreenComponent, CommonModule, ReactiveFormsModule, FieldErrorComponent
   ],
   templateUrl: './the-login-page.component.html',
   styleUrl: './the-login-page.component.css'
@@ -32,16 +32,16 @@ export class TheLoginPageComponent {
       .subscribe({
         next: (res) => {
           this.toastr.success('Bienvenido!');
-          this.navigateToHome();
+          this.navigateToDashboard();
         },
         error: err => {
-          this.toastr.error('El correo o la contraseña son incorrectos')
+          this.toastr.error(err.error.message)
         }
       });
   }
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-    private userService: UserService, private toastr: ToastrService
+    private userService: UserService, private toastr: ToastrService,
   ) { }
 
   navigateToCreateAccount() {
@@ -51,7 +51,7 @@ export class TheLoginPageComponent {
   navigateToChangePassword() {
     this.router.navigate(['/recover-password']);
   }
-  navigateToHome() {
-    this.router.navigate(['/home']);
+  navigateToDashboard(): void {
+    this.router.navigate(['/panel']);
   }
 }

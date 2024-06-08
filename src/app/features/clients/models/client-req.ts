@@ -1,9 +1,9 @@
-export interface Client {
+export interface ClientReq {
   name: string;
   lastName: string;
   dni: string;
   birthDate: Date;
-  address: string;
+  address?: string;
   paymentDay: number;
   creditLine: number;
 }

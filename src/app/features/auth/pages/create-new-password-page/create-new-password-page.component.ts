@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PasswordRecoveryService } from '../../services/password-recovery.service';
+
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -7,8 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { LogoScreenComponent } from "../../../../public/components/logo-screen/logo-screen.component";
 import { MatIcon } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
-import {EmailService} from "../../services/email.service";
-import {ChangePasswordReqModel} from "../../models/change-password-req.model";
+import { ChangePasswordReqModel } from '../../models/change-password-req.model';
+import { EmailService } from '../../services/email.service';
+import { PasswordRecoveryService } from '../../services/password-recovery.service';
 
 @Component({
   selector: 'app-create-new-password-page',
@@ -20,12 +21,12 @@ import {ChangePasswordReqModel} from "../../models/change-password-req.model";
 export class CreateNewPasswordPageComponent {
   newPassword: string = '';
   confirmPassword: string = '';
-  email: string = ''; // Obtén el correo electrónico desde el componente anterior
+  email: string = '';
 
   constructor(
     private passwordRecoveryService: PasswordRecoveryService,
     private emailService: EmailService
-    ) {
+  ) {
     this.email = emailService.getEmail();
     console.log('Correo electrónico obtenido del servicio:', this.email); // Agrega este registro
   }
@@ -43,12 +44,12 @@ export class CreateNewPasswordPageComponent {
         },
         error => {
           console.error('Error al cambiar la contraseña', error);
-          // Maneja el error de acuerdo a tus necesidades
+
         }
       );
     } else {
       console.error('Las contraseñas no coinciden');
-      // Maneja el caso cuando las contraseñas no coinciden
+
     }
   }
 }

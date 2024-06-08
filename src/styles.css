@@ -1,4 +1,3 @@
-@import "~@ng-select/ng-select/themes/default.theme.css";
 @import url('assets/styles/toast.css');
 
 html, body { height: 100%; }
@@ -14,6 +13,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-color: #05ad75 !important;
   box-shadow: none;
 }
+.form-control::placeholder {
+  color: #b8b8b8 !important;
+  font-weight: 300 !important;
+}
+
+
 
 .h1,.h2,.h3,.h4,.h5,.h6 {
   color: #29624F !important;
@@ -52,4 +57,11 @@ a {
   color: #05ad75 !important;
 }
 
+.ng-select-container {
+  border-color: #05ad75 !important;
+  box-shadow: none !important;
+}
 
+.ng-option-selected {
+  background-color: #1bf1aa40 !important;
+}

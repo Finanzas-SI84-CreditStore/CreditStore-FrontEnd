@@ -5,15 +5,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { LogoScreenComponent } from '../../public/components/logo-screen/logo-screen.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AddPaymentComponent } from '../add-payment/add-payment.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../clients/services/user.service';
-import { UserReq } from '../clients/models/user-req';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LogoScreenComponent } from '../../../../public/components/logo-screen/logo-screen.component';
+import { UserReq } from '../../../clients/models/user-req';
+import { UserService } from '../../../clients/services/user.service';
+import { AddPaymentComponent } from '../../../credits/components/add-payment/add-payment.component';
 
 @Component({
   selector: 'app-the-create-account',

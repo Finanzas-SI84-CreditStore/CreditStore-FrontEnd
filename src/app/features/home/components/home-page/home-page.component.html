@@ -1,10 +1,6 @@
 <div class="row">
   <app-navbar></app-navbar>
   <div class="home-container">
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar cliente">
-    </div>
-
     <div class="greeting-box">
       <h2>Hi {{username}}!</h2>
       <p>Los intereses del mes son S/{{interest | number:'1.2-2'}}</p>
@@ -29,9 +25,9 @@
       </div>
     </div>
 
-    <div class="action-buttons">
-      <button class="add-client-btn" (click)="openFormClientAccount()">Agregar Nuevo Cliente</button>
-      <button class="add-account-btn" (click)="navigateToAddAccount()">Agregar Nueva Cuenta</button>
+    <div class="text-center">
+      <button class="btn btn-primary me-3" (click)="openFormClientAccount()">Agregar Nuevo Cliente</button>
+      <button class="btn btn-primary" (click)="navigateToAddAccount()">Agregar Nueva Cuenta</button>
     </div>
   </div>
 </div>

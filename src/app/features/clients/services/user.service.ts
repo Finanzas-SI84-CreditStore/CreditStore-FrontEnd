@@ -20,8 +20,8 @@ const injector = Injector.create({
 })
 export class UserService {
 
-  apiUrl: string = environment.baseUrl + 'users';
-  constructor(public http: HttpClient) { }
+  apiUrl: string = environment.baseUrl+'/users';
+  constructor(public http: HttpClient) {}
 
   createUser(userReq: UserReq): Observable<string> {
     return this.http.post<string>(this.apiUrl, userReq);

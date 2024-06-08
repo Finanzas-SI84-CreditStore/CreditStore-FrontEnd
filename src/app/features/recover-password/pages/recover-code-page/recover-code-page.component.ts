@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { LogoScreenComponent } from "../../../../public/components/logo-screen/logo-screen.component";
 import { MatIcon } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
+import {EmailService} from "../../services/email.service";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-recover-code-page',
@@ -15,12 +17,15 @@ import { RouterModule } from "@angular/router";
   templateUrl: './recover-code-page.component.html',
   styleUrls: ['./recover-code-page.component.css']
 })
-export class RecoverCodePageComponent {
+export class RecoverCodePageComponent implements OnInit{
   otp: number = 0;
   email: string = 'jenniespinoza2002@hotmail.com'; // Obtén el correo electrónico desde el componente anterior
 
 
-  constructor(private passwordRecoveryService: PasswordRecoveryService) { }
+  constructor(
+    private passwordRecoveryService: PasswordRecoveryService,
+    private emailService: EmailService
+  ) {}
 
   verifyOtp() {
     this.passwordRecoveryService.verifyOtp(this.otp, this.email).subscribe(
@@ -35,5 +40,8 @@ export class RecoverCodePageComponent {
     );
   }
 
-
+  ngOnInit(): void {
+    this.email = this.emailService.getEmail();
+    console.log('Correo electrónico obtenido del servicio:', this.email); // Agrega este registro
+  }
 }

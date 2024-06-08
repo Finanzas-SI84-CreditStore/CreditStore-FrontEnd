@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { LogoScreenComponent } from "../../../../public/components/logo-screen/logo-screen.component";
 import { RouterModule } from "@angular/router";
+import {EmailService} from "../../services/email.service";
 
 @Component({
   selector: 'app-recover-password-page',
@@ -17,9 +18,14 @@ import { RouterModule } from "@angular/router";
 export class RecoverPasswordPageComponent {
   email: string = 'jenniespinoza2002@hotmail.com';
 
-  constructor(private passwordRecoveryService: PasswordRecoveryService) { }
+  constructor(
+    private passwordRecoveryService: PasswordRecoveryService,
+    private emailService: EmailService
+    ) { }
 
   verifyEmail() {
+    this.emailService.setEmail(this.email);
+    console.log('Correo electrónico guardado en el servicio:', this.email);
     this.passwordRecoveryService.verifyEmail(this.email).subscribe(
       response => {
         console.log('Correo electrónico verificado');
@@ -28,6 +34,7 @@ export class RecoverPasswordPageComponent {
       error => {
         console.error('Error al verificar el correo electrónico', error);
         // Maneja el error de acuerdo a tus necesidades
+
       }
     );
   }

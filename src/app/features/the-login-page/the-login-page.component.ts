@@ -7,7 +7,6 @@ import { UserService } from '../clients/services/user.service';
 import { UserReq } from '../clients/models/user-req';
 import { finalize } from 'rxjs';
 import { fieldErrorComponent } from '../../shared/components/field-error/field-error.component';
-import e from 'express';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -32,12 +31,11 @@ export class TheLoginPageComponent {
     this.userService.logIn(this.form.getRawValue() as UserReq).pipe(finalize(() => this.spinner = false))
       .subscribe({
         next: (res) => {
-          this.toastr.success('Login successful!');
-          console.log(res);
+          this.toastr.success('Bienvenido!');
+          this.navigateToHome();
         },
         error: err => {
-          this.toastr.error(err.error);
-          console.error(err);
+          this.toastr.error('El correo o la contraseña son incorrectos')
         }
       });
   }

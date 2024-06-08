@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { LogoScreenComponent } from "../../../../public/components/logo-screen/logo-screen.component";
 import { MatIcon } from "@angular/material/icon";
 import { RouterModule } from "@angular/router";
+import {EmailService} from "../../services/email.service";
+import {ChangePasswordReqModel} from "../../models/change-password-req.model";
 
 @Component({
   selector: 'app-create-new-password-page',
@@ -20,7 +22,13 @@ export class CreateNewPasswordPageComponent {
   confirmPassword: string = '';
   email: string = ''; // Obtén el correo electrónico desde el componente anterior
 
-  constructor(private passwordRecoveryService: PasswordRecoveryService) { }
+  constructor(
+    private passwordRecoveryService: PasswordRecoveryService,
+    private emailService: EmailService
+    ) {
+    this.email = emailService.getEmail();
+    console.log('Correo electrónico obtenido del servicio:', this.email); // Agrega este registro
+  }
 
   changePassword() {
     if (this.newPassword === this.confirmPassword) {
@@ -28,7 +36,7 @@ export class CreateNewPasswordPageComponent {
         password: this.newPassword,
         newPassword: this.newPassword
       };
-      this.passwordRecoveryService.changePassword(this.email, changePasswordReq).subscribe(
+      this.passwordRecoveryService.changePassword(this.email, changePasswordReq as ChangePasswordReqModel).subscribe(
         response => {
           console.log('Contraseña cambiada exitosamente');
           // Realiza cualquier acción adicional después de cambiar la contraseña

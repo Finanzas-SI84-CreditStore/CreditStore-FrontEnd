@@ -17,6 +17,7 @@ import {EmailService} from "../../services/email.service";
 })
 export class RecoverPasswordPageComponent {
   email: string = 'jenniespinoza2002@hotmail.com';
+  router: any;
 
   constructor(
     private passwordRecoveryService: PasswordRecoveryService,
@@ -29,7 +30,9 @@ export class RecoverPasswordPageComponent {
     this.passwordRecoveryService.verifyEmail(this.email).subscribe(
       response => {
         console.log('Correo electrónico verificado');
-        // Realiza cualquier acción adicional después de verificar el correo electrónico
+        setTimeout(() => {
+          this.router.navigate(['/recover-code']);
+        }, 3000);
       },
       error => {
         console.error('Error al verificar el correo electrónico', error);

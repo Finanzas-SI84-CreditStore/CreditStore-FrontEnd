@@ -19,6 +19,7 @@ import { EmailService } from "../../services/email.service";
 export class RecoverCodePageComponent implements OnInit {
   otp: number = 0;
   email: string = 'jenniespinoza2002@hotmail.com'; // Obtén el correo electrónico desde el componente anterior
+  router: any;
 
 
   constructor(
@@ -31,6 +32,12 @@ export class RecoverCodePageComponent implements OnInit {
       response => {
         console.log('Código OTP verificado');
         // Realiza cualquier acción adicional después de verificar el código OTP
+
+        console.log('codigo verificado');
+        setTimeout(() => {
+          this.router.navigate(['/change-password']);
+        }, 3000);
+        
       },
       error => {
         console.error('Error al verificar el código OTP', error);

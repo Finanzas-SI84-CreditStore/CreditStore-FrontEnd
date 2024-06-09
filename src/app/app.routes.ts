@@ -12,8 +12,8 @@ import { ChangeProfileComponent } from './features/auth/components/change-profil
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-  { path: 'inicio', component: TheLoginPageComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: TheLoginPageComponent },
   { path: 'panel', component: HomePageComponent },
   { path: 'clientes', component: ClientPageComponent },
   { path: 'recover-code', component: RecoverCodePageComponent },

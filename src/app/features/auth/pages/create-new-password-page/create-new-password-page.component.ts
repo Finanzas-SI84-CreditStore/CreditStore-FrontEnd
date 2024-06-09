@@ -22,6 +22,7 @@ export class CreateNewPasswordPageComponent {
   newPassword: string = '';
   confirmPassword: string = '';
   email: string = '';
+  router: any;
 
   constructor(
     private passwordRecoveryService: PasswordRecoveryService,
@@ -41,6 +42,10 @@ export class CreateNewPasswordPageComponent {
         response => {
           console.log('Contraseña cambiada exitosamente');
           // Realiza cualquier acción adicional después de cambiar la contraseña
+
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
         },
         error => {
           console.error('Error al cambiar la contraseña', error);

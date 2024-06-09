@@ -8,6 +8,7 @@ import { UserReq } from '../../../clients/models/user-req';
 import { finalize } from 'rxjs';
 import { FieldErrorComponent } from '../../../../shared/components/field-error/field-error.component';
 import { ToastrService } from 'ngx-toastr';
+import { SessionStorageService } from '../../../../shared/services/session-storage.service';
 
 @Component({
   selector: 'app-the-login-page',
@@ -32,6 +33,8 @@ export class TheLoginPageComponent {
       .subscribe({
         next: (res) => {
           this.toastr.success('Bienvenido!');
+          console.log(res);
+          this.sessionStorageService.setItem('userId', res);
           this.navigateToDashboard();
         },
         error: err => {
@@ -40,8 +43,12 @@ export class TheLoginPageComponent {
       });
   }
 
-  constructor(private router: Router, private formBuilder: FormBuilder,
-    private userService: UserService, private toastr: ToastrService,
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private toastr: ToastrService,
+    private sessionStorageService: SessionStorageService
   ) { }
 
   navigateToCreateAccount() {
@@ -51,6 +58,7 @@ export class TheLoginPageComponent {
   navigateToChangePassword() {
     this.router.navigate(['/recover-password']);
   }
+
   navigateToDashboard(): void {
     this.router.navigate(['/panel']);
   }

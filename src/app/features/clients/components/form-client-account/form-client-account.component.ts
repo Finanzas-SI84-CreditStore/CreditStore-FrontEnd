@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FieldErrorComponent } from '../../../../shared/components/field-error/field-error.component';
@@ -8,6 +8,7 @@ import { NgSelectComponent, NgSelectModule, NgOptionComponent } from '@ng-select
 import { ClientService } from '../../services/client.service';
 import { ClientReq } from '../../models/client-req';
 import { ToastrService } from 'ngx-toastr';
+import { SessionStorageService } from '../../../../shared/services/session-storage.service';
 
 @Component({
   selector: 'app-form-client-account',
@@ -17,10 +18,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './form-client-account.component.html',
   styleUrl: './form-client-account.component.css'
 })
-export class FormClientAccountComponent {
-  //TODO: Cambiar por el id del usuario logueado
-  userId: string = 'f72a9a70-3bb8-4610-92e3-0ef974fcff00'
-
+export class FormClientAccountComponent implements OnInit {
+  userId: string = '';
   paymentDays: number[] = [5, 10, 15, 20, 25];
   form = this.formBuilder.group({
     name: new FormControl<string>('', Validators.required),
@@ -32,22 +31,36 @@ export class FormClientAccountComponent {
     creditLine: new FormControl<number | null>(null, Validators.required)
   });
 
-  constructor(private formBuilder: FormBuilder, public modalService: NgbActiveModal,
-    private clientService: ClientService, private toastr: ToastrService
+  constructor(
+    private formBuilder: FormBuilder,
+    public modalService: NgbActiveModal,
+    private clientService: ClientService,
+    private toastr: ToastrService,
+    private sessionStorageService: SessionStorageService
   ) { }
 
-  onSave(): void {
-    this.clientService.createClient(this.userId, this.form.value as ClientReq).subscribe({
-      next: (id) => {
-        console.log(id);
-        this.toastr.success('Cliente creado correctamente');
-        this.modalService.close(true);
-      },
-      error: (err) => {
-        console.log(err);
-        this.toastr.error(err.error.message);
-      }
-    });
+  ngOnInit(): void {
+    this.userId = this.sessionStorageService.getItem('userId');
+    if (!this.userId) {
+      this.toastr.error('No se encontró el userId en el session storage');
+    }
   }
 
+  onSave(): void {
+    if (this.userId) {
+      this.clientService.createClient(this.userId, this.form.value as ClientReq).subscribe({
+        next: (id) => {
+          console.log(id);
+          this.toastr.success('Cliente creado correctamente');
+          this.modalService.close(true);
+        },
+        error: (err) => {
+          console.log(err);
+          this.toastr.error(err.error.message);
+        }
+      });
+    } else {
+      this.toastr.error('No se encontró el userId en el session storage');
+    }
+  }
 }

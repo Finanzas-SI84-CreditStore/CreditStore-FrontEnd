@@ -1,4 +1,3 @@
-
 /* Contenedor principal */
 .container {
     display: flex;
@@ -188,5 +187,31 @@
   .error-modal {
     border: 2px solid red;
     background-color: #E74C3C;  }
+/* Estilo general para el contenedor */
+.container {
+    display: flex;
+  }
   
-
+  /* Estilo para la barra de navegación */
+  app-navbar {
+    flex: 0 0 250px; /* Ajusta este valor según el ancho de tu navbar */
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    position: fixed; /* Fija la navbar en su posición */
+    top: 0;
+    left: 0;
+    background-color: #f8f9fa; 
+    border-right: 1px solid #dee2e6; 
+  }
+  
+  /* Estilo para el contenido */
+  .content {
+    margin-left: 200px; 
+    padding: 20px; 
+    width: 100%;
+  }
+  
+  /* Ajusta la altura del chart-container */
+  .chart-container {
+    margin-bottom: 20px;
+    height: 400px; /* Ajusta la altura según sea necesario */
+  }

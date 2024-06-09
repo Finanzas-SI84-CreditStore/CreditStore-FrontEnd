@@ -4,6 +4,7 @@ import { HomePageComponent } from './features/home/components/home-page/home-pag
 import { AddCustomerComponent } from './features/clients/components/add-customer/add-customer.component';
 import { AddPaymentComponent } from './features/add-payment/add-payment.component';
 import { TheCreateAccountComponent } from './features/the-create-account/the-create-account.component';
+import { MonthlyIncomeComponent } from './features/home/pages/monthly-income/monthly-income.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   { path: 'inicio', component: TheLoginPageComponent },
@@ -11,4 +12,5 @@ export const routes: Routes = [
   { path: 'addClient', component: AddCustomerComponent },
   { path: 'addPayment', component: AddPaymentComponent },
   { path: 'createAccount', component: TheCreateAccountComponent },
+  { path: 'montlyincome', component: MonthlyIncomeComponent },
 ];

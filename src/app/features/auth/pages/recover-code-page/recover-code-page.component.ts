@@ -1,53 +1,72 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { LogoScreenComponent } from "../../../../public/components/logo-screen/logo-screen.component";
-import { MatIcon } from "@angular/material/icon";
-import { RouterModule } from "@angular/router";
 import { EmailService } from "../../services/email.service";
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { LogoScreenComponent } from '../../../../public/components/logo-screen/logo-screen.component';
+import { CommonModule } from '@angular/common';
+import { FieldErrorComponent } from '../../../../shared/components/field-error/field-error.component';
 
 @Component({
   selector: 'app-recover-code-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatInputModule, MatButtonModule, LogoScreenComponent, MatIcon, RouterModule],
+  imports: [LogoScreenComponent, CommonModule, ReactiveFormsModule, FieldErrorComponent],
   templateUrl: './recover-code-page.component.html',
   styleUrls: ['./recover-code-page.component.css']
+  
 })
 export class RecoverCodePageComponent implements OnInit {
   otp: number = 0;
-  email: string = 'jenniespinoza2002@hotmail.com'; // Obtén el correo electrónico desde el componente anterior
-  router: any;
-
+  email: string = ''; 
+  form: FormGroup;
+  
 
   constructor(
     private passwordRecoveryService: PasswordRecoveryService,
-    private emailService: EmailService
-  ) { }
+    private emailService: EmailService,
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder,
+    private router:Router
+  ) { 
+    this.form = this.formBuilder.group({
+      otp: ['', [Validators.required, this.numberValidator()]]
+    });
+  }
 
   verifyOtp() {
-    this.passwordRecoveryService.verifyOtp(this.otp, this.email).subscribe(
-      response => {
-        console.log('Código OTP verificado');
-        // Realiza cualquier acción adicional después de verificar el código OTP
+    // Ensure the form is valid before proceeding
+    if (this.form.valid) {
+      // Retrieve the OTP value from the form
+      this.otp = this.form.value.otp;
 
-        console.log('codigo verificado');
-        setTimeout(() => {
+      // Retrieve the email from the email service
+      this.email = this.emailService.getEmail();
+
+      // Call the password recovery service to verify OTP
+      this.passwordRecoveryService.verifyOtp(this.otp, this.email).subscribe(
+        response => {
+          console.log('Código OTP verificado');
+          this.toastr.success('Código verificado');
           this.router.navigate(['/change-password']);
-        }, 3000);
-        
-      },
-      error => {
-        console.error('Error al verificar el código OTP', error);
-        // Maneja el error de acuerdo a tus necesidades
-      }
-    );
+        },
+        error => {
+          console.error('Error al verificar el código OTP', error);
+          this.toastr.error('Error al verificar el código OTP');
+        }
+      );
+    }
   }
 
   ngOnInit(): void {
+    // Initialize the email value from the email service
     this.email = this.emailService.getEmail();
-    console.log('Correo electrónico obtenido del servicio:', this.email); // Agrega este registro
+    console.log('Correo electrónico obtenido del servicio:', this.email); 
+  }
+
+  numberValidator() {
+    return (control: any) => {
+      return isNaN(control.value) ? {'number': true} : null;
+    };
   }
 }

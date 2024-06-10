@@ -1,4 +1,4 @@
-<nav class="navbar" [ngClass]="{'expanded': isMenuOpen}">
+<nav class="custom-navbar" [ngClass]="{'expanded': isMenuOpen}">
   <div class="logo">
     <img src="assets/creditstore-logo.svg" alt="CreditStore Logo">
   </div>
@@ -9,27 +9,27 @@
   </div>
   <ul class="nav-links">
     <li>
-      <a routerLink="/inicio">
+      <a routerLink="/panel">
         <img src="assets/icons/home-icon.svg" alt="Icono Inicio" class="icon">
-        <span>Inicio</span>
+        <span class="text-white">Inicio</span>
       </a>
     </li>
     <li>
       <a routerLink="/clientes">
         <img src="/assets/icons/client-icon.svg" alt="Icono Clientes" class="icon">
-        <span>Mis Clientes</span>
+        <span class="text-white">Mis Clientes</span>
       </a>
     </li>
     <li>
       <a routerLink="/cuentas">
         <img src="assets/icons/account-icon.svg" alt="Icono Cuentas" class="icon">
-        <span>Mis Cuentas</span>
+        <span class="text-white">Mis Cuentas</span>
       </a>
     </li>
     <li>
       <a routerLink="/reportes">
         <img src="assets/icons/report-icon.svg" alt="Icono Reportes" class="icon">
-        <span>Reportes</span>
+        <span class="text-white">Reportes</span>
       </a>
     </li>
   </ul>
@@ -37,13 +37,15 @@
     <div class="setting">
       <a routerLink="/configuracion">
         <img src="assets/icons/setting-icon.svg" alt="Icono Configuración" class="icon">
-        <span>Configuración</span>
+        <span class="text-white">Configuración</span>
       </a>
     </div>
     <div class="divider"></div>
     <div class="user-info">
-      <img src="assets/Avatar.png" alt="User Profile" class="user-avatar">
-      <span class="user-name">Juan Perez</span>
+      <div routerLink="/change-profile">
+        <img src="assets/Avatar.png" alt="User Profile" class="user-avatar">
+        <span class="user-name">Juan Perez</span>
+      </div>
     </div>
   </div>
 </nav>

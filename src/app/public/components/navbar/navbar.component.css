@@ -1,4 +1,4 @@
-.navbar {
+.custom-navbar {
   width: 264px;
   height: 100vh;
   background-color: #05AD75;
@@ -12,7 +12,7 @@
   transition: width 0.3s ease;
 }
 
-.navbar.expanded {
+.custom-navbar.expanded {
   width: 64px;
 }
 
@@ -140,20 +140,20 @@
   font-weight: 500;
 }
 
-.navbar.expanded .logo,
-.navbar.expanded .nav-links li span,
-.navbar.expanded .setting span,
-.navbar.expanded .user-name {
+.custom-navbar.expanded .logo,
+.custom-navbar.expanded .nav-links li span,
+.custom-navbar.expanded .setting span,
+.custom-navbar.expanded .user-name {
   display: none;
 }
 
-.navbar.expanded .nav-links a,
-.navbar.expanded .setting a,
-.navbar.expanded .user-info {
+.custom-navbar.expanded .nav-links a,
+.custom-navbar.expanded .setting a,
+.custom-navbar.expanded .user-info {
   justify-content: center;
 }
 
-.navbar.expanded .nav-links a .icon,
-.navbar.expanded .setting a .icon {
+.custom-navbar.expanded .nav-links a .icon,
+.custom-navbar.expanded .setting a .icon {
   margin-right: 0;
 }

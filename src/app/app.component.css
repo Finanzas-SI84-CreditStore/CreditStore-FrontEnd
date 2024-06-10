@@ -1,164 +1,156 @@
 /* Contenedor principal */
 .container {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 /* Sección del logo */
 .logo-section {
-    background-color: #FAF1DD; /* Color de fondo */
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  background-color: #faf1dd; /* Color de fondo */
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .logo-section img {
-    width: 200px; /* Ajusta el tamaño del logo según sea necesario */
-    margin-bottom: 20px;
+  width: 200px; /* Ajusta el tamaño del logo según sea necesario */
+  margin-bottom: 20px;
 }
 
 .logo-section h1 {
-    font-size: 2.5em;
-    color: #05AD75; /* Color del texto del logo */
+  font-size: 2.5em;
+  color: #05ad75; /* Color del texto del logo */
 }
 
 /* Sección de formulario */
 .form-section {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    background-color: white; /* Color de fondo del formulario */
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background-color: white; /* Color de fondo del formulario */
 }
 
 .form-container {
-    width: 100%;
-    max-width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .form-container h2 {
-    color: #29624F; /* Color del texto del encabezado */
-    margin-bottom: 20px;
-    font-size: 1.5em;
+  color: #29624f; /* Color del texto del encabezado */
+  margin-bottom: 20px;
+  font-size: 1.5em;
 }
 
 .form-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px; 
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .form-group {
-    flex: 1;
-    margin-right: 65px; /* Espacio entre las columnas */
+  flex: 1;
+  margin-right: 65px; /* Espacio entre las columnas */
 }
 
 .form-group:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .form-group.full-width {
-    flex: 0 0 100%;
-    margin-right: 0;
+  flex: 0 0 100%;
+  margin-right: 0;
 }
 
 .form-group label {
-    display: block;
-    color: #29624F; /* Color del texto de las etiquetas */
-    margin-bottom: 5px;
+  display: block;
+  color: #29624f; /* Color del texto de las etiquetas */
+  margin-bottom: 5px;
 }
 
 .input-container {
-    position: relative;
+  position: relative;
 }
 
 .input-container i {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #05AD75; /* Color del icono */
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #05ad75; /* Color del icono */
 }
 
 .input-container input {
-    width: 100%;
-    padding: 10px 10px 10px 30px; /* Espacio para el ícono */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
+  width: 100%;
+  padding: 10px 10px 10px 30px; /* Espacio para el ícono */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
 }
 
 .input-container input:focus {
-    border-color: #05AD75; /* Color del borde al enfocar */
-    outline: none;
-    box-shadow: 0 0 5px rgba(5, 173, 117, 0.5);
+  border-color: #05ad75; /* Color del borde al enfocar */
+  outline: none;
+  box-shadow: 0 0 5px rgba(5, 173, 117, 0.5);
 }
 
 .password-requirements {
-    font-size: 0.9em;
-    color: #29624F; /* Color del texto de los requisitos de contraseña */
-    margin-top: 10px;
+  font-size: 0.9em;
+  color: #29624f; /* Color del texto de los requisitos de contraseña */
+  margin-top: 10px;
 }
 
 .password-requirements .valid {
-    color: #05AD75; /* Color para los requisitos válidos */
+  color: #05ad75; /* Color para los requisitos válidos */
 }
 
 .password-requirements .invalid {
-    color: #E74C3C; /* Color para los requisitos inválidos */
+  color: #e74c3c; /* Color para los requisitos inválidos */
 }
 
 .submit-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #05AD75; /* Color de fondo del botón */
-    color: white; /* Color del texto del botón */
-    border: none;
-    border-radius: 4px;
-    font-size: 1em;
-    cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  background-color: #05ad75; /* Color de fondo del botón */
+  color: white; /* Color del texto del botón */
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
 }
 
 .submit-btn:hover {
-    background-color: #04865D; /* Color de fondo del botón al pasar el ratón */
+  background-color: #04865d; /* Color de fondo del botón al pasar el ratón */
 }
 
 .login-link {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    color: #29624F; /* Color del enlace de inicio de sesión */
-    text-decoration: none;
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #29624f; /* Color del enlace de inicio de sesión */
+  text-decoration: none;
 }
 
 .login-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 .invalid {
-    color: red;
-  }
-  
-  .valid {
-    color: green;
-  }
+  color: red;
+}
 
+.valid {
+  color: green;
+}
 
-  .mat-raised-button.mat-primary {
-    background-color: #05AD75;
-    color: #29624F;
-  }
-  
-  .mat-form-field .mat-form-field-label {
-    color: #29624F;
-  }
-  
-  .mat-form-field .mat-input-element {
-    color: #29624F;
-  }
+.mat-raised-button.mat-primary {
+  background-color: #05ad75;
+  color: #29624f;
+}
 
+<<<<<<< HEAD
   .success-message {
     color: green;   
   }
@@ -215,3 +207,43 @@
     margin-bottom: 20px;
     height: 400px; /* Ajusta la altura según sea necesario */
   }
+=======
+.mat-form-field .mat-form-field-label {
+  color: #29624f;
+}
+
+.mat-form-field .mat-input-element {
+  color: #29624f;
+}
+
+.success-message {
+  color: green;
+}
+
+.error-message {
+  color: red;
+}
+
+.modal {
+  position: fixed;
+  top: 20%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #faf1dd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.success-modal {
+  border: 2px solid green;
+  background-color: #05ad75;
+}
+
+.error-modal {
+  border: 2px solid red;
+  background-color: #e74c3c;
+}
+
+>>>>>>> 35e3d38e28771ee7d6fa1fb2c1d8850c3603851a

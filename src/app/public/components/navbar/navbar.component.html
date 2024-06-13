@@ -1,11 +1,13 @@
-<nav class="custom-navbar" [ngClass]="{'expanded': isMenuOpen}">
-  <div class="logo">
-    <img src="assets/creditstore-logo.svg" alt="CreditStore Logo">
-  </div>
-  <div class="hamburger" (click)="toggleMenu()">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
+<nav class="custom-navbar" [ngClass]="{'expanded': !isMenuOpen}">
+  <div class="top-section">
+    <div class="logo">
+      <img src="assets/creditstore-logo.svg" alt="CreditStore Logo">
+    </div>
+    <div class="hamburger" (click)="toggleMenu()">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
   </div>
   <ul class="nav-links">
     <li>
@@ -16,7 +18,7 @@
     </li>
     <li>
       <a routerLink="/clientes">
-        <img src="/assets/icons/client-icon.svg" alt="Icono Clientes" class="icon">
+        <img src="assets/icons/client-icon.svg" alt="Icono Clientes" class="icon">
         <span class="text-white">Mis Clientes</span>
       </a>
     </li>

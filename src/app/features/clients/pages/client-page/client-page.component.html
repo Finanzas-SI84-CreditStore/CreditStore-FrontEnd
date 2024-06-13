@@ -4,45 +4,33 @@
     <div class="clients-container">
       <div class="clients-header">
         <h2>Mis Clientes</h2>
-        <button class="export-button" (click)="exportClients()">Exportar</button>
+        <button class="btn btn-primary" (click)="exportClients()">Exportar</button>
       </div>
-      <div class="clients-table">
-        <table>
-          <thead>
-          <tr>
-            <th>DNI</th>
-            <th>Nombre</th>
-            <th>Fecha de nacimiento</th>
-            <th>Fecha de pago</th>
-            <th>Deuda</th>
-          </tr>
+      <div class="clients-table mt-3">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">DNI</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Fecha de nacimiento</th>
+              <th scope="col">Fecha de pago</th>
+              <th scope="col">Deuda</th>
+            </tr>
           </thead>
+
           <tbody>
-          <tr *ngFor="let client of clients | slice: (currentPage - 1) * itemsPerPage : currentPage * itemsPerPage">
-            <td>{{ client.dni }}</td>
-            <td>{{ client.name }} {{ client.lastName }}</td>
-            <td>{{ client.birthDate | date: 'dd MMM, yyyy' }}</td>
-            <td>{{ client.paymentDay }}</td>
-            <td>S/ {{ client.debt }}</td>
-          </tr>
+            <tr *ngFor="let client of clients">
+              <td>{{ client.dni }}</td>
+              <td>{{ client.name }} {{ client.lastName }}</td>
+              <td>{{ client.birthDate | date: 'dd MMM, yyyy' }}</td>
+              <td>{{ client.paymentDay }}</td>
+              <td>S/ {{ client.debt }}</td>
+            </tr>
           </tbody>
+
         </table>
-      </div>
-      <div class="pagination">
-        <span>Items per page:</span>
-        <select (change)="onItemsPerPageChange($event)">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-        </select>
-        <div class="pagination-buttons">
-          <button (click)="currentPage = 1" [disabled]="currentPage === 1">&lt;&lt;</button>
-          <button (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">&lt;</button>
-          <span>{{ currentPage }} - {{ itemsPerPage }} of {{ totalItems }}</span>
-          <button (click)="currentPage = currentPage + 1" [disabled]="currentPage * itemsPerPage >= totalItems">&gt;</button>
-          <button (click)="currentPage = Math.ceil(totalItems / itemsPerPage)" [disabled]="currentPage * itemsPerPage >= totalItems">&gt;&gt;</button>
-        </div>
       </div>
     </div>
   </div>
+  
 </div>

@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Client } from '../models/client.model';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
-  private apiUrl = 'http://localhost:8080'; // Reemplaza con la URL de tu backend
+  private apiUrl = environment.baseUrl; // Reemplaza con la URL de tu backend
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +21,4 @@ export class HomeService {
     return this.http.get<number>(`${this.apiUrl}/interest`);
   }
 
-  getUsername(): Observable<string> {
-    return this.http.get<string>(`${this.apiUrl}/username`);
-  }
 }

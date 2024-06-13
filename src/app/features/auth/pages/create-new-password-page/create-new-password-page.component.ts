@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LogoScreenComponent } from "../../../../public/components/logo-screen/logo-screen.component";
@@ -20,8 +20,8 @@ import { SessionStorageService } from '../../../../shared/services/session-stora
   templateUrl: './create-new-password-page.component.html',
   styleUrls: ['./create-new-password-page.component.css']
 })
-export class CreateNewPasswordPageComponent {
-  newPassword:string = '';
+export class CreateNewPasswordPageComponent implements OnInit {
+  newPassword: string = '';
   email: string = '';
   hide: boolean = true;
   form = this.formBuilder.group({
@@ -35,27 +35,32 @@ export class CreateNewPasswordPageComponent {
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
   ) {
-    this.email = emailService.getEmail();
+  }
+  ngOnInit(): void {
+    this.email = this.emailService.getEmail();
+    if(!this.email){
+      this.router.navigate(['/recover-password']);
+    }
   }
 
   changePassword() {
-    const passwordControl = this.form.get('password');
-    this.newPassword = passwordControl?.value || ''; 
-
+    this.newPassword = this.form.controls.password.value!;
     const changePasswordReq = {
       password: this.newPassword,
       newPassword: this.newPassword
     };
 
     this.passwordRecoveryService.changePassword(this.email, changePasswordReq as ChangePasswordReqModel).subscribe(
-      response => {
-        this.toastr.success('Contraseña cambiada exitosamente');          
-        this.router.navigate(['/login']);
-      },
-      error => {
-        this.toastr.error(error.message);
+      {
+        next: (res) => {
+          this.toastr.success('Contraseña cambiada con éxito!');
+          this.router.navigate(['/login']);
+        },
+        error: err => {
+          this.toastr.error(err.error.message);
+        }
       }
     );
-  } 
+  }
 
 }

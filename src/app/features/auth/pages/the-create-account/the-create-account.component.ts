@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,7 +12,8 @@ import { Router } from '@angular/router';
 import { LogoScreenComponent } from '../../../../public/components/logo-screen/logo-screen.component';
 import { UserReq } from '../../../clients/models/user-req';
 import { UserService } from '../../../clients/services/user.service';
-import { AddPaymentComponent } from '../../../credits/components/add-payment/add-payment.component';
+import { ToastrService } from 'ngx-toastr';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-the-create-account',
@@ -27,8 +27,6 @@ import { AddPaymentComponent } from '../../../credits/components/add-payment/add
     ReactiveFormsModule,
     LogoScreenComponent,
     MatDialogModule,
-    MatButtonModule,
-    AddPaymentComponent,
     FormsModule,
     HttpClientModule
   ],
@@ -45,14 +43,13 @@ export class TheCreateAccountComponent implements OnInit {
   passwordLowerCaseValid = false;
   passwordsMatch?: boolean;
   passwordNeutral = true;
-  showSuccessMessage = false;
-  showErrorMessage = false;
+  spinner = false;
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog, private userService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private userService: UserService, private router: Router) {
     this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      lastName: ['', Validators.required],
-      dni: ['', Validators.required],
+      name: ['', [Validators.required, this.noNumbersValidator()]],
+      lastName: ['', [Validators.required, this.noNumbersValidator()]],
+      dni: ['', [Validators.required, Validators.pattern(/^\d{8}$/)]],
       birthDate: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator()]],
@@ -65,14 +62,13 @@ export class TheCreateAccountComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    if (this.showSuccessMessage) {
-      setTimeout(() => this.showSuccessMessage = false, 3000);
-    }
+  ngOnInit(): void {}
 
-    if (this.showErrorMessage) {
-      setTimeout(() => this.showErrorMessage = false, 3000);
-    }
+  noNumbersValidator() {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      return /\d/.test(value) ? { noNumbers: 'El nombre no debe contener números' } : null;
+    };
   }
 
   passwordValidator() {
@@ -92,7 +88,7 @@ export class TheCreateAccountComponent implements OnInit {
       this.passwordLowerCaseValid = hasLowerCase;
 
       const valid = hasUpperCase && hasNumber && hasSpecialChar && hasLowerCase;
-      return !valid ? { passwordStrength: true } : null;
+      return !valid ? { passwordStrength: 'La contraseña debe contener mayúsculas, minúsculas, un número y un carácter especial' } : null;
     };
   }
 
@@ -101,7 +97,7 @@ export class TheCreateAccountComponent implements OnInit {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     const passwordsMatch = password === confirmPassword;
-    return !passwordsMatch ? { passwordsDoNotMatch: true } : null;
+    return !passwordsMatch ? { passwordsDoNotMatch: 'Las contraseñas no coinciden' } : null;
   }
 
   updatePasswordMatch(): void {
@@ -112,24 +108,43 @@ export class TheCreateAccountComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      this.userService.createUser(this.registerForm.getRawValue() as UserReq).subscribe({
-        next: id => {
-          this.showSuccessMessage = true;
-          this.showErrorMessage = false;
-          this.registerForm.reset();
-
-          this.router.navigate(['inicio']);
-        },
-        error: error => {
-          console.log("Error:", error);
-          this.showErrorMessage = true;
-          this.showSuccessMessage = false;
-        }
-      });
+      this.spinner = true;
+      this.userService.createUser(this.registerForm.getRawValue() as UserReq).pipe(finalize(() => this.spinner = false))
+        .subscribe({
+          next: id => {
+            this.toastr.success('¡Usuario creado correctamente!');
+            this.registerForm.reset();
+            this.router.navigate(['inicio']);
+          },
+          error: error => {
+            this.toastr.error(error.error.message);
+          }
+        });
     } else {
-      console.error("Form is invalid");
+      this.displayErrors();
     }
   }
+
+  displayErrors(): void {
+    if (this.registerForm.get('name')?.hasError('noNumbers')) {
+      this.toastr.error('El nombre no debe contener números.');
+    } else if (this.registerForm.get('lastName')?.hasError('noNumbers')) {
+      this.toastr.error('El apellido no debe contener números.');
+    } else if (this.registerForm.get('dni')?.hasError('pattern')) {
+      this.toastr.error('El DNI debe tener exactamente 8 dígitos.');
+    } else if (this.registerForm.get('email')?.hasError('email')) {
+      this.toastr.error('Por favor, ingrese un correo electrónico válido.');
+    } else if (this.registerForm.get('password')?.hasError('passwordStrength')) {
+      this.toastr.error('La contraseña debe contener mayúsculas, minúsculas, un número y un carácter especial.');
+    } else if (this.registerForm.get('password')?.hasError('minlength')) {
+      this.toastr.error('La contraseña debe tener al menos 8 caracteres.');
+    } else if (this.registerForm.hasError('passwordsDoNotMatch')) {
+      this.toastr.error('Las contraseñas no coinciden.');
+    } else {
+      this.toastr.error('Por favor, complete correctamente el formulario.');
+    }
+  }
+  
 
   updatePasswordRequirements(): void {
     const passwordControl = this.registerForm.get('password');
@@ -138,17 +153,7 @@ export class TheCreateAccountComponent implements OnInit {
     }
   }
 
-  openAddPaymentDialog(): void {
-    const dialogRef = this.dialog.open(AddPaymentComponent, {
-      width: '400px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('El diálogo fue cerrado');
-    });
-  }
-
   navigateToInicio() {
-    this.router.navigate(['inicio']);
+    this.router.navigate(['login']);
   }
 }

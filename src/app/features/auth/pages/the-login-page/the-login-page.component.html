@@ -12,7 +12,7 @@
         <span class="input-group-text">
           <i class="bi bi-person"></i>
         </span>
-        <input type="email" class="form-control" placeholder="Ingresa tu correo" formControlName="email">
+        <input type="email" id="email" class="form-control" placeholder="Ingresa tu correo" formControlName="email">
       </div>
       <div class="invalid-feedback d-block" app-field-error controlName="email">
       </div>
@@ -31,7 +31,7 @@
       <div class="invalid-feedback d-block" app-field-error controlName="password"> </div>
     </div>
     <div class="d-flex flex-column align-items-center gap-2">
-      <button type="submit" class="btn btn-primary" [disabled]="!form.valid" >Iniciar sesión</button>
+      <button type="submit" id="submit" class="btn btn-primary" [disabled]="!form.valid" >Iniciar sesión</button>
       <a class="hover-pointer mt-2 mb-1" (click)="navigateToChangePassword()">Recuperar contraseña</a>
       <a class="hover-pointer" (click)="navigateToCreateAccount()">¿No tienes una cuenta?</a>
     </div>

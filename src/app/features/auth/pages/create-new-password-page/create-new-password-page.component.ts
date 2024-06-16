@@ -1,60 +1,66 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LogoScreenComponent } from "../../../../public/components/logo-screen/logo-screen.component";
-import { MatIcon } from "@angular/material/icon";
-import { RouterModule } from "@angular/router";
+import { Router } from "@angular/router";
 import { ChangePasswordReqModel } from '../../models/change-password-req.model';
 import { EmailService } from '../../services/email.service';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
+import { FieldErrorComponent } from '../../../../shared/components/field-error/field-error.component';
+import { UserService } from '../../../clients/services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { SessionStorageService } from '../../../../shared/services/session-storage.service';
 
 @Component({
   selector: 'app-create-new-password-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatInputModule, MatButtonModule, LogoScreenComponent, MatIcon, RouterModule],
+  imports: [
+    LogoScreenComponent, CommonModule, ReactiveFormsModule, FieldErrorComponent
+  ],
   templateUrl: './create-new-password-page.component.html',
   styleUrls: ['./create-new-password-page.component.css']
 })
-export class CreateNewPasswordPageComponent {
+export class CreateNewPasswordPageComponent implements OnInit {
   newPassword: string = '';
-  confirmPassword: string = '';
   email: string = '';
-  router: any;
+  hide: boolean = true;
+  form = this.formBuilder.group({
+    password: new FormControl('', Validators.required),
+  });
 
   constructor(
     private passwordRecoveryService: PasswordRecoveryService,
-    private emailService: EmailService
+    private emailService: EmailService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService,
   ) {
-    this.email = emailService.getEmail();
-    console.log('Correo electrónico obtenido del servicio:', this.email); // Agrega este registro
+  }
+  ngOnInit(): void {
+    this.email = this.emailService.getEmail();
+    if(!this.email){
+      this.router.navigate(['/recover-password']);
+    }
   }
 
   changePassword() {
-    if (this.newPassword === this.confirmPassword) {
-      const changePasswordReq = {
-        password: this.newPassword,
-        newPassword: this.newPassword
-      };
-      this.passwordRecoveryService.changePassword(this.email, changePasswordReq as ChangePasswordReqModel).subscribe(
-        response => {
-          console.log('Contraseña cambiada exitosamente');
-          // Realiza cualquier acción adicional después de cambiar la contraseña
+    this.newPassword = this.form.controls.password.value!;
+    const changePasswordReq = {
+      password: this.newPassword,
+      newPassword: this.newPassword
+    };
 
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 3000);
+    this.passwordRecoveryService.changePassword(this.email, changePasswordReq as ChangePasswordReqModel).subscribe(
+      {
+        next: (res) => {
+          this.toastr.success('Contraseña cambiada con éxito!');
+          this.router.navigate(['/login']);
         },
-        error => {
-          console.error('Error al cambiar la contraseña', error);
-
+        error: err => {
+          this.toastr.error(err.error.message);
         }
-      );
-    } else {
-      console.error('Las contraseñas no coinciden');
-
-    }
+      }
+    );
   }
+
 }

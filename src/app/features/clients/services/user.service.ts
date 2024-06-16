@@ -3,11 +3,11 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { UserReq } from '../models/user-req';
 import { Observable } from 'rxjs';
-import { provideHttpClient } from '@angular/common/http';
 import { Injector } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginReq } from '../models/login-req';
 import { Login } from '../models/login';
+import { User } from '../../auth/models/user';
 const injector = Injector.create({
   providers: [
     { provide: HttpClient, deps: [], useClass: HttpClientModule },
@@ -30,6 +30,10 @@ export class UserService {
   //TODO: Actualizar para que solo devuelva el string del ID
   logIn(req: LoginReq):Observable<Login>{
     return this.http.post<Login>(this.apiUrl + '/login', req);
+  }
+
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(this.apiUrl + '/' + id);
   }
 
 }

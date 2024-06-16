@@ -23,20 +23,19 @@ import { TheCreateAccountComponent } from './features/auth/pages/the-create-acco
 import { AddAccountPageComponent } from './features/account/pages/add-account-page/add-account-page.component';
 import { ClientPageComponent } from './features/clients/pages/client-page/client-page.component';
 import { ChangeProfileComponent } from './features/auth/components/change-profile/change-profile.component';
-
+import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: TheLoginPageComponent },
-  { path: 'panel', component: HomePageComponent },
-  { path: 'clientes', component: ClientPageComponent },
+  { path: 'panel', component: HomePageComponent, canActivate: [AuthGuard] },
+  { path: 'clientes', component: ClientPageComponent, canActivate: [AuthGuard] },
   { path: 'recover-code', component: RecoverCodePageComponent },
   { path: 'change-password', component: CreateNewPasswordPageComponent },
   { path: 'recover-password', component: RecoverPasswordPageComponent },
   { path: 'create-password', component: CreateNewPasswordPageComponent },
-  { path: 'add-payment', component: AddPaymentComponent },
+  { path: 'add-payment', component: AddPaymentComponent, canActivate: [AuthGuard] },
   { path: 'create-account', component: TheCreateAccountComponent },
-  { path: 'add-account', component: AddAccountPageComponent },
-  { path: 'change-profile', component: ChangeProfileComponent }
->>>>>>> 35e3d38e28771ee7d6fa1fb2c1d8850c3603851a
+  { path: 'add-account', component: AddAccountPageComponent, canActivate: [AuthGuard] },
+  { path: 'change-profile', component: ChangeProfileComponent, canActivate: [AuthGuard] }
 ];

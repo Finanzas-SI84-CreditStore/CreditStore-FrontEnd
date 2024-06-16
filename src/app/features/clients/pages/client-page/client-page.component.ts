@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../services/client.service';
 import { ClientQuery } from '../../models/client-query';
-import {NavbarComponent} from "../../../../public/components/navbar/navbar.component";
-import {DatePipe, NgForOf, SlicePipe} from "@angular/common";
+import { NavbarComponent } from "../../../../public/components/navbar/navbar.component";
+import { DatePipe, NgForOf, SlicePipe } from "@angular/common";
+import { SessionStorageService } from '../../../../shared/services/session-storage.service';
 
 @Component({
   selector: 'app-client-page',
@@ -18,16 +19,16 @@ import {DatePipe, NgForOf, SlicePipe} from "@angular/common";
 })
 export class ClientPageComponent implements OnInit {
   clients: ClientQuery[] = [];
-  userId: string = '1f39b2df-b4e3-446e-ad1a-6922d4b7a235'; // Reemplaza con el ID del usuario actual
+  userId: string = ''; 
+  toastr: any;
 
-  // Propiedades para la paginación
-  itemsPerPage: number = 10;
-  currentPage: number = 1;
-  totalItems: number = 0;
-
-  constructor(private clientService: ClientService) { }
+  constructor(
+    private clientService: ClientService,
+    private sessionStorageService: SessionStorageService
+  ) { }
 
   ngOnInit() {
+    this.userId = this.sessionStorageService.getItem('userId');
     this.getAllClients();
   }
 
@@ -35,23 +36,15 @@ export class ClientPageComponent implements OnInit {
     this.clientService.getAllClientsByUser(this.userId).subscribe(
       (response: ClientQuery[]) => {
         this.clients = response;
-        this.totalItems = response.length;
+        console.log('Clientes recibidos:', this.clients);
       },
       (error) => {
-        console.error('Error al obtener los clientes', error);
+        this.toastr.error(error.message)
       }
     );
   }
 
-  onItemsPerPageChange(event: any) {
-    this.itemsPerPage = +event.target.value;
-    this.currentPage = 1;
-  }
-
   exportClients() {
-    // Lógica para exportar los clientes a un archivo
     console.log('Exportar clientes');
   }
-
-  protected readonly Math = Math;
 }

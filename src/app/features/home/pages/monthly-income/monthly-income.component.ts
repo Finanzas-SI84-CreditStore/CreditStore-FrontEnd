@@ -8,7 +8,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, PLATFORM_ID } from '@angular/core';
 import { WindowRefService } from '../../../clients/services/window-ref.service'; 
 import { StoreOptionsModalComponent } from '../../../clients/components/store-options-modal/store-options-modal.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-
+import {NavbarComponent} from "../../../../public/components/navbar/navbar.component";
 Chart.register(...registerables);
 
 @Component({
@@ -18,7 +18,7 @@ Chart.register(...registerables);
     CommonModule,
     MatCardModule,
     MatIconModule,
-    MatSelectModule,MatDialogModule
+    MatSelectModule,MatDialogModule,NavbarComponent
   ],
   templateUrl: './monthly-income.component.html',
   styleUrls: ['./monthly-income.component.css'],

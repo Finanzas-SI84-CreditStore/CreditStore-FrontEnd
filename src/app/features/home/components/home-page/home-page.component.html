@@ -1,15 +1,14 @@
 <div class="row">
   <app-navbar></app-navbar>
   <div class="home-container">
-    <div class="greeting-box">
-      <h2>Hi {{username}}!</h2>
-      <p>Los intereses del mes son S/{{interest | number:'1.2-2'}}</p>
+    <div class="greeting-box text-center">
+      <h2>Buen día, {{usuario?.names}} {{usuario?.lastNames}}!</h2>
+      <!-- <p>Los intereses del mes son S/{{interest | number:'1.2-2'}}</p> -->
     </div>
 
     <div class="client-list">
       <div class="client-card" *ngFor="let client of clients">
         <div class="client-info">
-          <span class="client-icon">😊</span>
           <div>
             <h3>{{client.name}}</h3>
             <p>{{client.paymentDate}}</p>

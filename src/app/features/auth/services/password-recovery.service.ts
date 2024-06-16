@@ -22,7 +22,7 @@ export class PasswordRecoveryService {
   }
 
   changePassword(email: string, changePasswordReq: ChangePasswordReqModel): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/change-password/${email}`, changePasswordReq);
+    return this.http.post<string>(`${this.apiUrl}/change-password/${email}`, changePasswordReq, { responseType: 'text' as 'json' });
   }
 
 

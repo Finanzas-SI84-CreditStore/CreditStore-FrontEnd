@@ -1,5 +1,4 @@
 export interface UserReq{
-
     name: string,
     lastName: string;
     dni: string;
@@ -7,5 +6,4 @@ export interface UserReq{
     password: string;
     birthDate: string;
     storeName: string;
-
 }

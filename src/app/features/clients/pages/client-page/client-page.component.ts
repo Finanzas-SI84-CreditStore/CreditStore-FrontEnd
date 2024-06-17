@@ -5,6 +5,7 @@ import { NavbarComponent } from "../../../../public/components/navbar/navbar.com
 import { DatePipe, NgForOf, SlicePipe } from "@angular/common";
 import { SessionStorageService } from '../../../../shared/services/session-storage.service';
 
+
 @Component({
   selector: 'app-client-page',
   templateUrl: './client-page.component.html',
@@ -44,7 +45,5 @@ export class ClientPageComponent implements OnInit {
     );
   }
 
-  exportClients() {
-    console.log('Exportar clientes');
-  }
+  
 }

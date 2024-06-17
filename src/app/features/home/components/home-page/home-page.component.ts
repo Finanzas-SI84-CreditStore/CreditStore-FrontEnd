@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SessionStorageService } from '../../../../shared/services/session-storage.service';
 import { UserService } from '../../../clients/services/user.service';
-import { UserReq } from '../../../clients/models/user-req';
 import { User } from '../../../auth/models/user';
+
 
 @Component({
   selector: 'app-home-page',
@@ -35,6 +35,9 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.sessionStorageService.getItem('userId');
     this.findUser();
+    if (this.userId) {
+      this.getClientesConMayoresDeudas();
+    }
   }
 
   findUser(): void {
@@ -45,12 +48,23 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  getClientesConMayoresDeudas(): void {
+    this.homeService.getClientesConMayoresDeudas(this.userId!).subscribe({
+      next: (clients) => {
+        this.clients = clients;
+      }
+    });
+  }
+
   navigateToAddAccount() {
     this.router.navigate(['/add-account']);
   }
   navigateToAddClient() {
     this.router.navigate(['/add-client']);
   }
+
+
+
 
   openFormClientAccount(): void {
     const modalRef: NgbModalRef = this.modalService.open(FormClientAccountComponent,

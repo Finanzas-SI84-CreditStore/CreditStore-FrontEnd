@@ -109,3 +109,20 @@
   margin: 0 10px;
   cursor: pointer;
 }
+
+
+.card-title {
+  font-size: 1.25rem; 
+}
+
+.card-text {
+  font-size: 0.875rem;
+}
+
+.client-amount p {
+  font-size: 0.875rem; 
+}
+
+.progress-bar {
+  font-size: 0.75rem;
+}

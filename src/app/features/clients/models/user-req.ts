@@ -4,6 +4,6 @@ export interface UserReq{
     dni: string;
     email: string;
     password: string;
-    birthdate: string;
+    birthDate: string;
     storeName: string;
 }

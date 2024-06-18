@@ -1,8 +1,7 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<div *ngIf="showSuccessMessage" class="modal success-modal">¡Usuario creado correctamente!</div>
-<div *ngIf="showErrorMessage" class="modal error-modal">Error al crear el usuario. Por favor, inténtalo de nuevo.</div>
-
 <div class="container">
+  <div class="logo d-md-none">
+    <img class="img" src="../../../../assets/credistore2logo.png" alt="CreditStore Logo">
+  </div>
   <div class="logo-section">
     <app-logo-screen class="logo"></app-logo-screen>
   </div>
@@ -17,12 +16,18 @@
               <i class="fas fa-user"></i>
               <input type="text" id="firstName" formControlName="name" placeholder="Juan" required>
             </div>
+            <div *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)" class="invalid-feedback d-block">
+              {{ registerForm.get('name')?.getError('noNumbers') || 'El campo es obligatorio' }}
+            </div>
           </div>
           <div class="form-group">
             <label for="lastName">Apellidos</label>
             <div class="input-container">
               <i class="fas fa-user"></i>
               <input type="text" id="lastName" formControlName="lastName" placeholder="Perez" required>
+            </div>
+            <div *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)" class="invalid-feedback d-block">
+              {{ registerForm.get('lastName')?.getError('noNumbers') || 'El campo es obligatorio' }}
             </div>
           </div>
         </div>
@@ -32,6 +37,9 @@
             <div class="input-container">
               <i class="fas fa-id-card"></i>
               <input type="text" id="dni" formControlName="dni" placeholder="12345678" required>
+            </div>
+            <div *ngIf="registerForm.get('dni')?.invalid && (registerForm.get('dni')?.dirty || registerForm.get('dni')?.touched)" class="invalid-feedback d-block">
+              {{ 'El DNI debe tener exactamente 8 dígitos' }}
             </div>
           </div>
           <div class="form-group">
@@ -49,6 +57,9 @@
               <i class="fas fa-envelope"></i>
               <input type="email" id="email" formControlName="email" placeholder="johndoe@gmail.com" required>
             </div>
+            <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="invalid-feedback d-block">
+              {{ 'Por favor, ingrese un correo electrónico válido' }}
+            </div>
           </div>
         </div>
         <div class="form-row">
@@ -58,12 +69,18 @@
               <i class="fas fa-lock"></i>
               <input type="password" id="password" formControlName="password" required (input)="updatePasswordRequirements()">
             </div>
+            <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="invalid-feedback d-block">
+              {{ registerForm.get('password')?.getError('passwordStrength') || 'El campo es obligatorio' }}
+            </div>
           </div>
           <div class="form-group">
             <label for="confirmPassword">Confirmar Contraseña</label>
             <div class="input-container">
               <i class="fas fa-lock"></i>
               <input type="password" id="confirmPassword" formControlName="confirmPassword" required (input)="updatePasswordRequirements()">
+            </div>
+            <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" class="invalid-feedback d-block">
+              {{ 'Las contraseñas no coinciden' }}
             </div>
           </div>
         </div>
@@ -90,8 +107,13 @@
           </p>
         </div>
         <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">Registrarse</button>
-        </form>
-        <button mat-button class="other-button" (click)="navigateToInicio()">Ya eres miembro? Iniciar Sesión</button>
+      </form>
+      <button mat-button class="other-button" (click)="navigateToInicio()">¿Ya eres miembro? Iniciar Sesión</button>
     </div>
+  </div>
+</div>
+<div *ngIf="spinner" class="screen d-flex justify-content-center align-items-center">
+  <div class="spinner-border text-primary spinner" role="status">
+    <span class="sr-only"></span>
   </div>
 </div>

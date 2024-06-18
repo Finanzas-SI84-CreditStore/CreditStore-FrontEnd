@@ -2,10 +2,13 @@
 export interface Client {
   id: number;
   name: string;
-  paymentDate: string;
-  amount: number;
-  maxCredit: number;
-  progress: number;
+  lastName: string;
+  dni: number;
+  birhtDate: Date;
+  paymentDay: number;
+  debt: number;
+  creditLine: number;
+  availableBalance: number;
 }
 
 export class ClientModel {

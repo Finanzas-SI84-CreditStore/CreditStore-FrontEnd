@@ -21,4 +21,8 @@ export class HomeService {
     return this.http.get<number>(`${this.apiUrl}/interest`);
   }
 
+  getClientesConMayoresDeudas(userId: string): Observable<Client[]> {
+    return this.http.get<Client[]>(`${this.apiUrl}/users/${userId}/clients/debtors`);
+  }
+
 }

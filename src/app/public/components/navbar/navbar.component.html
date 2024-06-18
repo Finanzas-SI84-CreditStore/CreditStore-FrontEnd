@@ -37,14 +37,14 @@
   </ul>
   <div class="bottom-section">
     <div class="setting">
-      <a routerLink="/configuracion">
-        <img src="assets/icons/setting-icon.svg" alt="Icono Configuración" class="icon">
-        <span class="text-white">Configuración</span>
+      <a routerLink="/login" (click)="logout()">
+        <img src="assets/icons/logout.svg" alt="Icono lougout" class="icon">
+        <span class="text-white">Logout</span>
       </a>
     </div>
     <div class="divider"></div>
     <div class="user-info">
-      <div routerLink="/change-profile">
+      <div>
         <img src="assets/Avatar.png" alt="User Profile" class="user-avatar">
         <span class="user-name">Juan Perez</span>
       </div>

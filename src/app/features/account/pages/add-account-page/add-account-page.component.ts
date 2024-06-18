@@ -1,15 +1,8 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { AccountRequest } from '../../models/account-request.model';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { MatFormField, MatLabel } from "@angular/material/form-field";
-import { MatInput } from "@angular/material/input";
-import { MatRadioButton, MatRadioGroup } from "@angular/material/radio";
-import { MatOption } from "@angular/material/autocomplete";
-import { MatSelect } from "@angular/material/select";
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, NgForOf } from "@angular/common";
-import { MatButton } from "@angular/material/button";
-import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from "../../../../public/components/navbar/navbar.component";
@@ -22,26 +15,16 @@ import { NgOptionComponent, NgSelectComponent, NgSelectModule } from '@ng-select
   standalone: true,
   styleUrls: ['./add-account-page.component.css'],
   imports: [
-    FormsModule,
-    MatLabel,
-    MatFormField,
-    MatInput,
-    MatRadioGroup,
-    MatOption,
-    MatSelect,
-    NgForOf,
-    MatRadioButton,
-    MatButton,
-    HttpClientModule,
+
     MatTooltipModule,
     MatIconModule,
-    //ELIMINAR ESAS IMPORTACIONES SIN USO
+   
 
     NavbarComponent,
     CommonModule,
     ReactiveFormsModule,
     FieldErrorComponent,
-    NgSelectModule,
+    NgSelectModule
   ],
   providers: [NgSelectComponent, NgOptionComponent],
 
@@ -61,6 +44,8 @@ export class AddAccountPageComponent {
   };
   capitalizationPeriods = [ 'ANUAL', 'MENSUAL', 'DIARIA' ];
   interestTypes = [ 'EFECTIVA', 'NOMINAL' ];
+  creditType = [ 'VENCIMIENTO', 'MENSUAL'];
+  gracePeriod = [ 'SI', 'NO' ];
 
   sharesNumber = [
     { value: 1, viewValue: '1' },
@@ -70,7 +55,7 @@ export class AddAccountPageComponent {
     { value: 5, viewValue: '5' }
   ];
 
-  gracePeriods = [
+  gracePeriodLength = [
     { value: 1, viewValue: '1' },
     { value: 2, viewValue: '2' },
     { value: 3, viewValue: '3' }
@@ -79,6 +64,12 @@ export class AddAccountPageComponent {
   formCredit = this.formBuilder.group({
     interestType: new FormControl('NOMINAL', Validators.required),
     capitalizationPeriod: new FormControl('MENSUAL', Validators.required),
+    creditType: new FormControl('VENCIMIENTO', Validators.required),
+    gracePeriod: new FormControl(false, Validators.required),
+    gracePeriodLength: new FormControl(0, Validators.required),
+    sharesNumber: new FormControl(1, Validators.required),
+    purchaseValue: new FormControl(0, Validators.required),
+    interestRate: new FormControl(0, Validators.required),
 
   });
 
@@ -116,5 +107,33 @@ export class AddAccountPageComponent {
       this.formCredit.controls.capitalizationPeriod.setValidators(Validators.required);
     }
     this.formCredit.controls.capitalizationPeriod.updateValueAndValidity();
+  }
+
+  changeTipoCredito(tipo: string):void{
+    if(tipo === 'VENCIMIENTO'){
+      this.formCredit.controls.sharesNumber.clearValidators();
+      this.formCredit.controls.sharesNumber.setValue(0);
+      this.formCredit.controls.sharesNumber.disable();
+    }
+    else{
+      this.formCredit.controls.sharesNumber.enable();
+      this.formCredit.controls.sharesNumber.setValue(1);
+      this.formCredit.controls.sharesNumber.setValidators(Validators.required);
+    }
+    this.formCredit.controls.creditType.updateValueAndValidity();
+  }
+
+  changePeriodoGracia(gracia: string):void{
+    if(gracia === 'NO'){
+      this.formCredit.controls.gracePeriodLength.clearValidators();
+      this.formCredit.controls.gracePeriodLength.setValue(0);
+      this.formCredit.controls.gracePeriodLength.disable();
+    }
+    else{
+      this.formCredit.controls.gracePeriodLength.enable();
+      this.formCredit.controls.gracePeriodLength.setValue(1);
+      this.formCredit.controls.gracePeriodLength.setValidators(Validators.required);
+    }
+    this.formCredit.controls.gracePeriodLength.updateValueAndValidity();
   }
 }

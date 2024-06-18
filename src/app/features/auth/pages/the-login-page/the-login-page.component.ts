@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { LogoScreenComponent } from '../../../../public/components/logo-screen/logo-screen.component';
-import { Router } from '@angular/router';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../clients/services/user.service';
 import { UserReq } from '../../../clients/models/user-req';

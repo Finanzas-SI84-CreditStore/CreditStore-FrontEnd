@@ -9,6 +9,7 @@ export interface Client {
   debt: number;
   creditLine: number;
   availableBalance: number;
+  
 }
 
 export class ClientModel {

@@ -5,6 +5,7 @@
       <h2>Buen día, {{usuario?.names}} {{usuario?.lastNames}}!</h2>
       <!-- <p>Los intereses del mes son S/{{interest | number:'1.2-2'}}</p> -->
     </div>
+
     <div class="container mt-5">
       <h1 class="title text-center">Mis Clientes</h1>
       <div class="row">
@@ -15,7 +16,7 @@
               <p class="card-text">Fecha de pagos: {{ client.paymentDay }}</p>
               <div class="client-amount">
                 <p>Deuda: S/{{ client.debt | number:'1.2-2' }}</p>
-                <p>Crédito máximo: S/{{ client.creditLine | number:'1.2-2' }}</p>
+                <p>Crédito: S/{{ client.creditLine | number:'1.2-2' }}</p>
               </div>
               <div class="d-flex align-items-center">
                 <div class="progress w-100">

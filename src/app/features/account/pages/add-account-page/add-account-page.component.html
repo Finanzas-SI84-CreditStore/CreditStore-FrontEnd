@@ -1,120 +1,29 @@
 <app-navbar></app-navbar>
-<div class="container">
-  <div class="content">
-    <h1 class="title">Agregar Cuenta</h1>
-    <div class="sections">
-      <div class="section1">
-        <form class="form" (ngSubmit)="onSubmit()">
-          <h4 class="text">Valor de Compra <mat-icon matTooltip="Introduzca el precio total de la compra realizada"
-              class="help">help_outline</mat-icon></h4>
-          <mat-form-field class="input">
-            <mat-label>Valor de Compra</mat-label>
-            <input matInput [(ngModel)]="accountRequest.purchaseValue" name="purchaseValue">
-          </mat-form-field>
-
-          <h4 class="text">Tipo de Tasa</h4>
-          <mat-radio-group class="radio" aria-label="Select an option" [(ngModel)]="accountRequest.interestType"
-            name="interestType">
-            <mat-radio-button class="radio-button" value="effective">Efectiva</mat-radio-button>
-            <mat-radio-button class="radio-button" value="nominal">Nominal</mat-radio-button>
-          </mat-radio-group>
-          <!--
-          <h4 class="text">Capitalización de Tasa <mat-icon
-              matTooltip="En caso de ser taza nominal, elija la frecuencia de capitalización"
-              class="help">help_outline</mat-icon></h4>
-          <mat-select class="selector" [(ngModel)]="accountRequest.capitalizationPeriod" name="capitalizationPeriod">
-            <mat-option *ngFor="let capitalizationRate of capitalizationRates" [value]="capitalizationRate.value">
-              {{capitalizationRate.viewValue}}
-            </mat-option>
-          </mat-select>
-
-          <h4 class="text">Tiempo de Tasa <mat-icon
-              matTooltip="Escoja si el tiempo de la taza será calculado en días, meses o años"
-              class="help">help_outline</mat-icon></h4>
-          <mat-select class="selector" [(ngModel)]="accountRequest.interestPeriod" name="interestPeriod">
-            <mat-option *ngFor="let capitalizationTime of capitalizationTimes" [value]="capitalizationTime.value">
-              {{capitalizationTime.viewValue}}
-            </mat-option>
-          </mat-select> -->
-
-          <h4 class="text">Valor de Tasa <mat-icon matTooltip="Escriba el porcentaje de la tasa"
-              class="help">help_outline</mat-icon></h4>
-          <mat-form-field class="input">
-            <mat-label>Valor de Tasa</mat-label>
-            <input matInput [(ngModel)]="accountRequest.interestRate" name="interestRate">
-            <span matSuffix>% &nbsp;</span>
-          </mat-form-field>
-
-        </form>
-      </div>
-      <div class="section2">
-        <h4 class="text">Tipo de Crédito</h4>
-        <mat-radio-group class="radio" aria-label="Select an option" [(ngModel)]="accountRequest.creditType"
-          name="creditType">
-          <mat-radio-button class="radio-button" value="atExpiration">Pago a Vencimiento</mat-radio-button>
-          <mat-radio-button value="monthly">Pago Mensual</mat-radio-button>
-        </mat-radio-group>
-
-        <h4 class="text">N° de Cuotas <mat-icon matTooltip="Escoja la cantidad de cuotas de la compra"
-            class="help">help_outline</mat-icon></h4>
-        <mat-select class="selector" [(ngModel)]="accountRequest.installmentCount" name="installmentCount">
-          <mat-option *ngFor="let shareNumber of sharesNumber" [value]="shareNumber.value">
-            {{shareNumber.viewValue}}
-          </mat-option>
-        </mat-select>
-
-        <h4 class="text">Plazo de Gracia <mat-icon
-            matTooltip="Escoja si es que debería haber un tiempo de gracia en la taza de la compra"
-            class="help">help_outline</mat-icon></h4>
-        <mat-radio-group class="radio" aria-label="Select an option" [(ngModel)]="accountRequest.gracePeriod"
-          name="gracePeriod">
-          <mat-radio-button class="radio-button" [value]="true">Sí</mat-radio-button>
-          <mat-radio-button class="radio-button" [value]="false">No</mat-radio-button>
-        </mat-radio-group>
-
-        <h4 class="text">Periodo(s) de Gracia</h4>
-        <mat-select class="selector" [(ngModel)]="accountRequest.gracePeriodLength" name="gracePeriodLength">
-          <mat-option *ngFor="let gracePeriod of gracePeriods" [value]="gracePeriod.value">
-            {{gracePeriod.viewValue}}
-          </mat-option>
-        </mat-select>
-      </div>
-
-      <!-- <div class="section3">
-        <h2 class="title-section3">Valor de Compra</h2>
-        <mat-form-field class="input">
-          <input matInput [value]="accountRequest.purchaseValue" readonly>
-        </mat-form-field>
-
-        <h4 class="text">Cuota: S/</h4>
-        <mat-form-field class="input">
-          <mat-label>Cantidad</mat-label>
-          <input matInput>
-        </mat-form-field>
-
-        <h4 class="text">Finalización de la<br>cuenta: <mat-icon matTooltip="La fecha en la que el último pago se realice" class="help">help_outline</mat-icon></h4>
-        <mat-form-field class="input">
-          <mat-label>Fecha</mat-label>
-          <input matInput>
-        </mat-form-field>
-
-        <h4 class="text">Periodos de Gracia:</h4>
-        <mat-form-field class="input">
-          <mat-label>Periodos</mat-label>
-          <input matInput [value]="accountRequest.gracePeriodLength" readonly>
-        </mat-form-field>
-      </div> -->
-    </div>
-    <button mat-raised-button color="primary" type="submit" class="add-button">Agregar Cuenta</button>
-  </div>
-</div>
 <div class="container text-center">
-  <h1 class="h1 fw-medium mb-3">Agregar Crédito</h1>
+  <div class="content">
+  <h1 class="h1 fw-medium mb-3 title">Agregar Crédito</h1>
+  <div class="sections">
+    <div class="section1">
+        
+
+
   <form [formGroup]="formCredit" class="needs-validation" (ngSubmit)="onSubmit()">
     <div class="row text-start">
+            <!-- Input no configurado -->
+            <h4 class="text">Valor de Compra
+              <!--<a class="icon-hover">
+                <i class="help fa fa-question-circle"></i>
+              </a>-->
+<mat-icon matTooltip="Introduzca el precio total de la compra realizada"
+              class="help">help_outline</mat-icon></h4>
+      <div class="input-group flex-nowrap">
+        <input type="number" id="purchaseValue" class="form-control" placeholder="Ingrese el valor de la compra" formControlName="purchaseValue">
+      </div>
+      <div class="invalid-feedback d-block" app-field-error controlName="purchaseValue">
+      </div>
       <div class="col-md-6">
         <div class="row justify-content-center mb-3">
-          <label class="form-label">Tipo de Tasa *</label>
+          <h4 class="text">Tipo de Tasa</h4>
           <div class="form-check col justify-content-center form-radio-margin ">
             <input class="form-check-input" type="radio" (change)="changeTipoTasa('EFECTIVA')"
               formControlName="interestType" [value]="'EFECTIVA'" />
@@ -126,26 +35,94 @@
             <label class="form-check-label"> Nominal </label>
           </div>
         </div>
-        <div class="form-group w-100 mb-3" style="min-width: 100%;">
-          <label class="form-label">Capitalización de Tasa *</label>
-          <ng-select formControlName="capitalizationPeriod" placeholder="Seleccione la cpaitacización de la tasa"
-            [searchable]="false">
-            <ng-option *ngFor="let rate of capitalizationPeriods" [value]="rate">{{rate}}</ng-option>
-          </ng-select>
-          <div class="invalid-feedback d-block" app-field-error controlName="capitalizationPeriod"> </div>
-        </div>
       </div>
-      <div class="col-md-6">
-        <div class="form-group w-100">
-          <label class="form-label">Día de pago *</label>
-          <!-- <ng-select formControlName="capitalizationPeriod" placeholder="Seleccione la cpaitacización de la tasa"
-            [searchable]="false">
-            <ng-option *ngFor="let rate of capitalizationPeriods" [value]="rate">{{rate}}</ng-option>
-          </ng-select>
-          <div class="invalid-feedback d-block" app-field-error controlName="capitalizationPeriod"> </div> -->
-        </div>
+      <div class="form-group w-100">
+        <h4 class="text">Capitalización de Tasa *</h4>
+        <ng-select formControlName="capitalizationPeriod" placeholder="Seleccione la capitalización de la tasa"
+          [searchable]="false">
+          <ng-option *ngFor="let rate of capitalizationPeriods" [value]="rate">{{rate}}</ng-option>
+        </ng-select>
+        <div class="invalid-feedback d-block" app-field-error controlName="capitalizationPeriod"> </div>
       </div>
+      <!-- Input no configurado -->
+<h4 class="text">Valor de Tasa <mat-icon matTooltip="Escriba el porcentaje de la tasa"
+        class="help">help_outline</mat-icon></h4>
+<div class="input-group flex-nowrap">
+    <input type="number" id="interestRate" class="form-control" placeholder="Ingrese el porcentaje de tasa" formControlName="interestRate">
+    <div class="input-group-append">
+      <span class="input-group-text">%</span>
     </div>
+</div>
+  <div class="invalid-feedback d-block" app-field-error controlName="interestRate">
+  </div>
+      </div>
   </form>
-  <button type="submit" class="mt-3 mb-5 btn btn-primary">Agregar</button>
+    </div>
+
+    <div class="section2">
+      <form [formGroup]="formCredit" class="needs-validation" (ngSubmit)="onSubmit()">
+        <div class="row text-start">
+          <div class="col-md-6">
+            <div class="row justify-content-center mb-3">
+              <h4 class="text">Tipo de Crédito</h4>
+              <div class="form-check col justify-content-center form-radio-margin ">
+                <input class="form-check-input" type="radio" (change)="changeTipoCredito('VENCIMIENTO')"
+                  formControlName="creditType" [value]="'VENCIMIENTO'" />
+                <label class="form-check-label"> Pago a Vencimiento </label>
+              </div>
+              <div class="form-check col justify-content-center form-radio-margin">
+                <input class="form-check-input" type="radio" (change)="changeTipoCredito('MENSUAL')"
+                  formControlName="creditType" [value]="'MENSUAL'" />
+                <label class="form-check-label"> Pago Mensual </label>
+              </div>
+            </div>
+
+          </div>
+          <div class="form-group w-100 mb-3" style="min-width: 100%;">
+            <h4 class="text">N° de Cuotas <mat-icon matTooltip="Escoja la cantidad de cuotas de la compra"
+              class="help">help_outline</mat-icon></h4>
+            <ng-select formControlName="sharesNumber" placeholder="Seleccione la cantidad de cuotas"
+              [searchable]="false">
+              <ng-option *ngFor="let shareNumber of sharesNumber" [value]="shareNumber">{{shareNumber.value}}</ng-option>
+            </ng-select>
+            <div class="invalid-feedback d-block" app-field-error controlName="installmentCount"> </div>
+          </div>
+          </div>
+        </form>
+        <form [formGroup]="formCredit" class="needs-validation" (ngSubmit)="onSubmit()">
+          <div class="row text-start">
+          <div class="col-md-6">
+            <div class="row justify-content-center mb-3">
+              <h4 class="text">Plazo de Gracia <mat-icon
+                matTooltip="Escoja si es que debería haber un tiempo de gracia en la taza de la compra"
+                class="help">help_outline</mat-icon></h4>
+              <div class="form-check col justify-content-center form-radio-margin ">
+                <input class="form-check-input" type="radio" (change)="changePeriodoGracia('SI')"
+                  formControlName="gracePeriod" [value]=true />
+                <label class="form-check-label"> Sí </label>
+              </div>
+              <div class="form-check col justify-content-center form-radio-margin">
+                <input class="form-check-input" type="radio" (change)="changePeriodoGracia('NO')"
+                  formControlName="gracePeriod" [value]=false />
+                <label class="form-check-label"> No </label>
+              </div>
+            </div>
+
+          </div>
+          <div class="form-group w-100 mb-3" style="min-width: 100%;">
+            <h4 class="text">Periodo(s) de Gracia</h4>
+            <ng-select formControlName="gracePeriodLength" placeholder="Elija la cantidad de Periodos de Gracia"
+              [searchable]="false">
+              <ng-option *ngFor="let graceLength of gracePeriodLength" [value]="graceLength">{{graceLength.value}}</ng-option>
+            </ng-select>
+            <div class="invalid-feedback d-block" app-field-error controlName="gracePeriods"> </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+</div>
+  <button type="submit" class="mt-3 mb-5 btn btn-primary add-button">Agregar Crédito</button>
+</div>
 </div>

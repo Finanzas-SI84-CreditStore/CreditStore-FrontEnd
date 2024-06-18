@@ -9,6 +9,7 @@ import { TheCreateAccountComponent } from './features/auth/pages/the-create-acco
 import { AddAccountPageComponent } from './features/account/pages/add-account-page/add-account-page.component';
 import { ClientPageComponent } from './features/clients/pages/client-page/client-page.component';
 import { ChangeProfileComponent } from './features/auth/components/change-profile/change-profile.component';
+import { TheCreditAccountListPageComponent } from './features/account/pages/the-credit-account-list-page/the-credit-account-list-page.component';
 
 
 export const routes: Routes = [
@@ -23,5 +24,6 @@ export const routes: Routes = [
   { path: 'add-payment', component: AddPaymentComponent },
   { path: 'create-account', component: TheCreateAccountComponent },
   { path: 'add-account', component: AddAccountPageComponent },
-  { path: 'change-profile', component: ChangeProfileComponent }
+  { path: 'change-profile', component: ChangeProfileComponent },
+  { path: 'credit-list', component: TheCreditAccountListPageComponent },
 ];

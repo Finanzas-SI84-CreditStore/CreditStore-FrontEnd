@@ -28,16 +28,15 @@ export class HomePageComponent implements OnInit {
 
   constructor(private homeService: HomeService, private router: Router,
     private modalService: NgbModal, private sessionStorageService: SessionStorageService,
-    private userService: UserService
+    private userService: UserService, private homeservice: HomeService,
 
   ) { }
 
   ngOnInit(): void {
     this.userId = this.sessionStorageService.getItem('userId');
     this.findUser();
-    if (this.userId) {
-      this.getClientesConMayoresDeudas();
-    }
+    this.getClientesConMayoresDeudas();
+   
   }
 
   findUser(): void {
@@ -46,6 +45,14 @@ export class HomePageComponent implements OnInit {
         this.usuario = user;
       }
     });
+  }
+
+  calculatePercentageUsedById(clientId: number): number {
+    const client = this.clients.find(c => c.id === clientId);
+    if (client) {
+      return (client.debt / client.creditLine) * 100;
+    }
+    return 0;
   }
 
   getClientesConMayoresDeudas(): void {

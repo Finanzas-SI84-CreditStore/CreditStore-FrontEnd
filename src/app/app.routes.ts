@@ -13,6 +13,7 @@ import { ClientPageComponent } from './features/clients/pages/client-page/client
 import { ChangeProfileComponent } from './features/auth/components/change-profile/change-profile.component';
 import { TheCreditAccountListPageComponent } from './features/account/pages/the-credit-account-list-page/the-credit-account-list-page.component';
 import { AuthGuard } from './auth/auth.guard';
+import { PaymentsComponent } from './features/payments/payments.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -36,4 +37,6 @@ export const routes: Routes = [
   { path: 'change-profile', component: ChangeProfileComponent, canActivate: [AuthGuard] },
   { path: 'montlyincome', component: MonthlyIncomeComponent },
   { path: 'createAccount', component: TheCreateAccountComponent },
+
+  { path: 'payments', component: PaymentsComponent },
 ];

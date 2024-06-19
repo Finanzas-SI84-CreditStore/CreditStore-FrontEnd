@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginReq } from '../models/login-req';
 import { Login } from '../models/login';
 import { User } from '../../auth/models/user';
+import { Payment } from '../models/pay';
 const injector = Injector.create({
   providers: [
     { provide: HttpClient, deps: [], useClass: HttpClientModule },
@@ -34,6 +35,10 @@ export class UserService {
 
   getUserById(id: string): Observable<User> {
     return this.http.get<User>(this.apiUrl + '/' + id);
+  }
+
+  getpayments(id: string): Observable<Payment[]>{
+    return this.http.get<Payment[]>(`${this.apiUrl}/accounts/${id}/pays`);
   }
 
 }

@@ -41,7 +41,7 @@ export class TheCreateAccountComponent implements OnInit {
   passwordSpecialCharValid = false;
   passwordNumberValid = false;
   passwordLowerCaseValid = false;
-  passwordsMatch?: boolean;
+  passwordsMatch = false;
   passwordNeutral = true;
   spinner = false;
 
@@ -53,7 +53,8 @@ export class TheCreateAccountComponent implements OnInit {
       birthDate: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8), this.passwordValidator()]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      storeName: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
 
     this.registerForm.valueChanges.subscribe(() => {
@@ -74,7 +75,6 @@ export class TheCreateAccountComponent implements OnInit {
   passwordValidator() {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
-      if (!control.touched) return null;
 
       const hasUpperCase = /[A-Z]/.test(value);
       const hasNumber = /\d/.test(value);
@@ -93,17 +93,16 @@ export class TheCreateAccountComponent implements OnInit {
   }
 
   passwordMatchValidator = (group: AbstractControl): ValidationErrors | null => {
-    if (!group.get('password')?.touched || !group.get('confirmPassword')?.touched) return null;
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
-    const passwordsMatch = password === confirmPassword;
-    return !passwordsMatch ? { passwordsDoNotMatch: 'Las contraseñas no coinciden' } : null;
+    this.passwordsMatch = password === confirmPassword;
+    return !this.passwordsMatch ? { passwordsDoNotMatch: 'Las contraseñas no coinciden' } : null;
   }
 
   updatePasswordMatch(): void {
     const password = this.registerForm.get('password')?.value;
     const confirmPassword = this.registerForm.get('confirmPassword')?.value;
-    this.passwordsMatch = password === confirmPassword && this.registerForm.get('confirmPassword')?.touched;
+    this.passwordsMatch = password === confirmPassword;
   }
 
   onSubmit(): void {
@@ -114,7 +113,7 @@ export class TheCreateAccountComponent implements OnInit {
           next: id => {
             this.toastr.success('¡Usuario creado correctamente!');
             this.registerForm.reset();
-            this.router.navigate(['inicio']);
+            this.router.navigate(['panel']);
           },
           error: error => {
             this.toastr.error(error.error.message);
@@ -145,11 +144,14 @@ export class TheCreateAccountComponent implements OnInit {
     }
   }
   
-
   updatePasswordRequirements(): void {
     const passwordControl = this.registerForm.get('password');
     if (passwordControl) {
       passwordControl.updateValueAndValidity({ onlySelf: true });
+    }
+    const confirmPasswordControl = this.registerForm.get('confirmPassword');
+    if (confirmPasswordControl) {
+      confirmPasswordControl.updateValueAndValidity({ onlySelf: true });
     }
   }
 

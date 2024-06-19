@@ -45,7 +45,7 @@ export class AddAccountPageComponent {
   capitalizationPeriods = [ 'ANUAL', 'MENSUAL', 'DIARIA' ];
   interestTypes = [ 'EFECTIVA', 'NOMINAL' ];
   creditType = [ 'VENCIMIENTO', 'MENSUAL'];
-  gracePeriod = [ 'SI', 'NO' ];
+  gracePeriod = [ 'TOTAL', 'NO', 'PARCIAL' ];
 
   sharesNumber = [
     { value: 1, viewValue: '1' },

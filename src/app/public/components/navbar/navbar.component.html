@@ -38,15 +38,15 @@
   <div class="bottom-section">
     <div class="setting">
       <a routerLink="/login" (click)="logout()">
-        <img src="assets/icons/logout.svg" alt="Icono lougout" class="icon">
-        <span class="text-white">Logout</span>
+        <i class="text-white bi bi-box-arrow-right"></i>
+        <span class="ms-2 text-white">Salir</span>
       </a>
     </div>
     <div class="divider"></div>
     <div class="user-info">
-      <div>
-        <img src="assets/Avatar.png" alt="User Profile" class="user-avatar">
-        <span class="user-name">Juan Perez</span>
+      <div class="d-flex flex-column align-items-center gap-2 d-md-block">
+        <img src="assets/tienda.png" alt="User Profile" class="user-avatar">
+        <span class="user-name">{{usuario?.names}} {{usuario?.lastNames}}</span>
       </div>
     </div>
   </div>

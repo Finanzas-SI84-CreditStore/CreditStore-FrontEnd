@@ -1,7 +1,17 @@
 .valid {
     color: rgb(27, 192, 137);
   }
-  
+
   .invalid {
     color: rgb(238, 92, 92);
+  }
+
+  .logo {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .logo .img {
+      width: 100%;
+      height: auto;
   }

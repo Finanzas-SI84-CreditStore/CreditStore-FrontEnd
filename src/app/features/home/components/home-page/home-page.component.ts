@@ -36,7 +36,7 @@ export class HomePageComponent implements OnInit {
     this.userId = this.sessionStorageService.getItem('userId');
     this.findUser();
     this.getClientesConMayoresDeudas();
-   
+
   }
 
   findUser(): void {
@@ -76,6 +76,12 @@ export class HomePageComponent implements OnInit {
   openFormClientAccount(): void {
     const modalRef: NgbModalRef = this.modalService.open(FormClientAccountComponent,
       { size: 'lg', centered: true, backdrop: 'static' });
+    modalRef.closed.subscribe((response) => {
+      if (response) {
+        this.getClientesConMayoresDeudas();
+      }
+    });
+
   }
 
 }

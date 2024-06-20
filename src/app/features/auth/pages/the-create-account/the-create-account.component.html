@@ -1,116 +1,114 @@
-<div class="container">
-  <div class="logo d-md-none">
-    <img class="img" src="../../../../assets/credistore2logo.png" alt="CreditStore Logo">
-  </div>
-  <div class="logo-section">
-    <app-logo-screen class="logo"></app-logo-screen>
-  </div>
-  <div class="form-section">
-    <div class="form-container">
-      <h2>CREAR CUENTA</h2>
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="firstName">Nombres</label>
-            <div class="input-container">
-              <i class="fas fa-user"></i>
-              <input type="text" id="firstName" formControlName="name" placeholder="Juan" required>
-            </div>
-            <div *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)" class="invalid-feedback d-block">
-              {{ registerForm.get('name')?.getError('noNumbers') || 'El campo es obligatorio' }}
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="lastName">Apellidos</label>
-            <div class="input-container">
-              <i class="fas fa-user"></i>
-              <input type="text" id="lastName" formControlName="lastName" placeholder="Perez" required>
-            </div>
-            <div *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)" class="invalid-feedback d-block">
-              {{ registerForm.get('lastName')?.getError('noNumbers') || 'El campo es obligatorio' }}
-            </div>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="dni">DNI</label>
-            <div class="input-container">
-              <i class="fas fa-id-card"></i>
-              <input type="text" id="dni" formControlName="dni" placeholder="12345678" required>
-            </div>
-            <div *ngIf="registerForm.get('dni')?.invalid && (registerForm.get('dni')?.dirty || registerForm.get('dni')?.touched)" class="invalid-feedback d-block">
-              {{ 'El DNI debe tener exactamente 8 dígitos' }}
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="birthDate">Fecha de nacimiento</label>
-            <div class="input-container">
-              <i class="fas fa-calendar-alt"></i>
-              <input type="date" id="birthDate" formControlName="birthDate" required>
-            </div>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group full-width">
-            <label for="email">Correo</label>
-            <div class="input-container">
-              <i class="fas fa-envelope"></i>
-              <input type="email" id="email" formControlName="email" placeholder="johndoe@gmail.com" required>
-            </div>
-            <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="invalid-feedback d-block">
-              {{ 'Por favor, ingrese un correo electrónico válido' }}
-            </div>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="password">Contraseña</label>
-            <div class="input-container">
-              <i class="fas fa-lock"></i>
-              <input type="password" id="password" formControlName="password" required (input)="updatePasswordRequirements()">
-            </div>
-            <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="invalid-feedback d-block">
-              {{ registerForm.get('password')?.getError('passwordStrength') || 'El campo es obligatorio' }}
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="confirmPassword">Confirmar Contraseña</label>
-            <div class="input-container">
-              <i class="fas fa-lock"></i>
-              <input type="password" id="confirmPassword" formControlName="confirmPassword" required (input)="updatePasswordRequirements()">
-            </div>
-            <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" class="invalid-feedback d-block">
-              {{ 'Las contraseñas no coinciden' }}
-            </div>
-          </div>
-        </div>
-        <div class="password-requirements">
-          <p id="lowercase" [class.invalid]="!passwordLowerCaseValid" [class.valid]="passwordLowerCaseValid">
-            <i class="fas" [class.fa-times]="!passwordLowerCaseValid" [class.fa-check]="passwordLowerCaseValid" [class.fa-circle]="passwordNeutral"></i>
-            Contiene al menos una minúscula
-          </p>
-          <p id="uppercase" [class.invalid]="!passwordUpperCaseValid" [class.valid]="passwordUpperCaseValid">
-            <i class="fas" [class.fa-times]="!passwordUpperCaseValid" [class.fa-check]="passwordUpperCaseValid" [class.fa-circle]="passwordNeutral"></i>
-            Contiene al menos una mayúscula
-          </p>
-          <p id="specialChar" [class.invalid]="!passwordSpecialCharValid" [class.valid]="passwordSpecialCharValid">
-            <i class="fas" [class.fa-times]="!passwordSpecialCharValid" [class.fa-check]="passwordSpecialCharValid" [class.fa-circle]="passwordNeutral"></i>
-            Contiene un carácter especial
-          </p>
-          <p id="number" [class.invalid]="!passwordNumberValid" [class.valid]="passwordNumberValid">
-            <i class="fas" [class.fa-times]="!passwordNumberValid" [class.fa-check]="passwordNumberValid" [class.fa-circle]="passwordNeutral"></i>
-            Contiene al menos un número
-          </p>
-          <p id="passwordMatch" [class.invalid]="!passwordsMatch" [class.valid]="passwordsMatch">
-            <i class="fas" [class.fa-times]="!passwordsMatch" [class.fa-check]="passwordsMatch" [class.fa-circle]="passwordNeutral"></i>
-            Las contraseñas coinciden
-          </p>
-        </div>
-        <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">Registrarse</button>
-      </form>
-      <button mat-button class="other-button" (click)="navigateToInicio()">¿Ya eres miembro? Iniciar Sesión</button>
+<div class="row m-0 d-flex justify-content-center min-vh-100">
+  <app-logo-screen class="d-none d-md-flex col-md-6 m-0 p-0"></app-logo-screen>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" 
+  class="needs-validation col-12 col-md-6 gap-4 d-flex flex-column justify-content-center px-5">
+    <div class="logo d-md-none">
+      <img class="img" src="../../../../assets/credistore2logo.png" alt="CreditStore Logo">
     </div>
-  </div>
+    <div class="col-lg-11 col-10 pe-0 text-center">
+      <h2 class="modal-title h2 mb-0">CREAR CUENTA</h2>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md-6 text-center mb-3">
+        <label class="form-label">Nombre *</label>
+        <input class="form-control" type="text" formControlName="name" placeholder="Ingresa tu nombre">
+        <div class="invalid-feedback d-block" app-field-error controlName="name"> </div>
+        <div *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)" class="invalid-feedback d-block">
+          {{ registerForm.get('name')?.getError('noNumbers') || 'El campo es obligatorio' }}
+        </div>
+      </div>
+      <div class="form-group col-md-6 text-center mb-3">
+        <label class="form-label">Apellidos *</label>
+        <input type="text" class="form-control" formControlName="lastName" placeholder="Ingresa tus apellidos">
+        <div class="invalid-feedback d-block" app-field-error controlName="lastName"> </div>
+        <div *ngIf="registerForm.get('lastName')?.invalid && (registerForm.get('lastName')?.dirty || registerForm.get('lastName')?.touched)" class="invalid-feedback d-block">
+          {{ registerForm.get('lastName')?.getError('noNumbers') || 'El campo es obligatorio' }}
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md-6 text-center mb-3">
+        <label class="form-label">DNI *</label>
+        <input type="text" appNumericInput class="form-control" formControlName="dni" placeholder="Ingresa tu DNI">
+        <div class="invalid-feedback d-block" app-field-error controlName="dni"> </div>
+        <div *ngIf="registerForm.get('dni')?.invalid && (registerForm.get('dni')?.dirty || registerForm.get('dni')?.touched)" class="invalid-feedback d-block">
+          {{ 'El DNI debe tener exactamente 8 dígitos' }}
+        </div>
+      </div>
+      <div class="form-group col-md-6 text-center mb-3">
+        <label class="form-label">Fecha de Nacimiento *</label>
+        <input type="date" class="form-control" formControlName="birthDate" placeholder="Selecciona tu fecha de nacimiento">
+        <div class="invalid-feedback d-block" app-field-error controlName="birthDate"> </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md-6 text-center mb-3">
+        <label class="form-label">Correo *</label>
+        <input type="email" class="form-control" formControlName="email" placeholder="Selecciona tu correo electrónico">
+        <div class="invalid-feedback d-block" app-field-error controlName="email"> </div>
+        <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="invalid-feedback d-block">
+          {{ 'Por favor, ingrese un correo electrónico válido' }}
+        </div>
+      </div>
+      <div class="form-group col-md-6 text-center mb-3">
+        <label class="form-label">Nombre de la tienda *</label>
+        <input class="form-control" type="text" formControlName="storeName" placeholder="Ingresa el nombre de la tienda">
+        <div class="invalid-feedback d-block" app-field-error controlName="storeName"> </div>
+        <div *ngIf="registerForm.get('storeName')?.invalid && (registerForm.get('storeName')?.dirty || registerForm.get('storeName')?.touched)" class="invalid-feedback d-block">
+          {{ registerForm.get('storeName')?.getError('noNumbers') || 'El campo es obligatorio' }}
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="form-group col-md-6 text-center mb-3">
+        <label class="form-label" for="password">Contraseña</label>
+        <div class="input-container">
+          <i class="fas fa-lock"></i>
+          <input class="form-control" type="password" id="password" formControlName="password" required (input)="updatePasswordRequirements()">
+        </div>
+        <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="invalid-feedback d-block">
+          {{ 'El campo es obligatorio' }}
+        </div>
+      </div>
+      <div class="form-group col-md-6 text-center mb-3">
+        <label class="form-label" for="confirmPassword">Confirmar Contraseña</label>
+        <div class="input-container">
+          <i class="fas fa-lock"></i>
+          <input class="form-control" type="password" id="confirmPassword" formControlName="confirmPassword" required (input)="updatePasswordRequirements()">
+        </div>
+        <div *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" class="invalid-feedback d-block">
+          {{ 'Las contraseñas no coinciden' }}
+        </div>
+      </div>
+    </div>
+    <div class="password-requirements">
+      <p id="lowercase" [ngClass]="{ 'invalid': !passwordLowerCaseValid, 'valid': passwordLowerCaseValid }">
+        <i class="fas" [ngClass]="{ 'fa-times': !passwordLowerCaseValid, 'fa-check': passwordLowerCaseValid }"></i>
+        * Contiene al menos una minúscula
+      </p>
+      <p id="uppercase" [ngClass]="{ 'invalid': !passwordUpperCaseValid, 'valid': passwordUpperCaseValid }">
+        <i class="fas" [ngClass]="{ 'fa-times': !passwordUpperCaseValid, 'fa-check': passwordUpperCaseValid }"></i>
+        * Contiene al menos una mayúscula
+      </p>
+      <p id="specialChar" [ngClass]="{ 'invalid': !passwordSpecialCharValid, 'valid': passwordSpecialCharValid }">
+        <i class="fas" [ngClass]="{ 'fa-times': !passwordSpecialCharValid, 'fa-check': passwordSpecialCharValid }"></i>
+        * Contiene un carácter especial
+      </p>
+      <p id="number" [ngClass]="{ 'invalid': !passwordNumberValid, 'valid': passwordNumberValid }">
+        <i class="fas" [ngClass]="{ 'fa-times': !passwordNumberValid, 'fa-check': passwordNumberValid }"></i>
+        * Contiene al menos un número
+      </p>
+      <p id="passwordMatch" [ngClass]="{ 'invalid': !passwordsMatch, 'valid': passwordsMatch }">
+        <i class="fas" [ngClass]="{ 'fa-times': !passwordsMatch, 'fa-check': passwordsMatch }"></i>
+        * Las contraseñas coinciden
+      </p>
+    </div>
+    <div class="d-flex flex-column align-items-center gap-2">
+      <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Registrarse</button>
+      <a class="hover-pointer" (click)="navigateToInicio()">¿Ya eres miembro? Iniciar Sesión</a>
+    </div>
+    
+  </form>
 </div>
 <div *ngIf="spinner" class="screen d-flex justify-content-center align-items-center">
   <div class="spinner-border text-primary spinner" role="status">

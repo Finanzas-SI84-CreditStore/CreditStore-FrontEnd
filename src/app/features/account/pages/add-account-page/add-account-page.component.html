@@ -97,9 +97,14 @@
                 matTooltip="Escoja si es que debería haber un tiempo de gracia en la taza de la compra"
                 class="help">help_outline</mat-icon></h4>
               <div class="form-check col justify-content-center form-radio-margin ">
-                <input class="form-check-input" type="radio" (change)="changePeriodoGracia('SI')"
+                <input class="form-check-input" type="radio" (change)="changePeriodoGracia('TOTAL')"
                   formControlName="gracePeriod" [value]=true />
-                <label class="form-check-label"> Sí </label>
+                <label class="form-check-label"> Total </label>
+              </div>
+              <div class="form-check col justify-content-center form-radio-margin ">
+                <input class="form-check-input" type="radio" (change)="changePeriodoGracia('PARCIAL')"
+                  formControlName="gracePeriod" [value]=true />
+                <label class="form-check-label"> Parcial </label>
               </div>
               <div class="form-check col justify-content-center form-radio-margin">
                 <input class="form-check-input" type="radio" (change)="changePeriodoGracia('NO')"

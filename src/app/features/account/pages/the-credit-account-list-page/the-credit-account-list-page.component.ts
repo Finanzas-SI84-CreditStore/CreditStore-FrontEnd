@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import {NavbarComponent} from "../../../../public/components/navbar/navbar.component";
 import {DatePipe, NgForOf, SlicePipe} from "@angular/common";
+import { SessionStorageService } from '../../../../shared/services/session-storage.service';
 
 @Component({
   selector: 'app-the-credit-account-list-page',
@@ -18,16 +19,17 @@ import {DatePipe, NgForOf, SlicePipe} from "@angular/common";
 })
 export class TheCreditAccountListPageComponent implements OnInit {
   accounts: AccountQuery[] = [];
-  userId: string = '1f39b2df-b4e3-446e-ad1a-6922d4b7a235'; // Reemplaza con el ID del usuario actual
+  userId: string = ''; // Reemplaza con el ID del usuario actual
 
-  // Propiedades para la paginación
-  itemsPerPage: number = 10;
-  currentPage: number = 1;
-  totalItems: number = 0;
+  
 
-  constructor(private accountService: AccountService) { }
+  constructor(
+    private accountService: AccountService,
+    private sessionStorageService: SessionStorageService
+  ) { }
 
   ngOnInit() {
+    this.userId = this.sessionStorageService.getItem('userId');
     this.getAllAccounts();
   }
 
@@ -35,7 +37,7 @@ export class TheCreditAccountListPageComponent implements OnInit {
     this.accountService.getAllAccountsByUser(this.userId).subscribe(
       (response: AccountQuery[]) => {
         this.accounts = response;
-        this.totalItems = response.length;
+        console.log('cuentas recibidos:', this.accounts);
       },
       (error) => {
         console.error('Error al obtener las cuentas', error);
@@ -43,15 +45,5 @@ export class TheCreditAccountListPageComponent implements OnInit {
     );
   }
 
-  onItemsPerPageChange(event: any) {
-    this.itemsPerPage = +event.target.value;
-    this.currentPage = 1;
-  }
-
-  exportAccounts() {
-    // Lógica para exportar las cuentas a un archivo
-    console.log('Exportar cuentas');
-  }
-
-  protected readonly Math = Math;
+  
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from "../../public/components/navbar/navbar.component";
 import { NgForOf, CommonModule } from '@angular/common';
-import { Payment } from '../clients/models/pay';
+import { Payment } from './model/pay';
 import { UserService } from '../clients/services/user.service';
 import { SessionStorageService } from '../../shared/services/session-storage.service';
 import { FormsModule } from '@angular/forms';
+import { paymentService } from './service/payment.service';
 
 @Component({
   selector: 'app-payments',
@@ -21,25 +22,25 @@ import { FormsModule } from '@angular/forms';
 export class PaymentsComponent implements OnInit {
   payments: Payment[] = [];
   filteredPayments: Payment[] = [];
-  userId: string = "";
+  accountId: string = "";
   startDate: string = "";
   endDate: string = "";
 
   constructor(
-    private userservice: UserService,
+    private paymentService: paymentService,
     private sessionStorageService: SessionStorageService
   ){}
 
   ngOnInit() {
-    this.userId = this.sessionStorageService.getItem('userId');
+    this.accountId = this.sessionStorageService.getItem('accountId');
     this.getPayments();
   }
 
   getPayments() {
-    this.userservice.getpayments(this.userId).subscribe(
+    this.paymentService.getpaysofaccount(this.accountId).subscribe(
       (response: Payment[]) => {
         this.payments = response;
-        this.filteredPayments = response; // Inicialmente muestra todos los pagos
+       this.filteredPayments = response;
       });
   }
 

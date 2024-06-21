@@ -14,6 +14,7 @@ import { ChangeProfileComponent } from './features/auth/components/change-profil
 import { TheCreditAccountListPageComponent } from './features/account/pages/the-credit-account-list-page/the-credit-account-list-page.component';
 import { AuthGuard } from './auth/auth.guard';
 import { PaymentsComponent } from './features/payments/payments.component';
+import { TheCreditAccountListPagePerClientComponent } from './features/account/pages/the-credit-account-list-page-per-client/the-credit-account-list-page-per-client.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -33,6 +34,7 @@ export const routes: Routes = [
   { path: 'add-account', component: AddAccountPageComponent },
   { path: 'change-profile', component: ChangeProfileComponent },
   { path: 'credit-list', component: TheCreditAccountListPageComponent },
+  { path: 'credit-list-client', component: TheCreditAccountListPagePerClientComponent },
   { path: 'add-account', component: AddAccountPageComponent, canActivate: [AuthGuard] },
   { path: 'change-profile', component: ChangeProfileComponent, canActivate: [AuthGuard] },
   { path: 'montlyincome', component: MonthlyIncomeComponent },

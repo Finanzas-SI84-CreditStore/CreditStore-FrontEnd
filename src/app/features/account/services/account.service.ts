@@ -10,7 +10,7 @@ import { AccountQuery } from '../models/account-query';
   providedIn: 'root'
 })
 export class AccountService {
-  private apiUrl = 'http://localhost:8080/accounts';
+  private apiUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -19,5 +19,9 @@ export class AccountService {
   }
   getAllAccountsByUser(userId: string): Observable<AccountQuery[]> {
     return this.http.get<AccountQuery[]>(`${this.apiUrl}/users/${userId}/accounts`);
+  }
+
+  getaccountsbyClient(id: string): Observable<AccountResponse[]>{
+    return this.http.get<AccountResponse[]>(`${this.apiUrl}/accounts/clients/${id}/accounts`);
   }
 }

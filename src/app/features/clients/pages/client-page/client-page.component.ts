@@ -4,7 +4,7 @@ import { ClientQuery } from '../../models/client-query';
 import { NavbarComponent } from "../../../../public/components/navbar/navbar.component";
 import { DatePipe, NgForOf, SlicePipe } from "@angular/common";
 import { SessionStorageService } from '../../../../shared/services/session-storage.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-page',
@@ -23,9 +23,11 @@ export class ClientPageComponent implements OnInit {
   userId: string = ''; 
   toastr: any;
 
+
   constructor(
     private clientService: ClientService,
-    private sessionStorageService: SessionStorageService
+    private sessionStorageService: SessionStorageService,
+    private router:Router
   ) { }
 
   ngOnInit() {
@@ -45,5 +47,9 @@ export class ClientPageComponent implements OnInit {
     );
   }
 
+  verCuentas(id: string) {
+    this.sessionStorageService.setItem("clientsId",id);
+    this.router.navigate(['credit-list-client']); 
+  }
   
 }

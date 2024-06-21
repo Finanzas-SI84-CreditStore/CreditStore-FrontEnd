@@ -27,7 +27,6 @@ export class FormClientAccountComponent implements OnInit {
     dni: new FormControl<string>('', [Validators.required,]),
     birthDate: new FormControl<Date | null>(null, Validators.required),
     address: new FormControl<string>(''),
-    paymentDay: new FormControl<number>(5, Validators.required),
     creditLine: new FormControl<number | null>(null, Validators.required)
   });
 

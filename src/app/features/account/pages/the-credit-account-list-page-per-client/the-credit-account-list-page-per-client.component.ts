@@ -6,6 +6,7 @@ import { SessionStorageService } from '../../../../shared/services/session-stora
 import { AccountQuery } from '../../models/account-query';
 import { AccountResponse } from '../../models/account-response.model';
 import { Router } from '@angular/router';
+import { ClientService } from '../../../clients/services/client.service';
 
 @Component({
   selector: 'app-the-credit-account-list-page-per-client',
@@ -21,23 +22,23 @@ import { Router } from '@angular/router';
   styleUrl: './the-credit-account-list-page-per-client.component.css'
 })
 export class TheCreditAccountListPagePerClientComponent {
-
   accounts: AccountResponse[] = [];
   clientsId: string = ''; // Reemplaza con el ID del usuario actual
-
-  
+  nombre: string="";
 
   constructor(
     private accountService: AccountService,
     private sessionStorageService: SessionStorageService,
-    private router:Router
+    private router:Router,
+    private ClientService: ClientService
+    
   ) { }
 
   ngOnInit() {
     this.clientsId = this.sessionStorageService.getItem('clientsId');
     this.getAllAccounts();
+    
   }
-
   getAllAccounts() {
     this.accountService.getaccountsbyClient(this.clientsId).subscribe(
       (response: AccountResponse[]) => {
@@ -49,11 +50,12 @@ export class TheCreditAccountListPagePerClientComponent {
       }
     );
   }
-
-
-
   verpagos(accountId: number) {
     this.sessionStorageService.setItem("accountId",accountId);
     this.router.navigate(['payments']); 
+  }
+  
+  createcredit() {
+    this.router.navigate(['add-account']); 
   }
 }

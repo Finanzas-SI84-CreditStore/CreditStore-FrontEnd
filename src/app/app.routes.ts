@@ -11,7 +11,6 @@ import { RecoverCodePageComponent } from './features/auth/pages/recover-code-pag
 import { AddAccountPageComponent } from './features/account/pages/add-account-page/add-account-page.component';
 import { ClientPageComponent } from './features/clients/pages/client-page/client-page.component';
 import { ChangeProfileComponent } from './features/auth/components/change-profile/change-profile.component';
-import { TheCreditAccountListPageComponent } from './features/account/pages/the-credit-account-list-page/the-credit-account-list-page.component';
 import { AuthGuard } from './auth/auth.guard';
 import { PaymentsComponent } from './features/payments/payments.component';
 import { TheCreditAccountListPagePerClientComponent } from './features/account/pages/the-credit-account-list-page-per-client/the-credit-account-list-page-per-client.component';
@@ -33,7 +32,6 @@ export const routes: Routes = [
 
   { path: 'add-account', component: AddAccountPageComponent },
   { path: 'change-profile', component: ChangeProfileComponent },
-  { path: 'credit-list', component: TheCreditAccountListPageComponent },
   { path: 'credit-list-client', component: TheCreditAccountListPagePerClientComponent },
   { path: 'add-account', component: AddAccountPageComponent, canActivate: [AuthGuard] },
   { path: 'change-profile', component: ChangeProfileComponent, canActivate: [AuthGuard] },

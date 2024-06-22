@@ -3,7 +3,8 @@
     <div class="content">
       <div class="accounts-container">
         <div class="accounts-header">
-          <h2>Cuentas</h2>
+          <h2>Creditos de </h2>
+          <button type="button" class="btn btn-success" (click)="createcredit()">CREAR CREDITO</button>
         </div>
           <div class="accounts-table mt-3">
             <table class="table">
@@ -11,32 +12,35 @@
                 <tr>
                   <th>ID de Transacción</th>
                   <th>Valor de Compra</th>
-                  <th>Tipo de Interés</th>
+                  <th>Tipo de Tasa</th>
                   <th>Periodo de Capitalización</th>
-                  <th>Periodo de Interés</th>
-                  <th>Tasa de Interés</th>
-                  <th>Tipo de Crédito</th>
-                  <th>Cantidad de Cuotas</th>
+                  <th>Valor de Tasa</th>
+                  <th>Tasa de Crédito</th>
+                  <th>Numero de Cuotas</th>
+                  <th>Plazo de Gracia</th>
                   <th>Periodo de Gracia</th>
-                  <th>Longitud del Periodo de Gracia</th>
+                  <th>Fecha de Pago</th>
                   <th scope="col">Ver Pagos</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let account of accounts">
                   <td>{{ account.id }}</td>
-                  <td>S/ {{ account.purchaseValue}}</td>
-                  <td>{{ account.interestType }}</td>
-                  <td>{{ account.capitalizationPeriod }}</td>
-                  <td>{{ account.interestPeriod }}</td>
-                  <td>{{ account.interestRate }}%</td>
-                  <td>{{ account.creditType }}</td>
-                  <td>{{ account.installmentCount }}</td>
-                  <td>{{ account.gracePeriod ? 'Sí' : 'No' }}</td>
-                  <td>{{ account.gracePeriodLength }}</td>
+                  <td>S/ {{ account.valorCompra}}</td>
+                  <td>{{ account.tipoTasa}}</td>
+                  <td>{{ account.capitalizacionTasa }}</td>
+                  <td>{{ account.valorTasa }}</td>
+                  <td>{{ account.tipoCredito }}</td>
+                  <td>{{ account.numeroCuotas }}</td>
+                  <td>{{ account.plazoGracia ? 'Sí' : 'No' }}</td>
+                  <td>{{ account.periodoGracia}}</td>
+                  <td>{{ account.paymentDate }}</td>
                   <td><button type="button" class="btn btn-success" (click)="verpagos(account.id)">PAGOS</button></td>
                 </tr>
               </tbody>
+
+
+              
             </table>
           </div>
           

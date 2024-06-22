@@ -1,12 +1,12 @@
 export interface AccountRequest {
-  purchaseValue: number;
-  interestType: string;
-  capitalizationPeriod: string;
-  interestPeriod: number;
-  interestRate: number;
-  creditType: string;
-  installmentCount: number;
-  gracePeriod: boolean;
-  gracePeriodLength: number;
-  clientId: string;
+  valorCompra: number;
+  tipoTasa: string;
+  capitalizacionTasa: string;
+  valorTasa: number;
+  tipoCredito: string;
+  numeroCuotas: number;
+  plazoGracia: boolean;
+  periodoGracia: number;
+  paymentDate: Date;
+  clientId : string;
 }

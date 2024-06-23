@@ -14,6 +14,7 @@ import { ChangeProfileComponent } from './features/auth/components/change-profil
 import { AuthGuard } from './auth/auth.guard';
 import { PaymentsComponent } from './features/payments/payments.component';
 import { TheCreditAccountListPagePerClientComponent } from './features/account/pages/the-credit-account-list-page-per-client/the-credit-account-list-page-per-client.component';
+import { PlanPagosComponent } from './features/plan-pagos/plan-pagos.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -39,4 +40,5 @@ export const routes: Routes = [
   { path: 'createAccount', component: TheCreateAccountComponent },
 
   { path: 'payments', component: PaymentsComponent },
+  { path: 'plan-pagos', component: PlanPagosComponent },
 ];

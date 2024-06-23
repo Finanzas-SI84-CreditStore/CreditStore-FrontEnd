@@ -24,12 +24,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let account of accounts">
+                <tr *ngFor="let account of accounts" (click)="planpagos(account.id)">
                   <td>{{ account.id }}</td>
                   <td>S/ {{ account.valorCompra}}</td>
                   <td>{{ account.tipoTasa}}</td>
                   <td>{{ account.capitalizacionTasa }}</td>
-                  <td>{{ account.valorTasa }}</td>
+                  <td>{{ account.valorTasa | percent:'1.7-7' }}</td>
                   <td>{{ account.tipoCredito }}</td>
                   <td>{{ account.numeroCuotas }}</td>
                   <td>{{ account.plazoGracia ? 'Sí' : 'No' }}</td>

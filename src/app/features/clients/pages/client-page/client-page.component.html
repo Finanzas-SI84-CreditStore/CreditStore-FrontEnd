@@ -18,7 +18,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let client of clients">
+            <tr *ngFor="let client of clients" >
               <td>{{ client.dni }}</td>
               <td>{{ client.name }} {{ client.lastName }}</td>
               <td>{{ client.birthDate | date: 'dd MMM, yyyy' }}</td>

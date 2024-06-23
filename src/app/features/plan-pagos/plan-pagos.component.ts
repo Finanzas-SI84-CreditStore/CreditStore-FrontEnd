@@ -4,6 +4,7 @@ import { AccountService } from './service/planPagos.service';
 import { ResponseData, DatosEntrada, DatosSalida } from './model/responseData.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NavbarComponent } from "../../public/components/navbar/navbar.component";
+import { SessionStorageService } from '../../shared/services/session-storage.service';
 
 @Component({
     selector: 'app-plan-pagos',
@@ -15,11 +16,16 @@ import { NavbarComponent } from "../../public/components/navbar/navbar.component
 export class PlanPagosComponent implements OnInit {
   datosEntrada: DatosEntrada | undefined;
   datosSalidaList: DatosSalida[] = [];
+  accountId : number = 0;
 
-  constructor(private accountService: AccountService) { }
+  constructor(
+    private accountService: AccountService,
+    private sessionStorageService: SessionStorageService
+  ) { }
 
   ngOnInit(): void {
-    this.getAccount(1);
+    this.accountId = this.sessionStorageService.getItem('accountId');
+    this.getAccount(this.accountId);
   }
 
   getAccount(id: number): void {

@@ -57,4 +57,6 @@ export class ClientPageComponent implements OnInit {
     this.router.navigate(['credit-list-client']);
   }
 
+  
+
 }

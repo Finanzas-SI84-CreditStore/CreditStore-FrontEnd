@@ -7,7 +7,7 @@ import { AccountQuery } from '../../models/account-query';
 import { AccountResponse } from '../../models/account-response.model';
 import { Router } from '@angular/router';
 import { ClientService } from '../../../clients/services/client.service';
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-the-credit-account-list-page-per-client',
   standalone: true,
@@ -15,13 +15,15 @@ import { ClientService } from '../../../clients/services/client.service';
       NavbarComponent,
       SlicePipe,
       DatePipe,
-      NgForOf
+      NgForOf,
+      CommonModule
     
   ],
   templateUrl: './the-credit-account-list-page-per-client.component.html',
   styleUrl: './the-credit-account-list-page-per-client.component.css'
 })
 export class TheCreditAccountListPagePerClientComponent {
+
   accounts: AccountResponse[] = [];
   clientsId: string = ''; // Reemplaza con el ID del usuario actual
   nombre: string="";
@@ -58,5 +60,10 @@ export class TheCreditAccountListPagePerClientComponent {
   
   createcredit() {
     this.router.navigate(['add-account']); 
+  }
+
+  planpagos(accountId: number) {
+    this.sessionStorageService.setItem("accountId",accountId);
+    this.router.navigate(['plan-pagos']);
   }
 }

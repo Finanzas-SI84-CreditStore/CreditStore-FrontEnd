@@ -43,10 +43,10 @@ export class AddAccountPageComponent implements OnInit {
     clientId: ''
   };
 
-  capitalizationPeriods = [ 'ANUAL', 'MENSUAL', 'DIARIA' ];
-  interestTypes = [ 'EFECTIVA', 'NOMINAL' ];
-  creditType = [ 'VENCIMIENTO', 'MENSUAL'];
-  gracePeriod = [ 'TOTAL', 'NO', 'PARCIAL' ];
+  capitalizationPeriods = ['ANUAL', 'MENSUAL', 'DIARIA'];
+  interestTypes = ['EFECTIVA', 'NOMINAL'];
+  creditType = ['VENCIMIENTO', 'MENSUAL'];
+  gracePeriod = ['TOTAL', 'NO', 'PARCIAL'];
 
   sharesNumber = [
     { value: 1, viewValue: '1' },
@@ -77,7 +77,7 @@ export class AddAccountPageComponent implements OnInit {
       interestRate: new FormControl(0, [Validators.required, Validators.min(0)]),
       creditType: new FormControl('VENCIMIENTO', Validators.required),
       sharesNumber: new FormControl(1, Validators.required),
-      gracePeriod: new FormControl(false, Validators.required),
+      gracePeriod: new FormControl('NO', Validators.required),
       gracePeriodLength: new FormControl(0, Validators.required),
     });
   }
@@ -97,7 +97,7 @@ export class AddAccountPageComponent implements OnInit {
         valorTasa: this.formCredit.value.interestRate ?? 0,
         tipoCredito: this.formCredit.value.creditType ?? '',
         numeroCuotas: this.formCredit.value.sharesNumber ?? 0,
-        plazoGracia: this.formCredit.value.gracePeriod ?? false,
+        plazoGracia: this.formCredit.value.gracePeriod === 'NO' ? false : true,
         periodoGracia: this.formCredit.value.gracePeriodLength ?? 0,
         paymentDate: new Date(),
         clientId: this.clientsId

@@ -45,7 +45,12 @@ export class AddAccountPageComponent implements OnInit {
     clientId: ''
   };
 
-  capitalizationPeriods = ['ANUAL', 'MENSUAL', 'DIARIA'];
+  capitalizationTasaOptions = [
+    { value: 360, viewValue: 'Anual' },
+    { value: 30, viewValue: 'Mensual' },
+    { value: 1, viewValue: 'Diaria' }
+  ];
+
   interestTypes = ['EFECTIVA', 'NOMINAL'];
   creditType = ['VENCIMIENTO', 'MENSUAL'];
   gracePeriod = ['TOTAL', 'NO', 'PARCIAL'];
@@ -64,6 +69,14 @@ export class AddAccountPageComponent implements OnInit {
     { value: 3, viewValue: '3' }
   ];
 
+  tiempoTasaOptions = [
+    { value: 30, viewValue: 'Mensual' },
+    { value: 60, viewValue: 'Bimestral' },
+    { value: 120, viewValue: 'Cuatrimestral' },
+    { value: 180, viewValue: 'Semestral' },
+    { value: 360, viewValue: 'Anual' }
+  ];
+
   formCredit: FormGroup;
   clientsId: string = "";
 
@@ -76,37 +89,40 @@ export class AddAccountPageComponent implements OnInit {
     this.formCredit = this.formBuilder.group({
       purchaseValue: new FormControl(0, [Validators.required, Validators.min(1)]),
       interestType: new FormControl('NOMINAL', Validators.required),
-      capitalizationPeriod: new FormControl('MENSUAL', Validators.required),
+      capitalizationPeriod: new FormControl(30, Validators.required),
       interestRate: new FormControl(0, [Validators.required, Validators.min(0)]),
       tasaMoratoria: new FormControl(0, [Validators.required, Validators.min(0)]),
       creditType: new FormControl('VENCIMIENTO', Validators.required),
       sharesNumber: new FormControl(1, Validators.required),
       gracePeriod: new FormControl(false, Validators.required),
       gracePeriodLength: new FormControl(0, Validators.required),
+      tiempoTasa: new FormControl(30, Validators.required)
     });
   }
 
   ngOnInit() {
-    
-      this.clientsId = this.sessionStorageService.getItem('clientsId') ;
-      console.log(this.clientsId);
+    this.clientsId = this.sessionStorageService.getItem('clientsId');
+    console.log(this.clientsId);
   }
 
   onSubmit() {
     if (this.formCredit.valid) {
+      const valorTasa = (this.formCredit.value.interestRate ?? 0) / 100;
+      const tasaMoratoria = (this.formCredit.value.tasaMoratoria ?? 0) / 100;
+
       this.AccountRequest = {
         valorCompra: this.formCredit.value.purchaseValue ?? 0,
         tipoTasa: this.formCredit.value.interestType ?? '',
-        capitalizacionTasa: this.formCredit.value.capitalizationPeriod ?? '',
-        valorTasa: this.formCredit.value.interestRate ?? 0,
+        capitalizacionTasa: this.formCredit.value.capitalizationPeriod ?? 0,
+        valorTasa: valorTasa,
         tipoCredito: this.formCredit.value.creditType ?? '',
         numeroCuotas: this.formCredit.value.sharesNumber ?? 0,
         plazoGracia: this.formCredit.value.gracePeriod ?? '',
         periodoGracia: this.formCredit.value.gracePeriodLength ?? 0,
-        tasaMoratoria: this.formCredit.value.tasaMoratoria ?? 0,
+        tasaMoratoria: tasaMoratoria,
         diasAtraso: 0,
         limiteCredito: 0,
-        tiempoTasa: 0,
+        tiempoTasa: this.formCredit.value.tiempoTasa ?? 0,
         paymentDate: new Date(),
         clientId: this.clientsId
       };
@@ -124,8 +140,6 @@ export class AddAccountPageComponent implements OnInit {
     } else {
       this.toastr.error('Por favor, completa todos los campos requeridos.');
     }
-
-    
   }
 
   changeTipoTasa(tasa: string): void {
@@ -135,7 +149,7 @@ export class AddAccountPageComponent implements OnInit {
       this.formCredit.controls['capitalizationPeriod'].disable();
     } else {
       this.formCredit.controls['capitalizationPeriod'].enable();
-      this.formCredit.controls['capitalizationPeriod'].setValue('MENSUAL');
+      this.formCredit.controls['capitalizationPeriod'].setValue(30);
       this.formCredit.controls['capitalizationPeriod'].setValidators(Validators.required);
     }
     this.formCredit.controls['capitalizationPeriod'].updateValueAndValidity();

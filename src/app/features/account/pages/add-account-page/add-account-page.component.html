@@ -25,7 +25,7 @@
 
           <h4 class="text">Capitalización de Tasa *</h4>
           <ng-select formControlName="capitalizationPeriod" placeholder="Seleccione la capitalización de la tasa" [searchable]="false">
-            <ng-option *ngFor="let rate of capitalizationPeriods" [value]="rate">{{rate}}</ng-option>
+            <ng-option *ngFor="let option of capitalizationTasaOptions" [value]="option.value">{{option.viewValue}}</ng-option>
           </ng-select>
           <div class="invalid-feedback d-block" app-field-error controlName="capitalizationPeriod"></div>
         </div>
@@ -94,6 +94,14 @@
             </div>
           </div>
           <div class="invalid-feedback d-block" app-field-error controlName="tasaMoratoria"></div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <h4 class="text">Tiempo Tasa</h4>
+          <ng-select formControlName="tiempoTasa" placeholder="Seleccione el tiempo de la tasa" [searchable]="false">
+            <ng-option *ngFor="let tiempo of tiempoTasaOptions" [value]="tiempo.value">{{tiempo.viewValue}}</ng-option>
+          </ng-select>
+          <div class="invalid-feedback d-block" app-field-error controlName="tiempoTasa"></div>
         </div>
       </div>
 

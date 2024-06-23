@@ -23,6 +23,7 @@ export class ClientPageComponent implements OnInit {
   clients: ClientQuery[] = [];
   userId: string = '';
   toastr: any;
+  nombre:string=""
 
 
   constructor(
@@ -48,8 +49,11 @@ export class ClientPageComponent implements OnInit {
     );
   }
 
-  verCuentas(id: string) {
+  verCuentas(id: string, name: string, lastname: string) {
     this.sessionStorageService.setItem("clientsId",id);
+    
+    this.nombre = name +" "+lastname;
+    this.sessionStorageService.setItem("clientsName",this.nombre);
     this.router.navigate(['credit-list-client']);
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../services/client.service';
 import { ClientQuery } from '../../models/client-query';
 import { NavbarComponent } from "../../../../public/components/navbar/navbar.component";
-import { DatePipe, NgForOf, SlicePipe } from "@angular/common";
+import { CommonModule, DatePipe, NgForOf, SlicePipe } from "@angular/common";
 import { SessionStorageService } from '../../../../shared/services/session-storage.service';
 import { Router } from '@angular/router';
 
@@ -14,14 +14,16 @@ import { Router } from '@angular/router';
     NavbarComponent,
     SlicePipe,
     DatePipe,
-    NgForOf
+    NgForOf,
+    CommonModule,
   ],
   styleUrls: ['./client-page.component.css']
 })
 export class ClientPageComponent implements OnInit {
   clients: ClientQuery[] = [];
-  userId: string = ''; 
+  userId: string = '';
   toastr: any;
+  nombre:string=""
 
 
   constructor(
@@ -47,9 +49,12 @@ export class ClientPageComponent implements OnInit {
     );
   }
 
-  verCuentas(id: string) {
+  verCuentas(id: string, name: string, lastname: string) {
     this.sessionStorageService.setItem("clientsId",id);
-    this.router.navigate(['credit-list-client']); 
+    
+    this.nombre = name +" "+lastname;
+    this.sessionStorageService.setItem("clientsName",this.nombre);
+    this.router.navigate(['credit-list-client']);
   }
-  
+
 }

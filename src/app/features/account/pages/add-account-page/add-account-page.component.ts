@@ -1,44 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { AccountRequest } from '../../models/account-request.model';
-import { FormBuilder, FormControl, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from "@angular/common";
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { SessionStorageService } from '../../../../shared/services/session-storage.service';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
-import { NavbarComponent } from "../../../../public/components/navbar/navbar.component";
+import { NgSelectModule } from '@ng-select/ng-select';
 import { FieldErrorComponent } from '../../../../shared/components/field-error/field-error.component';
-import { NgOptionComponent, NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
-import { SessionStorageService } from '../../../../shared/services/session-storage.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { AccountResponse } from '../../models/account-response.model';
+import { NavbarComponent } from "../../../../public/components/navbar/navbar.component";
 
 @Component({
   selector: 'app-add-account-page',
   templateUrl: './add-account-page.component.html',
-  standalone: true,
   styleUrls: ['./add-account-page.component.css'],
+  standalone: true,
   imports: [
-    MatTooltipModule,
-    MatIconModule,
-    NavbarComponent,
     CommonModule,
     ReactiveFormsModule,
+    MatTooltipModule,
+    MatIconModule,
+    NgSelectModule,
     FieldErrorComponent,
-    NgSelectModule
-  ],
-  providers: [NgSelectComponent, NgOptionComponent],
+    NavbarComponent
+  ]
 })
 export class AddAccountPageComponent implements OnInit {
   AccountRequest: AccountRequest = {
     valorCompra: 0,
     tipoTasa: '',
-    capitalizacionTasa: '',
+    capitalizacionTasa: 0,
     valorTasa: 0,
     tipoCredito: '',
     numeroCuotas: 0,
-    plazoGracia: false,
+    plazoGracia: '',
     periodoGracia: 0,
+    tasaMoratoria: 0,
+    diasAtraso: 0,
+    limiteCredito: 0,
+    tiempoTasa: 0,
     paymentDate: new Date('2024-07-01'),
     clientId: ''
   };
@@ -63,6 +65,7 @@ export class AddAccountPageComponent implements OnInit {
   ];
 
   formCredit: FormGroup;
+  clientsId: string = "";
 
   constructor(
     private accountService: AccountService,
@@ -75,17 +78,18 @@ export class AddAccountPageComponent implements OnInit {
       interestType: new FormControl('NOMINAL', Validators.required),
       capitalizationPeriod: new FormControl('MENSUAL', Validators.required),
       interestRate: new FormControl(0, [Validators.required, Validators.min(0)]),
+      tasaMoratoria: new FormControl(0, [Validators.required, Validators.min(0)]),
       creditType: new FormControl('VENCIMIENTO', Validators.required),
       sharesNumber: new FormControl(1, Validators.required),
-      gracePeriod: new FormControl('NO', Validators.required),
+      gracePeriod: new FormControl(false, Validators.required),
       gracePeriodLength: new FormControl(0, Validators.required),
     });
   }
 
-  private clientsId: string = "";
-
   ngOnInit() {
-    this.clientsId = this.sessionStorageService.getItem('clientsId');
+    
+      this.clientsId = this.sessionStorageService.getItem('clientsId') ;
+      console.log(this.clientsId);
   }
 
   onSubmit() {
@@ -97,15 +101,21 @@ export class AddAccountPageComponent implements OnInit {
         valorTasa: this.formCredit.value.interestRate ?? 0,
         tipoCredito: this.formCredit.value.creditType ?? '',
         numeroCuotas: this.formCredit.value.sharesNumber ?? 0,
-        plazoGracia: this.formCredit.value.gracePeriod === 'NO' ? false : true,
+        plazoGracia: this.formCredit.value.gracePeriod ?? '',
         periodoGracia: this.formCredit.value.gracePeriodLength ?? 0,
+        tasaMoratoria: this.formCredit.value.tasaMoratoria ?? 0,
+        diasAtraso: 0,
+        limiteCredito: 0,
+        tiempoTasa: 0,
         paymentDate: new Date(),
         clientId: this.clientsId
       };
 
+      console.log(this.AccountRequest);
+
       this.accountService.createAccount(this.AccountRequest).subscribe(
         response => {
-          this.toastr.success('Cuenta creada exitosamente:');
+          this.toastr.success('Cuenta creada exitosamente');
         },
         error => {
           this.toastr.error(error.message);
@@ -114,6 +124,8 @@ export class AddAccountPageComponent implements OnInit {
     } else {
       this.toastr.error('Por favor, completa todos los campos requeridos.');
     }
+
+    
   }
 
   changeTipoTasa(tasa: string): void {

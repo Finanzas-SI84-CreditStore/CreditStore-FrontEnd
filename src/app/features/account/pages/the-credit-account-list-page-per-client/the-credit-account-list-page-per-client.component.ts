@@ -36,6 +36,7 @@ export class TheCreditAccountListPagePerClientComponent {
 
   ngOnInit() {
     this.clientsId = this.sessionStorageService.getItem('clientsId');
+    this.nombre = this.sessionStorageService.getItem('clientsName');
     this.getAllAccounts();
     
   }

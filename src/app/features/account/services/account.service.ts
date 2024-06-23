@@ -14,8 +14,8 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
-  createAccount(AccountRequest: AccountRequest): Observable<AccountRequest> {
-    return this.http.post<AccountRequest>(`${this.apiUrl}/accounts`, AccountRequest);
+  createAccount(accountRequest: AccountRequest): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/accounts`, accountRequest);
   }
   getAllAccountsByUser(userId: string): Observable<AccountQuery[]> {
     return this.http.get<AccountQuery[]>(`${this.apiUrl}/users/${userId}/accounts`);

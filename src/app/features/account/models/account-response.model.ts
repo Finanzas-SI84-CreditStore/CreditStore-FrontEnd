@@ -2,7 +2,7 @@ export interface AccountResponse {
   id: number;
   valorCompra: number;
   tipoTasa: string;
-  capitalizacionTasa: string;
+  capitalizacionTasa: number;
   valorTasa: number;
   tipoCredito: string;
   numeroCuotas: number;

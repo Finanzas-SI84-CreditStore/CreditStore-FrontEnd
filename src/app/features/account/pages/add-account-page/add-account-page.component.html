@@ -23,7 +23,7 @@
             <label class="form-check-label"> Nominal </label>
           </div>
 
-          <h4 class="text">Capitalización de Tasa *</h4>
+          <h4 class="text">Capitalización de Tasa</h4>
           <ng-select formControlName="capitalizationPeriod" placeholder="Seleccione la capitalización de la tasa" [searchable]="false">
             <ng-option *ngFor="let option of capitalizationTasaOptions" [value]="option.value">{{option.viewValue}}</ng-option>
           </ng-select>
@@ -62,21 +62,11 @@
         </div>
 
         <div class="col-md-4 mb-4">
-          <h4 class="text">Plazo de Gracia
-            <mat-icon matTooltip="Escoja si es que debería haber un tiempo de gracia en la taza de la compra" class="help">help_outline</mat-icon>
-          </h4>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" (change)="changePeriodoGracia('TOTAL')" formControlName="gracePeriod" value="TOTAL" />
-            <label class="form-check-label"> Total </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" (change)="changePeriodoGracia('PARCIAL')" formControlName="gracePeriod" value="PARCIAL" />
-            <label class="form-check-label"> Parcial </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" (change)="changePeriodoGracia('NO')" formControlName="gracePeriod" value="NO" />
-            <label class="form-check-label"> No </label>
-          </div>
+          <h4 class="text">Plazo de Gracia</h4>
+          <ng-select formControlName="gracePeriod" placeholder="Seleccione el plazo de gracia" [searchable]="false">
+            <ng-option *ngFor="let option of gracePeriod" [value]="option.value">{{option.viewValue}}</ng-option>
+          </ng-select>
+          <div class="invalid-feedback d-block" app-field-error controlName="gracePeriod"></div>
 
           <h4 class="text">Periodo(s) de Gracia</h4>
           <ng-select formControlName="gracePeriodLength" placeholder="Elija la cantidad de Periodos de Gracia" [searchable]="false">

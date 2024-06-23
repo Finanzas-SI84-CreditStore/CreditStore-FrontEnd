@@ -53,14 +53,25 @@ export class AddAccountPageComponent implements OnInit {
 
   interestTypes = ['EFECTIVA', 'NOMINAL'];
   creditType = ['VENCIMIENTO', 'MENSUAL'];
-  gracePeriod = ['TOTAL', 'NO', 'PARCIAL'];
+  gracePeriod = [
+    { value: 'T', viewValue: 'Total' },
+    { value: 'P', viewValue: 'Parcial' },
+    { value: 'S', viewValue: 'No' },
+  ];
 
   sharesNumber = [
     { value: 1, viewValue: '1' },
     { value: 2, viewValue: '2' },
     { value: 3, viewValue: '3' },
     { value: 4, viewValue: '4' },
-    { value: 5, viewValue: '5' }
+    { value: 5, viewValue: '5' },
+    { value: 6, viewValue: '5' },
+    { value: 7, viewValue: '7' },
+    { value: 8, viewValue: '8' },
+    { value: 9, viewValue: '9' },
+    { value: 10, viewValue: '10' },
+    { value: 11, viewValue: '11' },
+    { value: 12, viewValue: '12' }
   ];
 
   gracePeriodLength = [
@@ -94,7 +105,7 @@ export class AddAccountPageComponent implements OnInit {
       tasaMoratoria: new FormControl(0, [Validators.required, Validators.min(0)]),
       creditType: new FormControl('VENCIMIENTO', Validators.required),
       sharesNumber: new FormControl(1, Validators.required),
-      gracePeriod: new FormControl(false, Validators.required),
+      gracePeriod: new FormControl('S', Validators.required),
       gracePeriodLength: new FormControl(0, Validators.required),
       tiempoTasa: new FormControl(30, Validators.required)
     });
@@ -107,19 +118,16 @@ export class AddAccountPageComponent implements OnInit {
 
   onSubmit() {
     if (this.formCredit.valid) {
-      const valorTasa = (this.formCredit.value.interestRate ?? 0) / 100;
-      const tasaMoratoria = (this.formCredit.value.tasaMoratoria ?? 0) / 100;
-
       this.AccountRequest = {
         valorCompra: this.formCredit.value.purchaseValue ?? 0,
         tipoTasa: this.formCredit.value.interestType ?? '',
-        capitalizacionTasa: this.formCredit.value.capitalizationPeriod ?? 0,
-        valorTasa: valorTasa,
+        capitalizacionTasa: this.formCredit.value.capitalizationPeriod ?? 1,
+        valorTasa: (this.formCredit.value.interestRate ?? 0) ,
         tipoCredito: this.formCredit.value.creditType ?? '',
         numeroCuotas: this.formCredit.value.sharesNumber ?? 0,
         plazoGracia: this.formCredit.value.gracePeriod ?? '',
         periodoGracia: this.formCredit.value.gracePeriodLength ?? 0,
-        tasaMoratoria: tasaMoratoria,
+        tasaMoratoria: (this.formCredit.value.tasaMoratoria ?? 0) ,
         diasAtraso: 0,
         limiteCredito: 0,
         tiempoTasa: this.formCredit.value.tiempoTasa ?? 0,

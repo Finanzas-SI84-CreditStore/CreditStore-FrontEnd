@@ -29,7 +29,7 @@
                   <td>S/ {{ account.valorCompra}}</td>
                   <td>{{ account.tipoTasa}}</td>
                   <td>{{ account.capitalizacionTasa }}</td>
-                  <td>{{ account.valorTasa | percent:'1.7-7' }}</td>
+                  <td>{{ account.valorTasa/100 | percent:'1.7-7' }}</td>
                   <td>{{ account.tipoCredito }}</td>
                   <td>{{ account.numeroCuotas }}</td>
                   <td>{{ account.plazoGracia ? 'Sí' : 'No' }}</td>

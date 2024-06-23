@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Injector } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { Payment } from '../../payments/model/pay';
+import { ClientQuery } from '../../clients/models/client-query';
 const injector = Injector.create({
   providers: [
     { provide: HttpClient, deps: [], useClass: HttpClientModule },
@@ -22,5 +23,9 @@ export class paymentService {
   
   getpaysofaccount(id: string): Observable<Payment[]>{
     return this.http.get<Payment[]>(`${this.apiUrl}/accounts/${id}/pays`);
+  }
+
+  getClientDebt(accountId: string): Observable<ClientQuery> {
+    return this.http.get<ClientQuery>(`${this.apiUrl}/accounts/${accountId}/client-debt`);
   }
 }

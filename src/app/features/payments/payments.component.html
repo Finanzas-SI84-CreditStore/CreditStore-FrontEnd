@@ -14,7 +14,8 @@
                     <label for="endDate">Hasta:</label>
                     <input id="endDate" type="date" class="form-control" [(ngModel)]="endDate">
                 </div>
-                <button (click)="filterPayments()" class="btn btn-primary mt-4">Filtrar</button>
+                <button (click)="filterPayments()" class="btn btn-primary mt-4 me-3">Filtrar</button>
+                <button (click)="openAddPaymentModal()" class="btn btn-primary mt-4">Añadir Pago</button>
             </div>
             <div class="clients-table mt-3">
                 <table class="table">

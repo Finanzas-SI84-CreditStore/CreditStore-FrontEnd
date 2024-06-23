@@ -63,7 +63,7 @@
 
         <div class="col-md-4 mb-4">
           <h4 class="text">Plazo de Gracia</h4>
-          <ng-select formControlName="gracePeriod" placeholder="Seleccione el plazo de gracia" [searchable]="false">
+          <ng-select formControlName="gracePeriod" (change)="changePeriodoGracia($event)" placeholder="Seleccione el plazo de gracia" [searchable]="false">
             <ng-option *ngFor="let option of gracePeriod" [value]="option.value">{{option.viewValue}}</ng-option>
           </ng-select>
           <div class="invalid-feedback d-block" app-field-error controlName="gracePeriod"></div>

@@ -15,7 +15,7 @@
                   <th>Tipo de Tasa</th>
                   <th>Periodo de Capitalización</th>
                   <th>Valor de Tasa</th>
-                  <th>Tasa de Crédito</th>
+                  <th>Periodo de Tasa</th>
                   <th>Numero de Cuotas</th>
                   <th>Plazo de Gracia</th>
                   <th>Periodo de Gracia</th>
@@ -28,14 +28,16 @@
                   <td>{{ account.id }}</td>
                   <td>S/ {{ account.valorCompra}}</td>
                   <td>{{ account.tipoTasa}}</td>
-                  <td>{{ account.capitalizacionTasa }}</td>
-                  <td>{{ account.valorTasa/100 | percent:'1.7-7' }}</td>
+                  <td>{{ capitalizacionText(account.capitalizacionTasa) }}</td>
+                  <td>{{ account.valorTasa / 100 | percent: '1.7-7' }}</td>
                   <td>{{ account.tipoCredito }}</td>
                   <td>{{ account.numeroCuotas }}</td>
-                  <td>{{ account.plazoGracia ? 'Sí' : 'No' }}</td>
-                  <td>{{ account.periodoGracia}}</td>
+                  <td>{{ account.plazoGracia }}</td>
+                  <td>{{ account.periodoGracia }}</td>
                   <td>{{ account.paymentDate }}</td>
-                  <td><button type="button" class="btn btn-success" (click)="verpagos(account.id)">PAGOS</button></td>
+                  <td>
+                    <button type="button" class="btn btn-success" (click)="verpagos(account.id)">PAGOS</button>
+                  </td>
                 </tr>
               </tbody>
 

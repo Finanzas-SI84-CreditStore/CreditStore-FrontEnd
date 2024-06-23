@@ -66,4 +66,17 @@ export class TheCreditAccountListPagePerClientComponent {
     this.sessionStorageService.setItem("accountId",accountId);
     this.router.navigate(['plan-pagos']);
   }
+
+  capitalizacionText(valor: number): string {
+    switch (valor) {
+      case 1:
+        return 'Diario';
+      case 30:
+        return 'Mensual';
+      case 360:
+        return 'Anual';
+      default:
+        return valor.toString();
+    }
+  }
 }

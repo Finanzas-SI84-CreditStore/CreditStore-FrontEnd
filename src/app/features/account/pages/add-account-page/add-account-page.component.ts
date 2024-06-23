@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FieldErrorComponent } from '../../../../shared/components/field-error/field-error.component';
 import { NavbarComponent } from "../../../../public/components/navbar/navbar.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-account-page',
@@ -56,7 +57,7 @@ export class AddAccountPageComponent implements OnInit {
   gracePeriod = [
     { value: 'T', viewValue: 'Total' },
     { value: 'P', viewValue: 'Parcial' },
-    { value: 'S', viewValue: 'No' },
+    { value: 'S', viewValue: 'Sin Plazo' },
   ];
 
   sharesNumber = [
@@ -95,7 +96,8 @@ export class AddAccountPageComponent implements OnInit {
     private accountService: AccountService,
     private formBuilder: FormBuilder,
     private sessionStorageService: SessionStorageService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router:Router
   ) {
     this.formCredit = this.formBuilder.group({
       purchaseValue: new FormControl(0, [Validators.required, Validators.min(1)]),
@@ -103,17 +105,21 @@ export class AddAccountPageComponent implements OnInit {
       capitalizationPeriod: new FormControl(30, Validators.required),
       interestRate: new FormControl(0, [Validators.required, Validators.min(0)]),
       tasaMoratoria: new FormControl(0, [Validators.required, Validators.min(0)]),
-      creditType: new FormControl('VENCIMIENTO', Validators.required),
+      creditType: new FormControl('MENSUAL', Validators.required),
       sharesNumber: new FormControl(1, Validators.required),
       gracePeriod: new FormControl('S', Validators.required),
       gracePeriodLength: new FormControl(0, Validators.required),
       tiempoTasa: new FormControl(30, Validators.required)
     });
+
+    // Establecer el estado inicial para 'Periodo(s) de Gracia'
+    this.changePeriodoGracia(this.formCredit.value.gracePeriod);
   }
 
   ngOnInit() {
     this.clientsId = this.sessionStorageService.getItem('clientsId');
     console.log(this.clientsId);
+    this.changePeriodoGracia(this.formCredit.value.gracePeriod);
   }
 
   onSubmit() {
@@ -139,7 +145,8 @@ export class AddAccountPageComponent implements OnInit {
 
       this.accountService.createAccount(this.AccountRequest).subscribe(
         response => {
-          this.toastr.success('Cuenta creada exitosamente');
+          this.toastr.success('Credito creado exitosamente');
+          this.router.navigate(['/credit-list-client']);
         },
         error => {
           this.toastr.error(error.message);
@@ -177,7 +184,7 @@ export class AddAccountPageComponent implements OnInit {
   }
 
   changePeriodoGracia(gracia: string): void {
-    if (gracia === 'NO') {
+    if (gracia === 'S') {
       this.formCredit.controls['gracePeriodLength'].clearValidators();
       this.formCredit.controls['gracePeriodLength'].setValue(0);
       this.formCredit.controls['gracePeriodLength'].disable();

@@ -21,7 +21,9 @@
     justify-content: space-between;
     margin-bottom: 20px;
   }
-  
+  .nombre{
+    color: #05AD75;;
+  }
   .export-button {
     background-color: #05AD75;
     color: white;

@@ -105,15 +105,15 @@
     <tbody>
       <tr *ngFor="let salida of datosSalidaList; let i = index">
         <td>{{ i }}</td>
-        <td>{{ salida.account.valorTasa | percent:'1.7-7' }}</td>
-        <td>{{ salida.tem | percent:'1.7-7' }}</td>
+        <td>{{ salida.account.valorTasa | number:'1.7-7' }}</td>
+        <td>{{ salida.tem | number:'1.7-7' }}</td>
         <td>{{ salida.account.plazoGracia }}</td>
-        <td>{{ salida.saldoInicial | currency }}</td>
-        <td>{{ salida.intereses | currency }}</td>
-        <td>{{ salida.interesMora | currency }}</td>
-        <td>{{ salida.amortizacion | currency }}</td>
-        <td>{{ salida.cuota | currency }}</td>
-        <td>{{ salida.saldoFinal | currency }}</td>
+        <td>S/{{ salida.saldoInicial | number:'1.2-2' }}</td>
+        <td>S/{{ salida.intereses | number:'1.2-2' }}</td>
+        <td>S/{{ salida.interesMora | number:'1.2-2' }}</td>
+        <td>S/{{ salida.amortizacion | number:'1.2-2' }}</td>
+        <td>S/{{ salida.cuota | number:'1.2-2' }}</td>
+        <td>S/{{ salida.saldoFinal | number:'1.2-2' }}</td>
         <td>{{ salida.fecha }}</td>
         <td>{{ salida.estado }}</td>
       </tr>

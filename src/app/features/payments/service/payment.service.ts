@@ -20,12 +20,12 @@ export class paymentService {
 
   apiUrl: string = environment.baseUrl;
   constructor(public http: HttpClient) {}
-  
+
   getpaysofaccount(id: string): Observable<Payment[]>{
     return this.http.get<Payment[]>(`${this.apiUrl}/accounts/${id}/pays`);
   }
 
   getClientDebt(accountId: string): Observable<ClientQuery> {
-    return this.http.get<ClientQuery>(`${this.apiUrl}/accounts/${accountId}/client-debt`);
+    return this.http.get<ClientQuery>(`${this.apiUrl}/accounts/${accountId}/credit-debt`);
   }
 }

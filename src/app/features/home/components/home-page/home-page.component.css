@@ -78,3 +78,26 @@
   color: #05AD75;
 }
 
+.progress {
+  height: 20px; /* Ajusta el alto de la barra según tus necesidades */
+  background-color: #e9ecef; /* Color de fondo de la barra de progreso */
+  border-radius: 0.25rem; /* Bordes redondeados */
+  overflow: hidden; /* Ocultar contenido que sobresalga */
+}
+
+.progress-bar {
+  height: 100%;
+  transition: width 0.6s ease;
+}
+
+.progress-bar.low {
+  background-color: #05AD75; /* Verde */
+}
+
+.progress-bar.medium {
+  background-color: #f7cb48; /* Amarillo */
+}
+
+.progress-bar.high {
+  background-color: #e94051; /* Rojo */
+}

@@ -57,7 +57,7 @@ export class AddAccountPageComponent implements OnInit {
   gracePeriod = [
     { value: 'T', viewValue: 'Total' },
     { value: 'P', viewValue: 'Parcial' },
-    { value: 'S', viewValue: 'Sin Plazo' },
+    { value: 'S', viewValue: 'No' },
   ];
 
   sharesNumber = [
@@ -66,7 +66,7 @@ export class AddAccountPageComponent implements OnInit {
     { value: 3, viewValue: '3' },
     { value: 4, viewValue: '4' },
     { value: 5, viewValue: '5' },
-    { value: 6, viewValue: '5' },
+    { value: 6, viewValue: '6' },
     { value: 7, viewValue: '7' },
     { value: 8, viewValue: '8' },
     { value: 9, viewValue: '9' },
@@ -97,7 +97,7 @@ export class AddAccountPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private sessionStorageService: SessionStorageService,
     private toastr: ToastrService,
-    private router:Router
+    private router: Router
   ) {
     this.formCredit = this.formBuilder.group({
       purchaseValue: new FormControl(0, [Validators.required, Validators.min(1)]),

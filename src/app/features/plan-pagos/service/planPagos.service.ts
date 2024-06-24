@@ -8,7 +8,7 @@ import { ResponseData } from '../model/responseData.model';
 })
 export class AccountService {
 
-  private baseUrl = 'http://localhost:8080/accounts';
+  private baseUrl = 'https://creditstore-api-production.up.railway.app/accounts';
 
   constructor(private http: HttpClient) { }
 

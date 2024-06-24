@@ -46,7 +46,7 @@ export class AddPaymentComponent implements OnInit {
 
       console.log('Payment data to be sent:', paymentData);
 
-      this.http.post(`http://localhost:8080/accounts/${this.accountId}/pays`, paymentData).subscribe({
+      this.http.post(`https://creditstore-api-production.up.railway.app/accounts/${this.accountId}/pays`, paymentData).subscribe({
         next: (response) => {
           console.log(response);
           this.toastr.success('Pago agregado correctamente');

@@ -10,7 +10,7 @@ import { AccountQuery } from '../models/account-query';
   providedIn: 'root'
 })
 export class AccountService {
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = 'https://creditstore-api-production.up.railway.app';
 
   constructor(private http: HttpClient) { }
 

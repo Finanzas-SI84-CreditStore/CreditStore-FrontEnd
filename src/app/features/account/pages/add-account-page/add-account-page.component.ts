@@ -106,11 +106,12 @@ export class AddAccountPageComponent implements OnInit {
       interestRate: new FormControl(0, [Validators.required, Validators.min(0)]),
       tasaMoratoria: new FormControl(0, [Validators.required, Validators.min(0)]),
       creditType: new FormControl('MENSUAL', Validators.required),
-      sharesNumber: new FormControl(1, Validators.required),
+      sharesNumber: new FormControl(1, [Validators.required, Validators.min(1)]),
       gracePeriod: new FormControl('S', Validators.required),
       gracePeriodLength: new FormControl(0, Validators.required),
       tiempoTasa: new FormControl(30, Validators.required)
     });
+    
 
     // Establecer el estado inicial para 'Periodo(s) de Gracia'
     this.changePeriodoGracia(this.formCredit.value.gracePeriod);
@@ -173,14 +174,14 @@ export class AddAccountPageComponent implements OnInit {
   changeTipoCredito(tipo: string): void {
     if (tipo === 'VENCIMIENTO') {
       this.formCredit.controls['sharesNumber'].clearValidators();
-      this.formCredit.controls['sharesNumber'].setValue(0);
+      this.formCredit.controls['sharesNumber'].setValue(1);
       this.formCredit.controls['sharesNumber'].disable();
     } else {
       this.formCredit.controls['sharesNumber'].enable();
       this.formCredit.controls['sharesNumber'].setValue(1);
-      this.formCredit.controls['sharesNumber'].setValidators(Validators.required);
+      this.formCredit.controls['sharesNumber'].setValidators([Validators.required, Validators.min(1)]);
     }
-    this.formCredit.controls['creditType'].updateValueAndValidity();
+    this.formCredit.controls['sharesNumber'].updateValueAndValidity();
   }
 
   changePeriodoGracia(gracia: string): void {

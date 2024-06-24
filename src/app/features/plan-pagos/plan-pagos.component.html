@@ -2,7 +2,7 @@
 
 <div class="container d-flex justify-content-center mt-5">
   <div class="card w-75">
-    <div class="card-header custom-card-header text-center">
+    <div class="card-header bg-primary text-white text-center">
       <h2 class="mb-0">Detalles de la Cuenta</h2>
     </div>
     <div class="card-body">
@@ -18,7 +18,7 @@
                 </tr>
                 <tr>
                   <td><strong>Tiempo de Tasa:</strong></td>
-                  <td>Mes</td>
+                  <td>{{ datosEntrada.tiempoTasa }} días</td>
                 </tr>
                 <tr>
                   <td><strong>Capitalización:</strong></td>
@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                   <td><strong>Límite de Crédito:</strong></td>
-                  <td>{{ datosEntrada.limiteCredito }}</td>
+                  <td>S/{{ datosEntrada.limiteCredito |number:'1.2-2' }}</td>
                 </tr>
               </tbody>
             </table>
@@ -56,11 +56,11 @@
                 </tr>
                 <tr>
                   <td><strong>Monto del Préstamo:</strong></td>
-                  <td>{{ datosEntrada.montoPrestamo }}</td>
+                  <td>S/{{ datosEntrada.montoPrestamo|number:'1.2-2'  }}</td>
                 </tr>
                 <tr>
                   <td><strong>Días de Atraso:</strong></td>
-                  <td>{{ datosEntrada.diasAtraso }}</td>
+                  <td>{{ datosEntrada.diasAtraso }} días</td>
                 </tr>
                 <tr>
                   <td><strong>Tasa Moratoria:</strong></td>
@@ -111,7 +111,9 @@
         <td>S/{{ salida.cuota | number:'1.2-2' }}</td>
         <td>S/{{ salida.saldoFinal | number:'1.2-2' }}</td>
         <td>{{ salida.fecha }}</td>
-        <td>{{ salida.estado }}</td>
+        <td [ngClass]="{'text-success': salida.estado === 'PAGADO', 'text-danger': salida.estado === 'PENDIENTE POR_PAGAR'}">
+          {{ salida.estado.replace('_', ' ') }}
+        </td>
       </tr>
     </tbody>
   </table>

@@ -57,7 +57,7 @@ export class AddAccountPageComponent implements OnInit {
   gracePeriod = [
     { value: 'T', viewValue: 'Total' },
     { value: 'P', viewValue: 'Parcial' },
-    { value: 'S', viewValue: 'No' },
+    { value: 'S', viewValue: 'Sin Plazo' },
   ];
 
   sharesNumber = [

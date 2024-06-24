@@ -2,7 +2,7 @@
 
 <div class="container d-flex justify-content-center mt-5">
   <div class="card w-75">
-    <div class="card-header bg-primary text-white text-center">
+    <div class="card-header custom-card-header text-center">
       <h2 class="mb-0">Detalles de la Cuenta</h2>
     </div>
     <div class="card-body">
@@ -22,7 +22,7 @@
                 </tr>
                 <tr>
                   <td><strong>Capitalización:</strong></td>
-                  <td>{{ datosEntrada.capitalizacion }}</td>
+                  <td>{{ datosEntrada.tipoTasa === 'EFECTIVA' ? '--' : datosEntrada.capitalizacion }}</td>
                 </tr>
                 <tr>
                   <td><strong>Tasa:</strong></td>
@@ -89,7 +89,7 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">NRO.</th>
-        <th scope="col">TEA</th>
+        <th scope="col">TASA</th>
         <th scope="col">TEM</th>
         <th scope="col">P.G.</th>
         <th scope="col">SALDO INICIAL</th>
@@ -103,9 +103,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let salida of datosSalidaList; let i = index">
-        <td>{{ i }}</td>
-        <td>{{ salida.account.valorTasa | percent:'1.7-7' }}</td>
+      <tr *ngFor="let salida of datosSalidaList.slice(1); let i = index">
+        <td>{{ i+1 }}</td>
+        <td>{{ salida.account.valorTasa/100|percent:'1.7-7'  }}</td>
         <td>{{ salida.tem | percent:'1.7-7' }}</td>
         <td>{{ salida.account.plazoGracia }}</td>
         <td>S/{{ salida.saldoInicial | number:'1.2-2' }}</td>

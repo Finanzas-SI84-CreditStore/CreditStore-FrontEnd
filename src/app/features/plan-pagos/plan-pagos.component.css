@@ -13,4 +13,8 @@
   .table td {
     vertical-align: middle; /* Centra verticalmente el texto en las celdas */
   }
+  .custom-card-header {
+    background-color: #05AD75; 
+    color: #ffffff; 
+  }
   

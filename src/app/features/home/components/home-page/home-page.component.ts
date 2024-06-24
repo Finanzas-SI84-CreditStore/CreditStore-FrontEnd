@@ -12,7 +12,6 @@ import { SessionStorageService } from '../../../../shared/services/session-stora
 import { UserService } from '../../../clients/services/user.service';
 import { User } from '../../../auth/models/user';
 
-
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -27,16 +26,13 @@ export class HomePageComponent implements OnInit {
   userId?: string;
 
   constructor(private homeService: HomeService, private router: Router,
-    private modalService: NgbModal, private sessionStorageService: SessionStorageService,
-    private userService: UserService, private homeservice: HomeService,
-
-  ) { }
+              private modalService: NgbModal, private sessionStorageService: SessionStorageService,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.userId = this.sessionStorageService.getItem('userId');
     this.findUser();
     this.getClientesConMayoresDeudas();
-
   }
 
   findUser(): void {
@@ -55,6 +51,17 @@ export class HomePageComponent implements OnInit {
     return 0;
   }
 
+  getProgressBarClass(clientId: number): string {
+    const percentage = this.calculatePercentageUsedById(clientId);
+    if (percentage < 50) {
+      return 'low';
+    } else if (percentage < 75) {
+      return 'medium';
+    } else {
+      return 'high';
+    }
+  }
+
   getClientesConMayoresDeudas(): void {
     this.homeService.getClientesConMayoresDeudas(this.userId!).subscribe({
       next: (clients) => {
@@ -66,12 +73,10 @@ export class HomePageComponent implements OnInit {
   navigateToAddAccount() {
     this.router.navigate(['/add-account']);
   }
+
   navigateToAddClient() {
     this.router.navigate(['/add-client']);
   }
-
-
-
 
   openFormClientAccount(): void {
     const modalRef: NgbModalRef = this.modalService.open(FormClientAccountComponent,
@@ -81,7 +86,5 @@ export class HomePageComponent implements OnInit {
         this.getClientesConMayoresDeudas();
       }
     });
-
   }
-
 }

@@ -68,10 +68,9 @@ export class PaymentsComponent implements OnInit {
   }
 
   openAddPaymentModal(): void {
-    this.paymentService.getClientDebt(this.accountId).subscribe(client => {
+    this.paymentService.getDeudaMes(this.accountId).subscribe(client => {
       const modalRef = this.modalService.open(AddPaymentComponent);
       modalRef.componentInstance.accountId = this.accountId;
-      modalRef.componentInstance.totalDebt = client.debt; // Pasamos la deuda total al modal
       modalRef.result.then((result: any) => {
         if (result) {
           console.log('Modal cerrado con éxito');

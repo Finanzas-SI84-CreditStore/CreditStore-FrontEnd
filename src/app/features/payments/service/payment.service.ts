@@ -25,7 +25,7 @@ export class paymentService {
     return this.http.get<Payment[]>(`${this.apiUrl}/accounts/${id}/pays`);
   }
 
-  getClientDebt(accountId: string): Observable<ClientQuery> {
-    return this.http.get<ClientQuery>(`${this.apiUrl}/accounts/${accountId}/credit-debt`);
+  getDeudaMes(accountId: string): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/accounts/${accountId}/credit-debt`);
   }
 }

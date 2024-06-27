@@ -65,3 +65,8 @@ a {
 .ng-option-selected {
   background-color: #1bf1aa40 !important;
 }
+
+.form-check-input:checked {
+  background-color: #05ad75 !important;
+  border-color: #05ad75 !important;
+}

@@ -9,4 +9,5 @@ export interface ClientQuery {
   creditLine: number;
   debt: number;
   availableBalance: number;
+  tieneMora: boolean;
 }

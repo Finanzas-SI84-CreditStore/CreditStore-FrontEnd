@@ -9,7 +9,7 @@ export interface Client {
   debt: number;
   creditLine: number;
   availableBalance: number;
-  
+  tieneMora: boolean;
 }
 
 export class ClientModel {

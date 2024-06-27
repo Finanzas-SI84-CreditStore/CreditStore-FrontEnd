@@ -100,18 +100,19 @@ export class AddAccountPageComponent implements OnInit {
     private router: Router
   ) {
     this.formCredit = this.formBuilder.group({
-      purchaseValue: new FormControl(0, [Validators.required, Validators.min(1)]),
+      purchaseValue: new FormControl<null|number>(null, [Validators.required, Validators.min(1)]),
       interestType: new FormControl('NOMINAL', Validators.required),
       capitalizationPeriod: new FormControl(30, Validators.required),
-      interestRate: new FormControl(0, [Validators.required, Validators.min(0)]),
-      tasaMoratoria: new FormControl(0, [Validators.required, Validators.min(0)]),
+      interestRate: new FormControl<null | number>(null, [Validators.required, Validators.min(0)]),
+      tasaMoratoria: new FormControl<null | number>(null, [Validators.required, Validators.min(0)]),
       creditType: new FormControl('MENSUAL', Validators.required),
       sharesNumber: new FormControl(1, [Validators.required, Validators.min(1)]),
       gracePeriod: new FormControl('S', Validators.required),
       gracePeriodLength: new FormControl(0, Validators.required),
-      tiempoTasa: new FormControl(30, Validators.required)
+      tiempoTasa: new FormControl(30, Validators.required),
+      paymentDate: new FormControl(new Date())
     });
-    
+
 
     // Establecer el estado inicial para 'Periodo(s) de Gracia'
     this.changePeriodoGracia(this.formCredit.value.gracePeriod);
@@ -124,21 +125,22 @@ export class AddAccountPageComponent implements OnInit {
   }
 
   onSubmit() {
+
     if (this.formCredit.valid) {
       this.AccountRequest = {
         valorCompra: this.formCredit.value.purchaseValue ?? 0,
         tipoTasa: this.formCredit.value.interestType ?? '',
         capitalizacionTasa: this.formCredit.value.capitalizationPeriod ?? 1,
-        valorTasa: (this.formCredit.value.interestRate ?? 0) ,
-        tipoCredito: this.formCredit.value.creditType ?? '',
+        valorTasa: (this.formCredit.value.interestRate ?? 0),
+        tipoCredito: this.formCredit.controls['creditType'].value ?? '',
         numeroCuotas: this.formCredit.value.sharesNumber ?? 0,
         plazoGracia: this.formCredit.value.gracePeriod ?? '',
         periodoGracia: this.formCredit.value.gracePeriodLength ?? 0,
-        tasaMoratoria: (this.formCredit.value.tasaMoratoria ?? 0) ,
+        tasaMoratoria: (this.formCredit.value.tasaMoratoria ?? 0),
         diasAtraso: 0,
         limiteCredito: 0,
         tiempoTasa: this.formCredit.value.tiempoTasa ?? 0,
-        paymentDate: new Date(),
+        paymentDate: this.formCredit.value.paymentDate,
         clientId: this.clientsId
       };
 
@@ -150,7 +152,7 @@ export class AddAccountPageComponent implements OnInit {
           this.router.navigate(['/credit-list-client']);
         },
         error => {
-          this.toastr.error(error.message);
+          this.toastr.error(error.error.message);
         }
       );
     } else {

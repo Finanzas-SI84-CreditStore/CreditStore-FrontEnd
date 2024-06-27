@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
+import { paymentService } from '../../../payments/service/payment.service';
 
 @Component({
   selector: 'app-add-payment',
@@ -17,24 +18,36 @@ export class AddPaymentComponent implements OnInit {
 
   form = this.formBuilder.group({
     paymentDate: [null, Validators.required],
-    amount: [null, [Validators.required, Validators.min(0)]]
+    amount: new FormControl<number| null>(null, [Validators.required, Validators.min(0)])
   });
 
-  totalDebt: number = 2530; // Este valor debería ser dinámico en el futuro
+  totalDebt!: number;
 
   constructor(
     private formBuilder: FormBuilder,
     public modalService: NgbActiveModal,
     private toastr: ToastrService,
-    private http: HttpClient
+    private http: HttpClient,
+    private paymentService: paymentService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.paymentService.getDeudaMes(this.accountId).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.totalDebt = response;
+      },
+      error: (err) => {
+        console.log(err);
+        this.toastr.error('Error al obtener la deuda');
+      }
+    });
+  }
 
   onSave(): void {
     if (this.form.valid) {
-      let paymentDate: string | null = this.form.value.paymentDate 
-        ? new Date(this.form.value.paymentDate).toISOString().split('T')[0] 
+      let paymentDate: string | null = this.form.value.paymentDate
+        ? new Date(this.form.value.paymentDate).toISOString().split('T')[0]
         : null;
 
       console.log('Converted paymentDate value:', paymentDate);

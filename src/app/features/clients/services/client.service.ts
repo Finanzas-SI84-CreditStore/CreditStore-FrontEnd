@@ -24,4 +24,5 @@ export class ClientService {
   getAllBiggestDebtorsByUser(userId: string): Observable<ClientQuery[]> {
     return this.http.get<ClientQuery[]>(`${this.apiUrl}/users/${userId}/clients/debtors`);
   }
+
 }

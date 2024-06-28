@@ -17,8 +17,8 @@ export class AddPaymentComponent implements OnInit {
   @Input() accountId!: string;
 
   form = this.formBuilder.group({
-    paymentDate: [null, Validators.required],
-    amount: new FormControl<number| null>(null, [Validators.required, Validators.min(0)])
+    paymentDate: [this.getToday(), Validators.required],
+    amount: new FormControl<number | null>(null, [Validators.required, Validators.min(0)])
   });
 
   totalDebt!: number;
@@ -32,6 +32,12 @@ export class AddPaymentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (!this.accountId) {
+      console.error('accountId is null or undefined');
+      this.toastr.error('Error: accountId no está definido');
+      return;
+    }
+
     this.paymentService.getDeudaMes(this.accountId).subscribe({
       next: (response) => {
         console.log(response);
@@ -59,10 +65,17 @@ export class AddPaymentComponent implements OnInit {
 
       console.log('Payment data to be sent:', paymentData);
 
+      if (!this.accountId) {
+        console.error('accountId is null or undefined');
+        this.toastr.error('Error: accountId no está definido');
+        return;
+      }
+
       this.http.post(`http://localhost:8080/accounts/${this.accountId}/pays`, paymentData).subscribe({
         next: (response) => {
           console.log(response);
           this.toastr.success('Pago agregado correctamente');
+          this.updateTotalDebt(); // Asegúrate de actualizar la deuda
           this.modalService.close(true);
         },
         error: (err) => {
@@ -73,5 +86,32 @@ export class AddPaymentComponent implements OnInit {
     } else {
       this.toastr.error('Por favor, completa todos los campos requeridos');
     }
+  }
+
+  updateTotalDebt(): void {
+    if (!this.accountId) {
+      console.error('accountId is null or undefined');
+      this.toastr.error('Error: accountId no está definido');
+      return;
+    }
+  
+    this.paymentService.getDeudaMes(this.accountId).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.totalDebt = response;
+      },
+      error: (err) => {
+        console.log(err);
+        this.toastr.error('Error al obtener la deuda');
+      }
+    });
+  }
+
+  private getToday(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

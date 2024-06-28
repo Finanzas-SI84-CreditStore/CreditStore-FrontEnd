@@ -41,4 +41,17 @@ export class PlanPagosComponent implements OnInit {
       }
     );
   }
+  mapGracePeriod(value: string): string {
+    switch (value) {
+      case 'T':
+        return 'Total';
+      case 'P':
+        return 'Parcial';
+      case 'S':
+        return 'Sin Periodo';
+      default:
+        return value;
+    }
+  }
+  
 }

@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                   <td><strong>Tipo de Periodo de Gracia:</strong></td>
-                  <td>{{ datosEntrada.tipoPeriodoGracia }}</td>
+                  <td>{{ mapGracePeriod(datosEntrada.tipoPeriodoGracia) }}</td>
                 </tr>
                 <tr>
                   <td><strong>Periodo de Gracia (meses):</strong></td>
@@ -103,7 +103,7 @@
         <td>{{ i+1 }}</td>
         <td>{{ salida.account.valorTasa/100|percent:'1.7-7'  }}</td>
         <td>{{ salida.tem | percent:'1.7-7' }}</td>
-        <td>{{ salida.account.plazoGracia }}</td>
+        <td>{{ mapGracePeriod(salida.account.plazoGracia) }}</td>
         <td>S/{{ salida.saldoInicial | number:'1.2-2' }}</td>
         <td>S/{{ salida.intereses | number:'1.2-2' }}</td>
         <td>S/{{ salida.interesMora | number:'1.2-2' }}</td>

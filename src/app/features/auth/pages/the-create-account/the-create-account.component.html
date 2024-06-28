@@ -7,12 +7,14 @@
         <img class="img" src="../../../../assets/credistore2logo.png" alt="CreditStore Logo">
       </div>
     </div>
-    <div class=" text-center ">
+    <div class="text-center">
       <h1 class="h1 fs-1 fw-medium">Crear Cuenta</h1>
     </div>
     <div class="row">
-      <div class="form-group col-lg-6  mb-1">
-        <label class="form-label">Nombre*</label>
+      <div class="form-group col-lg-6 mb-1">
+        <label class="form-label">Nombre *
+          <mat-icon matTooltip="Tu nombre completo" class="help">help_outline</mat-icon>
+        </label>
         <input class="form-control" type="text" formControlName="name" placeholder="Ingresa tu nombre">
         <div class="invalid-feedback d-block" app-field-error controlName="name"> </div>
         <div
@@ -21,8 +23,10 @@
           {{ registerForm.get('name')?.getError('noNumbers') || 'El campo es obligatorio' }}
         </div>
       </div>
-      <div class="form-group col-lg-6  mb-1">
-        <label class="form-label">Apellidos *</label>
+      <div class="form-group col-lg-6 mb-1">
+        <label class="form-label">Apellidos *
+          <mat-icon matTooltip="Tus apellidos" class="help">help_outline</mat-icon>
+        </label>
         <input type="text" class="form-control" formControlName="lastName" placeholder="Ingresa tus apellidos">
         <div class="invalid-feedback d-block" app-field-error controlName="lastName"> </div>
         <div
@@ -33,8 +37,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-lg-6  mb-1">
-        <label class="form-label">DNI *</label>
+      <div class="form-group col-lg-6 mb-1">
+        <label class="form-label">DNI *
+          <mat-icon matTooltip="Documento Nacional de Identidad (8 dígitos)" class="help">help_outline</mat-icon>
+        </label>
         <input type="text" appNumericInput class="form-control" formControlName="dni" placeholder="Ingresa tu DNI">
         <div class="invalid-feedback d-block" app-field-error controlName="dni"> </div>
         <div
@@ -43,17 +49,21 @@
           {{ 'El DNI debe tener exactamente 8 dígitos' }}
         </div>
       </div>
-      <div class="form-group col-lg-6  mb-1">
-        <label class="form-label">Fecha de Nacimiento *</label>
+      <div class="form-group col-lg-6 mb-1">
+        <label class="form-label">Fecha de Nacimiento *
+          <mat-icon matTooltip="Tu fecha de nacimiento" class="help">help_outline</mat-icon>
+        </label>
         <input type="date" class="form-control" formControlName="birthDate"
           placeholder="Selecciona tu fecha de nacimiento">
         <div class="invalid-feedback d-block" app-field-error controlName="birthDate"> </div>
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-lg-6  mb-1">
-        <label class="form-label">Correo *</label>
-        <input type="email" class="form-control" formControlName="email" placeholder="Selecciona tu correo electrónico">
+      <div class="form-group col-lg-6 mb-1">
+        <label class="form-label">Correo *
+          <mat-icon matTooltip="Tu dirección de correo electrónico" class="help">help_outline</mat-icon>
+        </label>
+        <input type="email" class="form-control" formControlName="email" placeholder="Ingresa tu correo electrónico">
         <div class="invalid-feedback d-block" app-field-error controlName="email"> </div>
         <div
           *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)"
@@ -61,10 +71,11 @@
           {{ 'Por favor, ingrese un correo electrónico válido' }}
         </div>
       </div>
-      <div class="form-group col-lg-6  mb-1">
-        <label class="form-label">Nombre de la tienda *</label>
-        <input class="form-control" type="text" formControlName="storeName"
-          placeholder="Ingresa el nombre de la tienda">
+      <div class="form-group col-lg-6 mb-1">
+        <label class="form-label">Nombre de la tienda *
+          <mat-icon matTooltip="El nombre de tu tienda" class="help">help_outline</mat-icon>
+        </label>
+        <input class="form-control" type="text" formControlName="storeName" placeholder="Ingresa el nombre de la tienda">
         <div class="invalid-feedback d-block" app-field-error controlName="storeName"> </div>
         <div
           *ngIf="registerForm.get('storeName')?.invalid && (registerForm.get('storeName')?.dirty || registerForm.get('storeName')?.touched)"
@@ -75,7 +86,9 @@
     </div>
     <div class="row">
       <div class="form-group col-lg-6 mb-1">
-        <label class="form-label" for="password">Contraseña</label>
+        <label class="form-label" for="password">Contraseña
+          <mat-icon matTooltip="Elige una contraseña segura" class="help">help_outline</mat-icon>
+        </label>
         <div class="input-container">
           <i class="fas fa-lock"></i>
           <input class="form-control" type="password" id="password" formControlName="password" required
@@ -87,8 +100,10 @@
           {{ 'El campo es obligatorio' }}
         </div>
       </div>
-      <div class="form-group col-lg-6  mb-1">
-        <label class="form-label" for="confirmPassword">Confirmar Contraseña</label>
+      <div class="form-group col-lg-6 mb-1">
+        <label class="form-label" for="confirmPassword">Confirmar Contraseña
+          <mat-icon matTooltip="Repite la contraseña" class="help">help_outline</mat-icon>
+        </label>
         <div class="input-container">
           <i class="fas fa-lock"></i>
           <input class="form-control" type="password" id="confirmPassword" formControlName="confirmPassword" required
@@ -127,7 +142,6 @@
       <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Registrarse</button>
       <a class="hover-pointer" (click)="navigateToInicio()">¿Ya eres miembro? Iniciar Sesión</a>
     </div>
-
   </form>
 </div>
 <div *ngIf="spinner" class="screen d-flex justify-content-center align-items-center">

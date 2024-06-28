@@ -14,6 +14,7 @@ import { UserReq } from '../../../clients/models/user-req';
 import { UserService } from '../../../clients/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-the-create-account',
@@ -28,7 +29,9 @@ import { finalize } from 'rxjs';
     LogoScreenComponent,
     MatDialogModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule,
+    MatIconModule,
   ],
   templateUrl: './the-create-account.component.html',
   styleUrls: ['./the-create-account.component.css'],

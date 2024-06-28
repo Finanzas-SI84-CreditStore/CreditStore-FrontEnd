@@ -14,4 +14,11 @@
   .logo .img {
       width: 100%;
       height: auto;
+  }.help {
+    font-size: 100%;
   }
+  .text {
+    color: darkgreen;
+    padding-top: 5px;
+  }
+  

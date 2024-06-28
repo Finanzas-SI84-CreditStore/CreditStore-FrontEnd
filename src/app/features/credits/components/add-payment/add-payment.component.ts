@@ -42,6 +42,12 @@ export class AddPaymentComponent implements OnInit {
       next: (response) => {
         console.log(response);
         this.totalDebt = response;
+        this.form.get('amount')?.setValidators([
+          Validators.required,
+          Validators.min(0),
+          Validators.max(this.totalDebt)
+        ]);
+        this.form.get('amount')?.updateValueAndValidity();
       },
       error: (err) => {
         console.log(err);
@@ -58,8 +64,15 @@ export class AddPaymentComponent implements OnInit {
 
       console.log('Converted paymentDate value:', paymentDate);
 
+      const paymentAmount = this.form.value.amount;
+
+      if (paymentAmount && paymentAmount > this.totalDebt) {
+        this.toastr.error('El pago no puede ser mayor que la deuda total');
+        return;
+      }
+
       const paymentData = {
-        amount: this.form.value.amount,
+        amount: paymentAmount,
         date: paymentDate
       };
 
@@ -75,7 +88,7 @@ export class AddPaymentComponent implements OnInit {
         next: (response) => {
           console.log(response);
           this.toastr.success('Pago agregado correctamente');
-          this.updateTotalDebt(); // Asegúrate de actualizar la deuda
+          this.updateTotalDebt();
           this.modalService.close(true);
         },
         error: (err) => {
@@ -84,7 +97,7 @@ export class AddPaymentComponent implements OnInit {
         }
       });
     } else {
-      this.toastr.error('Por favor, completa todos los campos requeridos');
+      this.toastr.error('Por favor, completa todos los campos requeridos correctamente');
     }
   }
 
@@ -94,7 +107,7 @@ export class AddPaymentComponent implements OnInit {
       this.toastr.error('Error: accountId no está definido');
       return;
     }
-  
+
     this.paymentService.getDeudaMes(this.accountId).subscribe({
       next: (response) => {
         console.log(response);
